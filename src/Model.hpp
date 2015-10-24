@@ -1,11 +1,11 @@
-#ifndef OBJECT3D_HPP
-#define OBJECT3D_HPP
+#ifndef MODEL_HPP
+#define MODEL_HPP
 
 #include "Mesh.hpp"
 
-class Object3D {
+class Model {
 public:
-    Object3D(std::string filename);
+    Model(std::string filename);
     
     void draw();
 
@@ -16,4 +16,4 @@ private:
 };
 
 
-#endif // OBJECT3D_HPP
+#endif // MODEL_HPP

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Object3D.hpp"
+#include "Model.hpp"
 #include "Shader.hpp"
 
 const GLuint WIDTH = 800;
@@ -77,7 +77,7 @@ int main() {
     initLibraries();
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    Object3D obj("resources/apple.obj");
+    Model model("resources/apple.obj");
     Shader baseShader("src/shaders/base.vs", "src/shaders/base.frag");
     
     while (!glfwWindowShouldClose(window)) {
@@ -86,7 +86,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         baseShader.use();
-        obj.draw();
+        model.draw();
         
         glfwSwapBuffers(window);
     }

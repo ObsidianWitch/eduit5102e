@@ -4,13 +4,13 @@
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 
-#include "Object3D.hpp"
+#include "Model.hpp"
 
-Object3D::Object3D(std::string filename) {
+Model::Model(std::string filename) {
     readMesh(filename);
 }
 
-void Object3D::readMesh(std::string filename) {
+void Model::readMesh(std::string filename) {
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec3> normals;
     std::vector<GLuint> indices;
@@ -57,6 +57,6 @@ void Object3D::readMesh(std::string filename) {
     mesh.initialize(vertices, normals, indices);
 }
 
-void Object3D::draw() {
+void Model::draw() {
     mesh.draw();
 }
