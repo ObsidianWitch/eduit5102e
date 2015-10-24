@@ -78,7 +78,10 @@ int main() {
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     Model model("resources/apple.obj");
-    Shader baseShader("src/shaders/base.vs", "src/shaders/base.frag");
+    Shader baseShader;
+    baseShader.add(GL_VERTEX_SHADER, "src/shaders/base.vs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/base.frag")
+              .link();
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
