@@ -1,18 +1,19 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
+#include <vector>
 #include "Mesh.hpp"
 
 class Model {
 public:
-    Model(std::string filename);
+    Model(std::string path);
     
     void draw();
-
-private:
-    Mesh mesh;
     
-    void readMesh(std::string filename);
+private:
+    std::vector<Mesh> meshes;
+    
+    void loadModel(std::string path);
 };
 
 
