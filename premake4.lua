@@ -9,4 +9,4 @@ solution "IT5102E_OpenGL_Project"
         includedirs { "src" }
         files { "src/*.cpp", "src/*.hpp" }
         location "build"
-        links { "glfw", "GL", "GLEW" }
+        links { "glfw", "GL", "GLEW", "assimp" }

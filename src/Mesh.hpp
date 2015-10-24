@@ -4,16 +4,12 @@
 #include <vector>
 #include <GL/glew.h>
 #include <glm/vec3.hpp>
-#include "Shader.hpp"
+#include <assimp/mesh.h>
 
 class Mesh {
 public:
-    Mesh();
+    Mesh(const aiMesh* mesh);
     Mesh(
-        std::vector<glm::vec3> vertices, std::vector<glm::vec3> normals,
-        std::vector<GLuint> indices
-    );
-    void initialize(
         std::vector<glm::vec3> vertices, std::vector<glm::vec3> normals,
         std::vector<GLuint> indices
     );

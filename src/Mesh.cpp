@@ -1,15 +1,36 @@
 #include "Mesh.hpp"
 
-Mesh::Mesh() {}
-
-Mesh::Mesh(
-    std::vector<glm::vec3> vertices, std::vector<glm::vec3> normals,
-    std::vector<GLuint> indices
-) {
-    initialize(vertices, normals, indices);
+Mesh::Mesh(const aiMesh* mesh) {
+    // Vertex positions & normals
+    for (unsigned int i ; i < mesh->mNumVertices ; i++) {
+        glm::vec3 position = glm::vec3(
+            mesh->mVertices[i].x,
+            mesh->mVertices[i].y,
+            mesh->mVertices[i].z
+        );
+        vertices.push_back(position);
+        
+        glm::vec3 normal = glm::vec3(
+            mesh->mNormals[i].x,
+            mesh->mNormals[i].y,
+            mesh->mNormals[i].z
+        );
+        normals.push_back(normal);
+    }
+    
+    // Indices
+    for (unsigned int i = 0 ; i < mesh->mNumFaces ; i++) {
+        const aiFace& face = mesh->mFaces[i];
+        
+        for (unsigned int j = 0 ; j < face.mNumIndices ; j++) {
+            indices.push_back(face.mIndices[j]);
+        }
+    }
+    
+    createBuffers();
 }
 
-void Mesh::initialize(
+Mesh::Mesh(
     std::vector<glm::vec3> vertices, std::vector<glm::vec3> normals,
     std::vector<GLuint> indices
 ) {
