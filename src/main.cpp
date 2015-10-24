@@ -3,22 +3,15 @@
 #include <GLFW/glfw3.h>
 #include "Model.hpp"
 #include "Shader.hpp"
+#include "Inputs.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
 
 GLFWwindow* window = nullptr;
 
-void error_callback(int, const char* description) {
+void errorCallback(int, const char* description) {
 	std::cerr << description << std::endl;
-}
-
-void key_callback(
-    GLFWwindow* window, int key, int, int action, int
-) {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GL_TRUE);
-    }
 }
 
 /**
@@ -27,7 +20,7 @@ void key_callback(
  */
 void initLibraries() {
     // GLFW
-    glfwSetErrorCallback(error_callback);
+    glfwSetErrorCallback(errorCallback);
     
     if (!glfwInit()) {
         std::cerr << "Failed to initialize GLFW" << std::endl;
@@ -49,7 +42,7 @@ void initLibraries() {
     
     glfwMakeContextCurrent(window);
     
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetKeyCallback(window, Inputs::instance().keyCallback);
     
     // GLEW
     glewExperimental = GL_TRUE;
