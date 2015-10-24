@@ -1,6 +1,8 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "Object3D.hpp"
+#include "Shader.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -17,14 +19,6 @@ void key_callback(
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
-}
-
-/**
- * Initializes resources (e.g. vertices, shaders) which will later be displayed
- * or used for rendering.
- */
-void initResources() {
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
 
 /**
@@ -81,12 +75,18 @@ void terminate() {
 
 int main() {
     initLibraries();
-    initResources();
+    
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    Object3D obj("resources/apple.obj");
+    Shader baseShader("src/shaders/base.vs", "src/shaders/base.frag");
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        baseShader.use();
+        obj.display();
         
         glfwSwapBuffers(window);
     }

@@ -5,13 +5,7 @@
 
 #include "Object3D.hpp"
 
-Object3D::Object3D() {}
-
 Object3D::Object3D(std::string filename) {
-    init(filename);
-}
-
-void Object3D::init(std::string filename) {
     readMesh(filename);
     
     if (normals.empty()) {
