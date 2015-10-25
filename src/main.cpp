@@ -1,9 +1,9 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include "inputs/Inputs.hpp"
 #include "Model.hpp"
 #include "Shader.hpp"
-#include "Inputs.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;

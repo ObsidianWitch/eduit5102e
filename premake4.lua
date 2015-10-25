@@ -7,6 +7,9 @@ solution "IT5102E_OpenGL_Project"
         kind "WindowedApp"
         language "C++"
         includedirs { "src" }
-        files { "src/*.cpp", "src/*.hpp" }
+        files {
+            "src/*.cpp", "src/*.hpp",
+            "src/inputs/*.cpp", "src/inputs/*.hpp"
+        }
         location "build"
         links { "glfw", "GL", "GLEW", "assimp" }
