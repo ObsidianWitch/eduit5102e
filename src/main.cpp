@@ -2,8 +2,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "inputs/Inputs.hpp"
+#include "shaders/Shader.hpp"
 #include "Model.hpp"
-#include "Shader.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -72,8 +72,8 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     Model model("resources/apple.obj");
     Shader baseShader;
-    baseShader.add(GL_VERTEX_SHADER, "src/shaders/base.vs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/base.frag")
+    baseShader.add(GL_VERTEX_SHADER, "src/shaders/glsl/base.vs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/base.frag")
               .link();
     
     while (!glfwWindowShouldClose(window)) {

@@ -9,7 +9,8 @@ solution "IT5102E_OpenGL_Project"
         includedirs { "src" }
         files {
             "src/*.cpp", "src/*.hpp",
-            "src/inputs/*.cpp", "src/inputs/*.hpp"
+            "src/inputs/*.cpp", "src/inputs/*.hpp",
+            "src/shaders/*.cpp", "src/shaders/*.hpp"
         }
         location "build"
         links { "glfw", "GL", "GLEW", "assimp" }
