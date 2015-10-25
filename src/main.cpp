@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
-#include "Model.hpp"
+#include "models/Model.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
