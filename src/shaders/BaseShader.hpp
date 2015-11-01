@@ -1,7 +1,7 @@
 #ifndef BASE_SHADER_HPP
 #define BASE_SHADER_HPP
 
-#include "shaders/Shader.hpp"
+#include "shaders/ShaderProgram.hpp"
 
 class BaseShader {
 public:
@@ -10,7 +10,7 @@ public:
     void use();
     
 private:
-    Shader shader;
+    ShaderProgram shader;
 };
 
 #endif // BASE_SHADER_HPP

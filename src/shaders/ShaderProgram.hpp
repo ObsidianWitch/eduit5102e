@@ -1,5 +1,5 @@
-#ifndef SHADERS_HPP
-#define SHADERS_HPP
+#ifndef SHADER_PROGRAM_HPP
+#define SHADER_PROGRAM_HPP
 
 #include <string>
 #include <vector>
@@ -7,11 +7,11 @@
 #include <glm/mat3x3.hpp>
 #include <glm/mat4x4.hpp>
 
-class Shader {
+class ShaderProgram {
 public:
-    Shader();
+    ShaderProgram();
     
-    Shader& add(GLenum type, std::string filename);
+    ShaderProgram& add(GLenum type, std::string filename);
     void link();
     void use();
     
@@ -31,4 +31,4 @@ private:
     void linkageErrors();
 };
 
-#endif // SHADERS_HPP
+#endif // SHADER_PROGRAM_HPP

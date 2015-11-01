@@ -5,11 +5,11 @@
 #include <glm/mat4x4.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Shader.hpp"
+#include "ShaderProgram.hpp"
 
-Shader::Shader() {}
+ShaderProgram::ShaderProgram() {}
 
-Shader& Shader::add(GLenum type, std::string filename) {
+ShaderProgram& ShaderProgram::add(GLenum type, std::string filename) {
     std::string str = readShader(filename);
     const GLchar* shaderCode = str.c_str();
 
@@ -29,7 +29,7 @@ Shader& Shader::add(GLenum type, std::string filename) {
     return *this;
 }
 
-std::string Shader::readShader(std::string filename) {
+std::string ShaderProgram::readShader(std::string filename) {
     std::ifstream ifs(filename, std::ifstream::in);
     
     if (!ifs) {
@@ -44,7 +44,7 @@ std::string Shader::readShader(std::string filename) {
     return ss.str();
 }
 
-void Shader::link() {
+void ShaderProgram::link() {
     program = glCreateProgram();
     
     for (GLuint shader : shaders) {
@@ -60,11 +60,11 @@ void Shader::link() {
     }
 }
 
-void Shader::use() {
+void ShaderProgram::use() {
     glUseProgram(program);
 }
 
-void Shader::compilationErrors(GLint shader) {
+void ShaderProgram::compilationErrors(GLint shader) {
     GLint length;
     
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
@@ -77,7 +77,7 @@ void Shader::compilationErrors(GLint shader) {
     delete[] log;
 }
 
-void Shader::linkageErrors() {
+void ShaderProgram::linkageErrors() {
     GLint length;
     
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
@@ -90,26 +90,26 @@ void Shader::linkageErrors() {
     delete[] log;
 }
 
-GLuint Shader::uniformLocation(std::string uniformName) {
+GLuint ShaderProgram::uniformLocation(std::string uniformName) {
     return glGetUniformLocation(program, uniformName.c_str());
 }
 
-void Shader::setUniform(GLuint id, GLuint value) {
+void ShaderProgram::setUniform(GLuint id, GLuint value) {
     glUniform1i(id, value);
 }
 
-void Shader::setUniform(GLuint id, GLfloat value) {
+void ShaderProgram::setUniform(GLuint id, GLfloat value) {
     glUniform1f(id, value);
 }
 
-void Shader::setUniform(GLuint id, glm::vec3 value) {
+void ShaderProgram::setUniform(GLuint id, glm::vec3 value) {
     glUniform3fv(id, 1, glm::value_ptr(value));
 }
 
-void Shader::setUniform(GLuint id, glm::mat3 value) {
+void ShaderProgram::setUniform(GLuint id, glm::mat3 value) {
     glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(value));
 }
 
-void Shader::setUniform(GLuint id, glm::mat4 value) {
+void ShaderProgram::setUniform(GLuint id, glm::mat4 value) {
     glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(value));
 }
