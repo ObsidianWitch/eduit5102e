@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "Mesh.hpp"
-#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
 
 class Model {
 public:

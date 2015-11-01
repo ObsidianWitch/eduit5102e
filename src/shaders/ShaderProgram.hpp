@@ -4,8 +4,7 @@
 #include <string>
 #include <vector>
 #include <GL/glew.h>
-#include <glm/mat3x3.hpp>
-#include <glm/mat4x4.hpp>
+#include <glm/glm.hpp>
 
 class ShaderProgram {
 public:

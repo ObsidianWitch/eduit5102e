@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <GL/glew.h>
-#include <glm/vec3.hpp>
+#include <glm/glm.hpp>
 #include <assimp/mesh.h>
 
 class Mesh {
