@@ -16,11 +16,11 @@ public:
     void use();
     
     GLuint uniformLocation(std::string uniformName);
-    void setUniform(const std::string& name, GLuint value);
-    void setUniform(const std::string& name, GLfloat value);
-    void setUniform(const std::string& name, glm::vec3 value);
-    void setUniform(const std::string& name, glm::mat3 value);
-    void setUniform(const std::string& name, glm::mat4 value);
+    void setUniform(GLuint id, GLuint value);
+    void setUniform(GLuint id, GLfloat value);
+    void setUniform(GLuint id, glm::vec3 value);
+    void setUniform(GLuint id, glm::mat3 value);
+    void setUniform(GLuint id, glm::mat4 value);
     
 private:
     std::vector<GLuint> shaders;
