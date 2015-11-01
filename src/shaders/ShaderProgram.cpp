@@ -102,14 +102,14 @@ void ShaderProgram::setUniform(GLuint id, GLfloat value) {
     glUniform1f(id, value);
 }
 
-void ShaderProgram::setUniform(GLuint id, glm::vec3 value) {
+void ShaderProgram::setUniform(GLuint id, const glm::vec3& value) {
     glUniform3fv(id, 1, glm::value_ptr(value));
 }
 
-void ShaderProgram::setUniform(GLuint id, glm::mat3 value) {
+void ShaderProgram::setUniform(GLuint id, const glm::mat3& value) {
     glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(value));
 }
 
-void ShaderProgram::setUniform(GLuint id, glm::mat4 value) {
+void ShaderProgram::setUniform(GLuint id, const glm::mat4& value) {
     glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(value));
 }

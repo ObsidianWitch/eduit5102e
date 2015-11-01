@@ -18,9 +18,9 @@ public:
     GLuint uniformLocation(std::string uniformName);
     void setUniform(GLuint id, GLuint value);
     void setUniform(GLuint id, GLfloat value);
-    void setUniform(GLuint id, glm::vec3 value);
-    void setUniform(GLuint id, glm::mat3 value);
-    void setUniform(GLuint id, glm::mat4 value);
+    void setUniform(GLuint id, const glm::vec3& value);
+    void setUniform(GLuint id, const glm::mat3& value);
+    void setUniform(GLuint id, const glm::mat4& value);
     
 private:
     std::vector<GLuint> shaders;

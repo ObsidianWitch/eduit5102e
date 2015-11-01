@@ -1,6 +1,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
 #include "models/Model.hpp"
@@ -79,6 +80,7 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         baseShader.use();
+        baseShader.updateModelUniform(model.getModelMatrix());
         model.draw();
         
         glfwSwapBuffers(window);

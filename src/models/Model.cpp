@@ -34,3 +34,8 @@ void Model::draw() {
         mesh.draw();
     }
 }
+
+glm::mat4 Model::getModelMatrix() { return modelMatrix; }
+void Model::setModelMatrix(glm::mat4 modelMatrix) {
+    this->modelMatrix = modelMatrix;
+}

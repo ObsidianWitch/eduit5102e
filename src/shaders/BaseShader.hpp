@@ -9,8 +9,11 @@ public:
     
     void use();
     
+    void updateModelUniform(const glm::mat4& modelMatrix);
+    
 private:
     ShaderProgram shader;
+    GLint modelUniform;
 };
 
 #endif // BASE_SHADER_HPP
