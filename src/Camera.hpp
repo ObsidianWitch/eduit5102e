@@ -2,6 +2,7 @@
 #define CAMERA_HPP
 
 #include <glm/glm.hpp>
+#include "CameraMouseHandler.hpp"
 
 class Camera {
 public:
@@ -13,6 +14,7 @@ public:
     
     void translate(const glm::vec3& vec);
     void rotate(float angle, const glm::vec3& axis);
+    void rotate(const glm::vec2& delta);
     
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
@@ -20,6 +22,7 @@ public:
     glm::vec3 getUp();
     float getWidth();
     float getHeight();
+    MouseHandler& getMouseHandler();
     
 private:
     // View
@@ -27,6 +30,7 @@ private:
     glm::vec3 direction;
     glm::vec3 worldUp;
     glm::mat4 viewMatrix;
+    CameraMouseHandler cameraMouseHandler;
     
     // Projection
     float fov;

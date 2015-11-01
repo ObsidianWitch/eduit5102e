@@ -1,5 +1,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/rotate_vector.hpp>
+#include <math.h>
 #include "Camera.hpp"
 
 /**
@@ -19,7 +20,9 @@ Camera::Camera(
     const glm::vec3& position, const glm::vec3& direction,
     const glm::vec3& worldUp,
     float fov, float width, float height, float zNear, float zFar
-) {
+) :
+    cameraMouseHandler(this)
+{
     this->position = position;
     this->direction = glm::normalize(direction);
     this->worldUp = glm::normalize(worldUp);
@@ -38,6 +41,15 @@ void Camera::translate(const glm::vec3& vec) {
 void Camera::rotate(float angle, const glm::vec3& axis) {
     position = glm::rotate(position, angle, axis);
     direction = glm::normalize(glm::rotate(direction, angle, axis));
+}
+
+void Camera::rotate(const glm::vec2& delta) {
+    rotate(glm::radians(delta.x), getUp()); // yaw
+    
+    float pitch = glm::degrees(asin(direction.y)) + delta.y;
+    if (pitch > -80.0f && pitch < 80.0f) {
+        rotate(glm::radians(delta.y), getRight());
+    }
 }
 
 glm::mat4 Camera::getViewMatrix() {
@@ -62,3 +74,7 @@ glm::vec3 Camera::getUp() {
 
 float Camera::getWidth() { return width; }
 float Camera::getHeight() { return height; }
+
+MouseHandler& Camera::getMouseHandler() {
+    return cameraMouseHandler;
+}

@@ -87,6 +87,7 @@ int main() {
         0.1f,                         // zNear
         100.0f                        // zFar
     );
+    Inputs::instance().addMouseHandler(camera.getMouseHandler());
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
