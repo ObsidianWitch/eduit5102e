@@ -5,6 +5,7 @@
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
 #include "models/Model.hpp"
+#include "Camera.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -74,6 +75,17 @@ int main() {
     Model model("resources/apple.obj");
     BaseShader baseShader;
     
+    Camera camera(
+        glm::vec3(0.0f, 0.0f, 4.0f),  // position
+        glm::vec3(0.0f, 0.0f, -1.0f), // direction
+        glm::vec3(0.0f, 1.0f, 0.0f),  // up
+        glm::radians(90.0f),          // fov
+        WIDTH,                        // width
+        HEIGHT,                       // height
+        0.1f,                         // zNear
+        100.0f                        // zFar
+    );
+    
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         
@@ -81,6 +93,8 @@ int main() {
         
         baseShader.use();
         baseShader.updateModelUniform(model.getModelMatrix());
+        baseShader.updateViewUniform(camera.getViewMatrix());
+        baseShader.updateProjectionUniform(camera.getProjectionMatrix());
         model.draw();
         
         glfwSwapBuffers(window);

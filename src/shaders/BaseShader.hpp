@@ -10,10 +10,14 @@ public:
     void use();
     
     void updateModelUniform(const glm::mat4& modelMatrix);
+    void updateViewUniform(const glm::mat4& viewMatrix);
+    void updateProjectionUniform(const glm::mat4& projectionMatrix);
     
 private:
     ShaderProgram shader;
     GLint modelUniform;
+    GLint viewUniform;
+    GLint projectionUniform;
 };
 
 #endif // BASE_SHADER_HPP
