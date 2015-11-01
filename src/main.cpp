@@ -45,6 +45,8 @@ void initLibraries() {
     glfwMakeContextCurrent(window);
     
     glfwSetKeyCallback(window, Inputs::instance().keyCallback);
+    glfwSetMouseButtonCallback(window, Inputs::instance().mouseButtonCallback);
+    glfwSetCursorPosCallback(window, Inputs::instance().cursorPositionCallback);
     
     // GLEW
     glewExperimental = GL_TRUE;

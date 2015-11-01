@@ -1,6 +1,7 @@
 #include "Inputs.hpp"
 
 std::vector<KeyHandler*> Inputs::keyHandlers;
+std::vector<MouseHandler*> Inputs::mouseHandlers;
 
 Inputs::Inputs() {}
 
@@ -23,4 +24,25 @@ void Inputs::keyCallback(
 
 void Inputs::addKeyHandler(KeyHandler& kh) {
     keyHandlers.push_back(&kh);
+}
+
+
+void Inputs::mouseButtonCallback(
+    GLFWwindow* window, int button, int action, int mods
+) {
+    for (MouseHandler* mh : mouseHandlers) {
+        mh->mouseButtonCallback(window, button, action, mods);
+    }
+}
+
+void Inputs::cursorPositionCallback(
+    GLFWwindow* window, double xpos, double ypos
+) {
+    for (MouseHandler* mh : mouseHandlers) {
+        mh->cursorPositionCallback(window, xpos, ypos);
+    }
+}
+
+void Inputs::addMouseHandler(MouseHandler& mh) {
+    mouseHandlers.push_back(&mh);
 }
