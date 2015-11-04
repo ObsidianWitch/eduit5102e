@@ -5,7 +5,7 @@
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
 #include "models/Model.hpp"
-#include "Camera.hpp"
+#include "camera/Camera.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;

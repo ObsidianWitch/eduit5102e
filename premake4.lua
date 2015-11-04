@@ -12,6 +12,7 @@ solution "IT5102E_OpenGL_Project"
             "src/inputs/*.cpp", "src/inputs/*.hpp",
             "src/models/*.cpp", "src/models/*.hpp",
             "src/shaders/*.cpp", "src/shaders/*.hpp",
+            "src/camera/*.cpp", "src/camera/*.hpp",
         }
         location "build"
         links { "glfw", "GL", "GLEW", "assimp" }
