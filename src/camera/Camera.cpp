@@ -52,6 +52,10 @@ void Camera::rotate(const glm::vec2& delta) {
     }
 }
 
+void Camera::zoom(float value) {
+    position += direction * value;
+}
+
 glm::mat4 Camera::getViewMatrix() {
     return glm::lookAt(
         position,

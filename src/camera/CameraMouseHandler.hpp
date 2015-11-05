@@ -16,6 +16,9 @@ public:
     void cursorPositionCallback(
         GLFWwindow* window, double xpos, double ypos
     ) override;
+    void scrollCallback(
+        GLFWwindow* window, double xoffset, double yoffset
+    ) override;
     
 private:
     static const double MOUSE_SENSITIVITY;

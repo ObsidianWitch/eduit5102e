@@ -43,6 +43,14 @@ void Inputs::cursorPositionCallback(
     }
 }
 
+void Inputs::scrollCallback(
+    GLFWwindow* window, double xoffset, double yoffset
+) {
+    for (MouseHandler* mh : mouseHandlers) {
+        mh->scrollCallback(window, xoffset, yoffset);
+    }
+}
+
 void Inputs::addMouseHandler(MouseHandler& mh) {
     mouseHandlers.push_back(&mh);
 }

@@ -13,6 +13,9 @@ public:
     virtual void cursorPositionCallback(
         GLFWwindow* window, double xpos, double ypos
     ) = 0;
+    virtual void scrollCallback(
+        GLFWwindow* window, double xoffset, double yoffset
+    ) = 0;
 };
 
 #endif // MOUSE_HANDLER_HPP

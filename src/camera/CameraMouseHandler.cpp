@@ -39,3 +39,9 @@ void CameraMouseHandler::cursorPositionCallback(
         camera->rotate(delta);
     }
 }
+
+void CameraMouseHandler::scrollCallback(
+    GLFWwindow*, double, double yoffset
+) {
+    camera->zoom(yoffset);
+}

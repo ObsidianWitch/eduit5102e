@@ -15,6 +15,7 @@ public:
     void translate(const glm::vec3& vec);
     void rotate(float angle, const glm::vec3& axis);
     void rotate(const glm::vec2& delta);
+    void zoom(float value);
     
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();

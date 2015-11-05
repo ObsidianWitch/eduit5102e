@@ -21,6 +21,9 @@ public:
     static void cursorPositionCallback(
         GLFWwindow* window, double xpos, double ypos
     );
+    static void scrollCallback(
+        GLFWwindow* window, double xoffset, double yoffset
+    );
     static void addMouseHandler(MouseHandler& mh);
 
 private:
