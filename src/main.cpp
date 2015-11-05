@@ -80,12 +80,7 @@ int main() {
     BaseShader baseShader;
     
     Model model("resources/nanosuit/nanosuit.obj");
-    model.setModelMatrix(
-        glm::translate(
-            model.getModelMatrix(),
-            glm::vec3(0.0f, -10.0f, 0.0f)
-        )
-    );
+    model.translate(glm::vec3(0.0f, -10.0f, 0.0f));
     
     Camera camera(
         glm::vec3(0.0f, 0.0f, 10.0f), // position

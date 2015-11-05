@@ -1,4 +1,5 @@
 #include <iostream>
+#include <glm/gtc/matrix_transform.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -30,7 +31,8 @@ void Model::draw() {
     }
 }
 
-glm::mat4 Model::getModelMatrix() { return modelMatrix; }
-void Model::setModelMatrix(glm::mat4 modelMatrix) {
-    this->modelMatrix = modelMatrix;
+void Model::translate(const glm::vec3& vec) {
+    modelMatrix *= glm::translate(glm::mat4(), vec);
 }
+
+glm::mat4 Model::getModelMatrix() { return modelMatrix; }

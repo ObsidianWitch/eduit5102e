@@ -11,8 +11,9 @@ public:
     
     void draw();
     
+    void translate(const glm::vec3& vec);
+    
     glm::mat4 getModelMatrix();
-    void setModelMatrix(glm::mat4 modelMatrix) ;
     
 private:
     std::vector<Mesh> meshes;
