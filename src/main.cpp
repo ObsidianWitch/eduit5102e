@@ -2,6 +2,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
 #include "models/Model.hpp"
@@ -74,11 +75,19 @@ int main() {
     initLibraries();
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    Model model("resources/apple.obj");
+    
     BaseShader baseShader;
     
+    Model model("resources/nanosuit/nanosuit.obj");
+    model.setModelMatrix(
+        glm::translate(
+            model.getModelMatrix(),
+            glm::vec3(0.0f, -10.0f, 0.0f)
+        )
+    );
+    
     Camera camera(
-        glm::vec3(0.0f, 0.0f, 4.0f),  // position
+        glm::vec3(0.0f, 0.0f, 10.0f), // position
         glm::vec3(0.0f, 0.0f, -1.0f), // direction
         glm::vec3(0.0f, 1.0f, 0.0f),  // up
         glm::radians(90.0f),          // fov
