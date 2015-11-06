@@ -3,10 +3,11 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
-#include "models/Model.hpp"
 #include "camera/Camera.hpp"
+#include "entities/Player.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -79,20 +80,22 @@ int main() {
     
     BaseShader baseShader;
     
-    Model model("resources/nanosuit/nanosuit.obj");
-    model.translate(glm::vec3(0.0f, -10.0f, 0.0f));
-    
     Camera camera(
-        glm::vec3(0.0f, 0.0f, 10.0f), // position
-        glm::vec3(0.0f, 0.0f, -1.0f), // direction
-        glm::vec3(0.0f, 1.0f, 0.0f),  // up
-        glm::radians(90.0f),          // fov
-        WIDTH,                        // width
-        HEIGHT,                       // height
-        0.1f,                         // zNear
-        100.0f                        // zFar
+        glm::vec3(0.0f, 0.0f, -10.0f), // position
+        glm::vec3(0.0f, 0.0f, 1.0f),   // direction
+        glm::vec3(0.0f, 1.0f, 0.0f),   // up
+        glm::radians(90.0f),           // fov
+        WIDTH,                         // width
+        HEIGHT,                        // height
+        0.1f,                          // zNear
+        100.0f                         // zFar
     );
     Inputs::instance().addMouseHandler(camera.getMouseHandler());
+    
+    Player player(
+        glm::vec3(0.0f, 0.0f, 0.0f), // position
+        0.3f                         // speed
+    );
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -100,10 +103,10 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         baseShader.use();
-        baseShader.updateModelUniform(model.getModelMatrix());
+        baseShader.updateModelUniform(player.getModelMatrix());
         baseShader.updateViewUniform(camera.getViewMatrix());
         baseShader.updateProjectionUniform(camera.getProjectionMatrix());
-        model.draw();
+        player.draw();
         
         glfwSwapBuffers(window);
     }
