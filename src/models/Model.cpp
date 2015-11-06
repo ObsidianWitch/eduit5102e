@@ -35,4 +35,13 @@ void Model::translate(const glm::vec3& vec) {
     modelMatrix *= glm::translate(glm::mat4(), vec);
 }
 
+/**
+ * Rotates the model around its own y axis and the specified angle in radians.
+ */
+void Model::rotate(float angle) {
+    glm::vec3 localUp = glm::vec3(0.0f, 1.0f, 0.0f);
+    
+    modelMatrix *= glm::rotate(glm::mat4(), angle, localUp);
+}
+
 glm::mat4 Model::getModelMatrix() { return modelMatrix; }

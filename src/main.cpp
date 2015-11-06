@@ -45,6 +45,7 @@ void initLibraries() {
     }
     
     glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
     
     glfwSetKeyCallback(window, Inputs::instance().keyCallback);
     glfwSetMouseButtonCallback(window, Inputs::instance().mouseButtonCallback);
@@ -96,6 +97,8 @@ int main() {
         glm::vec3(0.0f, 0.0f, 0.0f), // position
         0.3f                         // speed
     );
+    Inputs::instance().addKeyHandler(player.getInputHandler());
+    Inputs::instance().addMouseHandler(player.getInputHandler());
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
@@ -106,7 +109,7 @@ int main() {
         baseShader.updateModelUniform(player.getModelMatrix());
         baseShader.updateViewUniform(camera.getViewMatrix());
         baseShader.updateProjectionUniform(camera.getProjectionMatrix());
-        player.draw();
+        player.update();
         
         glfwSwapBuffers(window);
     }

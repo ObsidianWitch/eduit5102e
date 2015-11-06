@@ -12,6 +12,7 @@ public:
     void draw();
     
     void translate(const glm::vec3& vec);
+    void rotate(float angle);
     
     glm::mat4 getModelMatrix();
     

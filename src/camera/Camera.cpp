@@ -1,6 +1,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/rotate_vector.hpp>
-#include <math.h>
+#include <cmath>
 #include "Camera.hpp"
 
 /**
@@ -46,7 +46,7 @@ void Camera::rotate(float angle, const glm::vec3& axis) {
 void Camera::rotate(const glm::vec2& delta) {
     rotate(glm::radians(delta.x), getUp()); // yaw
     
-    float pitch = glm::degrees(asin(direction.y)) + delta.y;
+    float pitch = glm::degrees(std::asin(direction.y)) + delta.y;
     if (pitch > -80.0f && pitch < 80.0f) {
         rotate(glm::radians(delta.y), getRight());
     }
