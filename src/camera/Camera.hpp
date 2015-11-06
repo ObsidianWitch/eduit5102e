@@ -28,7 +28,6 @@ private:
     // View
     glm::vec3 position;
     glm::vec3 direction;
-    glm::vec3 worldUp;
     glm::mat4 viewMatrix;
     CameraMouseHandler cameraMouseHandler;
     

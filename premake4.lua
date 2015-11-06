@@ -13,7 +13,8 @@ solution "IT5102E_OpenGL_Project"
             "src/models/*.cpp", "src/models/*.hpp",
             "src/shaders/*.cpp", "src/shaders/*.hpp",
             "src/camera/*.cpp", "src/camera/*.hpp",
-            "src/entities/*.cpp", "src/entities/*.hpp"
+            "src/entities/*.cpp", "src/entities/*.hpp",
+            "src/tools/*.cpp", "src/tools/*.hpp"
         }
         location "build"
         links { "glfw", "GL", "GLEW", "assimp" }

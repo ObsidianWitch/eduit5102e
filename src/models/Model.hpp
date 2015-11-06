@@ -2,8 +2,9 @@
 #define MODEL_HPP
 
 #include <vector>
-#include "Mesh.hpp"
 #include <glm/glm.hpp>
+
+#include "Mesh.hpp"
 
 class Model {
 public:

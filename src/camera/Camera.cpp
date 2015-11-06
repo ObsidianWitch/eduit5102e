@@ -1,6 +1,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 #include <cmath>
+
+#include "tools/LocalBasis.hpp"
 #include "Camera.hpp"
 
 /**
@@ -23,7 +25,6 @@ Camera::Camera(
 {
     this->position = position;
     this->direction = glm::normalize(direction);
-    this->worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     
     this->fov = fov;
     this->width = width;
@@ -67,7 +68,7 @@ glm::mat4 Camera::getProjectionMatrix() {
 }
 
 glm::vec3 Camera::getRight() {
-    return glm::normalize(glm::cross(direction, worldUp));
+    return glm::normalize(glm::cross(direction, LocalBasis::y));
 }
 
 glm::vec3 Camera::getUp() {

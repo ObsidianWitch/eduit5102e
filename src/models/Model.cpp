@@ -4,6 +4,7 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+#include "tools/LocalBasis.hpp"
 #include "Model.hpp"
 
 Model::Model(std::string path) {
@@ -39,9 +40,7 @@ void Model::translate(const glm::vec3& vec) {
  * Rotates the model around its own y axis and the specified angle in radians.
  */
 void Model::rotate(float angle) {
-    glm::vec3 localUp = glm::vec3(0.0f, 1.0f, 0.0f);
-    
-    modelMatrix *= glm::rotate(glm::mat4(), angle, localUp);
+    modelMatrix *= glm::rotate(glm::mat4(), angle, LocalBasis::y);
 }
 
 glm::mat4 Model::getModelMatrix() { return modelMatrix; }
