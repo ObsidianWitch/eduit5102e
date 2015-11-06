@@ -8,7 +8,6 @@ class Camera {
 public:
     Camera(
         const glm::vec3& position, const glm::vec3& direction,
-        const glm::vec3& worldUp,
         float fov, float width, float height, float near, float far
     );
     

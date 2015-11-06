@@ -9,7 +9,6 @@
  * @param position Position of the camera.
  * @param direction direction towards the camera's target (reversed, will be
  * normalized).
- * @param worldUp Up vector in world space (will be normalized).
  * @param fov Fielf of view (radians).
  * @param width Used to compute the aspect ratio (width/height).
  * @param height Used to compute the aspect ratio (width/height).
@@ -18,14 +17,13 @@
  */
 Camera::Camera(
     const glm::vec3& position, const glm::vec3& direction,
-    const glm::vec3& worldUp,
     float fov, float width, float height, float zNear, float zFar
 ) :
     cameraMouseHandler(this)
 {
     this->position = position;
     this->direction = glm::normalize(direction);
-    this->worldUp = glm::normalize(worldUp);
+    this->worldUp = glm::vec3(0.0f, 1.0f, 0.0f);
     
     this->fov = fov;
     this->width = width;
