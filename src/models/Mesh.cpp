@@ -45,19 +45,9 @@ void Mesh::createBuffers() {
         &vertices.front(), GL_STATIC_DRAW
     );
     
-    // Vertex position attribute
-    glVertexAttribPointer(
-        0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-        (GLvoid*) offsetof(Vertex, position)
-    );
-    glEnableVertexAttribArray(0);
-    
-    // Vertex normal attribute
-    glVertexAttribPointer(
-        1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-        (GLvoid*) offsetof(Vertex, normal)
-    );
-    glEnableVertexAttribArray(1);
+    // Vertex attribute pointers
+    Vertex::positionAttribPointer();
+    Vertex::normalAttribPointer();
     
     // Unbind array & buffers
     glBindVertexArray(0);
