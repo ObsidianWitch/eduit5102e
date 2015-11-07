@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <assimp/mesh.h>
 
+#include "Vertex.hpp"
+
 class Mesh {
 public:
     Mesh(const aiMesh* mesh);
@@ -14,12 +16,8 @@ public:
     
 private:
     GLuint vertexArray;
-    GLuint vertexBuffer;
-    GLuint normalBuffer;
-    GLuint indexBuffer;
     
-    std::vector<glm::vec3> vertices;
-    std::vector<glm::vec3> normals;
+    std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
     
     void createBuffers();

@@ -1,21 +1,13 @@
 #include "Mesh.hpp"
 
 Mesh::Mesh(const aiMesh* mesh) {
-    // Vertex positions & normals
+    // Vertex
     for (unsigned int i = 0 ; i < mesh->mNumVertices ; i++) {
-        glm::vec3 position = glm::vec3(
-            mesh->mVertices[i].x,
-            mesh->mVertices[i].y,
-            mesh->mVertices[i].z
+        Vertex vertex(
+            mesh->mVertices[i],
+            mesh->mNormals[i]
         );
-        vertices.push_back(position);
-        
-        glm::vec3 normal = glm::vec3(
-            mesh->mNormals[i].x,
-            mesh->mNormals[i].y,
-            mesh->mNormals[i].z
-        );
-        normals.push_back(normal);
+        vertices.push_back(vertex);
     }
     
     // Indices
@@ -36,6 +28,7 @@ void Mesh::createBuffers() {
     glBindVertexArray(vertexArray);
     
     // Generate and bind index buffer
+    GLuint indexBuffer;
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(
@@ -43,24 +36,27 @@ void Mesh::createBuffers() {
         &indices.front(), GL_STATIC_DRAW
     );
     
-    // Vertex buffer
+    // Generate and bind Vertex buffer
+    GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBufferData(
-        GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3),
+        GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex),
         &vertices.front(), GL_STATIC_DRAW
     );
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0);
+    
+    // Vertex position attribute
+    glVertexAttribPointer(
+        0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+        (GLvoid*) offsetof(Vertex, position)
+    );
     glEnableVertexAttribArray(0);
     
-    // Normal buffer
-    glGenBuffers(1, &normalBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, normalBuffer);
-    glBufferData(
-        GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3),
-        &normals.front(), GL_STATIC_DRAW
+    // Vertex normal attribute
+    glVertexAttribPointer(
+        1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+        (GLvoid*) offsetof(Vertex, normal)
     );
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0);
     glEnableVertexAttribArray(1);
     
     // Unbind array & buffers
