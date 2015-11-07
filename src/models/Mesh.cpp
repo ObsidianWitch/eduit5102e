@@ -30,17 +30,6 @@ Mesh::Mesh(const aiMesh* mesh) {
     createBuffers();
 }
 
-Mesh::Mesh(
-    std::vector<glm::vec3> vertices, std::vector<glm::vec3> normals,
-    std::vector<GLuint> indices
-) {
-    this->vertices = vertices;
-    this->normals = normals;
-    this->indices = indices;
-    
-    createBuffers();
-}
-
 void Mesh::createBuffers() {
     // Generate and bind vertex array
     glGenVertexArrays(1, &vertexArray);
