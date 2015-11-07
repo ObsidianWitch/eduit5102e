@@ -16,7 +16,7 @@ public:
     
 private:
     GLuint vertexArray;
-    
+        
     std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
     

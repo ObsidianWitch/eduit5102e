@@ -5,7 +5,8 @@ Mesh::Mesh(const aiMesh* mesh) {
     for (unsigned int i = 0 ; i < mesh->mNumVertices ; i++) {
         Vertex vertex(
             mesh->mVertices[i],
-            mesh->mNormals[i]
+            mesh->mNormals[i],
+            mesh->mTextureCoords[0][i]
         );
         vertices.push_back(vertex);
     }
@@ -48,6 +49,7 @@ void Mesh::createBuffers() {
     // Vertex attribute pointers
     Vertex::positionAttribPointer();
     Vertex::normalAttribPointer();
+    Vertex::textureCoordAttribPointer();
     
     // Unbind array & buffers
     glBindVertexArray(0);
