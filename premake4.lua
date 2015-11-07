@@ -17,4 +17,4 @@ solution "IT5102E_OpenGL_Project"
             "src/tools/*.cpp", "src/tools/*.hpp"
         }
         location "build"
-        links { "glfw", "GL", "GLEW", "assimp" }
+        links { "glfw", "GL", "GLEW", "assimp", "SOIL" }
