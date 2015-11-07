@@ -2,7 +2,7 @@
 
 Mesh::Mesh(const aiMesh* mesh) {
     // Vertex positions & normals
-    for (unsigned int i ; i < mesh->mNumVertices ; i++) {
+    for (unsigned int i = 0 ; i < mesh->mNumVertices ; i++) {
         glm::vec3 position = glm::vec3(
             mesh->mVertices[i].x,
             mesh->mVertices[i].y,
