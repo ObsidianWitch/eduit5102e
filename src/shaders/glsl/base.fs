@@ -6,6 +6,10 @@ out vec4 color;
 
 uniform sampler2D diffuseTexture;
 
+vec4 ambient();
+
 void main() {
-    color = texture(diffuseTexture, fsTextureCoords);
+    vec4 textureColor = texture(diffuseTexture, fsTextureCoords);
+    
+    color = textureColor * ambient();
 }
