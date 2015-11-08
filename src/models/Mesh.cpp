@@ -4,7 +4,9 @@
 
 Mesh::Mesh(
     const aiMesh* mesh, const aiMaterial* material, std::string directory
-) {
+) :
+    material(material, directory)
+{
     // Vertex
     for (unsigned int i = 0 ; i < mesh->mNumVertices ; i++) {
         Vertex vertex(
@@ -22,17 +24,6 @@ Mesh::Mesh(
         for (unsigned int j = 0 ; j < face.mNumIndices ; j++) {
             indices.push_back(face.mIndices[j]);
         }
-    }
-    
-    // Textures
-    if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
-        aiString textureFile;
-        material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFile);
-        
-        std::string texturePath = directory + '/' + std::string(textureFile.C_Str());
-        textures.push_back(Texture(
-            texturePath, GL_TEXTURE0
-        ));
     }
     
     createBuffers();
@@ -73,17 +64,11 @@ void Mesh::createBuffers() {
 }
 
 void Mesh::draw() {
-    for (Texture& texture : textures) {
-        texture.bind();
-    }
+    material.bindTextures();
     
     glBindVertexArray(vertexArray);
-    
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
-    
     glBindVertexArray(0);
     
-    for (Texture& texture : textures) {
-        texture.unbind();
-    }
+    material.unbindTextures();
 }

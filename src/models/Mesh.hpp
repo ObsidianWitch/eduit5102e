@@ -7,7 +7,7 @@
 #include <assimp/mesh.h>
 
 #include "Vertex.hpp"
-#include "Texture.hpp"
+#include "Material.hpp"
 
 class Mesh {
 public:
@@ -20,7 +20,7 @@ private:
         
     std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
-    std::vector<Texture> textures;
+    Material material;
     
     void createBuffers();
 };
