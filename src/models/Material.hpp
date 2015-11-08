@@ -8,7 +8,7 @@
 
 class Material {
 public:
-    Material(const aiMaterial* material, std::string directory);
+    Material(const aiMaterial& material, std::string directory);
     
     void bindTextures();
     void unbindTextures();
@@ -17,7 +17,7 @@ private:
     std::vector<Texture> textures;
     
     void loadTexture(
-        const aiMaterial* material, std::string directory, aiTextureType type
+        const aiMaterial& material, std::string directory, aiTextureType type
     );
 };
 

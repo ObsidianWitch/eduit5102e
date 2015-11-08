@@ -22,8 +22,8 @@ Model::Model(std::string path) {
         aiMesh* mesh = scene->mMeshes[i];
 
         meshes.push_back(Mesh(
-            mesh,
-            scene->mMaterials[mesh->mMaterialIndex],
+            *mesh,
+            *scene->mMaterials[mesh->mMaterialIndex],
             directory
         ));
     }

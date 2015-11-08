@@ -11,7 +11,7 @@
 
 class Mesh {
 public:
-    Mesh(const aiMesh* mesh, const aiMaterial* material, std::string directory);
+    Mesh(const aiMesh& mesh, const aiMaterial& material, std::string directory);
     
     void draw();
     

@@ -3,23 +3,23 @@
 #include <iostream>
 
 Mesh::Mesh(
-    const aiMesh* mesh, const aiMaterial* material, std::string directory
+    const aiMesh& mesh, const aiMaterial& material, std::string directory
 ) :
     material(material, directory)
 {
     // Vertex
-    for (unsigned int i = 0 ; i < mesh->mNumVertices ; i++) {
+    for (unsigned int i = 0 ; i < mesh.mNumVertices ; i++) {
         Vertex vertex(
-            mesh->mVertices[i],
-            mesh->mNormals[i],
-            mesh->mTextureCoords[0][i]
+            mesh.mVertices[i],
+            mesh.mNormals[i],
+            mesh.mTextureCoords[0][i]
         );
         vertices.push_back(vertex);
     }
     
     // Indices
-    for (unsigned int i = 0 ; i < mesh->mNumFaces ; i++) {
-        const aiFace& face = mesh->mFaces[i];
+    for (unsigned int i = 0 ; i < mesh.mNumFaces ; i++) {
+        const aiFace& face = mesh.mFaces[i];
         
         for (unsigned int j = 0 ; j < face.mNumIndices ; j++) {
             indices.push_back(face.mIndices[j]);
