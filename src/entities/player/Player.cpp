@@ -3,6 +3,7 @@
 #include "entities/player/Player.hpp"
 
 Player::Player(const glm::vec3& position, float speed) :
+    Entity(position),
     model("resources/nanosuit/nanosuit.obj")
 {
     // approximately centers the model
@@ -69,12 +70,14 @@ void Player::move(
 }
 
 /**
- * Updates the Player's position and draws his model.
+ * Updates the Player's position, updates the model matrix for the specified
+ * shader, and draws his model.
+ * The shader in parameter should be bound before calling this method.
  */
-void Player::update() {
+void Player::update(Shader& shader) {
     updateMove();
+    shader.setUniform("model", model.getModelMatrix());
     model.draw();
 }
 
-glm::mat4 Player::getModelMatrix() { return model.getModelMatrix(); }
 PlayerInputHandler& Player::getInputHandler() { return playerInputHandler; }
