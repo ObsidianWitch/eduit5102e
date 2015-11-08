@@ -8,6 +8,8 @@ BaseShader::BaseShader() {
     modelUniform = shader.uniformLocation("model");
     viewUniform = shader.uniformLocation("view");
     projectionUniform = shader.uniformLocation("projection");
+    
+    setSamplersUniforms();
 }
 
 void BaseShader::use() {
@@ -24,4 +26,11 @@ void BaseShader::updateViewUniform(const glm::mat4& viewMatrix) {
 
 void BaseShader::updateProjectionUniform(const glm::mat4& projectionMatrix) {
     shader.setUniform(projectionUniform, projectionMatrix);
+}
+
+void BaseShader::setSamplersUniforms() {
+    use();
+    
+    GLuint diffuseTextureUniform = shader.uniformLocation("diffuseTexture");
+    shader.setUniform(diffuseTextureUniform, (GLuint) 0);
 }

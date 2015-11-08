@@ -18,6 +18,8 @@ private:
     GLint modelUniform;
     GLint viewUniform;
     GLint projectionUniform;
+    
+    void setSamplersUniforms();
 };
 
 #endif // BASE_SHADER_HPP

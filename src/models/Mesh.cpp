@@ -73,9 +73,17 @@ void Mesh::createBuffers() {
 }
 
 void Mesh::draw() {
+    for (Texture& texture : textures) {
+        texture.bind();
+    }
+    
     glBindVertexArray(vertexArray);
     
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     
     glBindVertexArray(0);
+    
+    for (Texture& texture : textures) {
+        texture.unbind();
+    }
 }
