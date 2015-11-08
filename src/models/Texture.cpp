@@ -1,13 +1,24 @@
 #include <iostream>
+#include <algorithm>
 #include <SOIL/SOIL.h>
 
 #include "Texture.hpp"
+
+std::vector<Texture> Texture::loadedTextures;
 
 Texture::Texture(std::string path, GLenum unit) {
     this->path = path;
     this->unit = unit;
     
-    load(path);
+    // Only load the texture if it has not already been loaded.
+    auto it = std::find(loadedTextures.begin(), loadedTextures.end(), path);
+    if (it == loadedTextures.end()) {
+        load(path);
+        loadedTextures.push_back(*this);
+    }
+    else {
+        id = it->id;
+    }
 }
 
 /**
@@ -75,3 +86,7 @@ void Texture::unbind() {
 }
 
 std::string Texture::getPath() { return path; }
+
+bool Texture::operator==(const std::string& str) const {
+    return (path == str);
+}

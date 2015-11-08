@@ -2,6 +2,7 @@
 #define TEXTURE_HPP
 
 #include <string>
+#include <vector>
 #include <GL/glew.h>
 
 class Texture {
@@ -11,7 +12,12 @@ public:
     std::string getPath();
     void bind();
     void unbind();
+    
+    bool operator==(const std::string& str) const;
+    
 private:
+    static std::vector<Texture> loadedTextures;
+    
     GLuint id;
     std::string path;
     GLenum unit;
