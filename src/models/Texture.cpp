@@ -6,7 +6,18 @@
 
 std::vector<Texture> Texture::loadedTextures;
 
+Texture::Texture(const aiMaterial& mat, aiTextureType type, GLenum unit) {
+    aiString path;
+    mat.GetTexture(type, 0, &path);
+    
+    initialize(path.C_Str(), unit);
+}
+
 Texture::Texture(std::string path, GLenum unit) {
+    initialize(path, unit);
+}
+
+void Texture::initialize(std::string path, GLenum unit) {
     this->path = path;
     this->unit = unit;
     

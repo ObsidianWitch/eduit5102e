@@ -4,10 +4,13 @@
 #include <string>
 #include <vector>
 #include <GL/glew.h>
+#include <assimp/material.h>
 
 class Texture {
 public:
+    Texture(const aiMaterial& mat, aiTextureType type, GLenum unit);
     Texture(std::string path, GLenum unit);
+    void initialize(std::string path, GLenum unit);
     
     std::string getPath();
     void bind();
