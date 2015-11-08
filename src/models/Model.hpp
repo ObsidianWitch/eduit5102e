@@ -20,8 +20,6 @@ public:
 private:
     std::vector<Mesh> meshes;
     glm::mat4 modelMatrix;
-    
-    void loadModel(std::string path);
 };
 
 

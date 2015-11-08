@@ -7,10 +7,11 @@
 #include <assimp/mesh.h>
 
 #include "Vertex.hpp"
+#include "Texture.hpp"
 
 class Mesh {
 public:
-    Mesh(const aiMesh* mesh);
+    Mesh(const aiMesh* mesh, const aiMaterial* material, std::string directory);
     
     void draw();
     
@@ -19,6 +20,7 @@ private:
         
     std::vector<Vertex> vertices;
     std::vector<GLuint> indices;
+    std::vector<Texture> textures;
     
     void createBuffers();
 };

@@ -8,21 +8,22 @@
 #include "Model.hpp"
 
 Model::Model(std::string path) {
-    loadModel(path);
-}
-
-void Model::loadModel(std::string path) {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(path, aiProcess_GenNormals);
-    
     if (!scene) {
         std::cerr << "Error loading model: " << importer.GetErrorString()
                   << std::endl;
     }
     
+    std::string directory = path.substr(0, path.find_last_of('/'));
     for (unsigned int i = 0 ; i < scene->mNumMeshes ; i++) {
-        Mesh m(scene->mMeshes[i]);
-        meshes.push_back(m);
+        aiMesh* mesh = scene->mMeshes[i];
+
+        meshes.push_back(Mesh(
+            mesh,
+            scene->mMaterials[mesh->mMaterialIndex],
+            directory
+        ));
     }
 }
 
