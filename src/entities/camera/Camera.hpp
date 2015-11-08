@@ -2,9 +2,10 @@
 #define CAMERA_HPP
 
 #include <glm/glm.hpp>
-#include "CameraMouseHandler.hpp"
+#include "entities/Entity.hpp"
+#include "entities/camera/CameraMouseHandler.hpp"
 
-class Camera {
+class Camera : public Entity {
 public:
     Camera(
         const glm::vec3& position, const glm::vec3& direction,
@@ -16,6 +17,8 @@ public:
     void rotate(const glm::vec2& delta);
     void zoom(float value);
     
+    void update(Shader& shader) override;
+    
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
     glm::vec3 getRight();
@@ -26,9 +29,7 @@ public:
     
 private:
     // View
-    glm::vec3 position;
     glm::vec3 direction;
-    glm::mat4 viewMatrix;
     CameraMouseHandler cameraMouseHandler;
     
     // Projection
@@ -37,7 +38,6 @@ private:
     float height;
     float zNear;
     float zFar;
-    glm::mat4 projectionMatrix;
 };
 
 #endif // CAMERA_HPP

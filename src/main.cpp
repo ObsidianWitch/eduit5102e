@@ -6,7 +6,7 @@
 
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
-#include "camera/Camera.hpp"
+#include "entities/camera/Camera.hpp"
 #include "entities/player/Player.hpp"
 
 const GLuint WIDTH = 800;
@@ -105,10 +105,9 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         baseShader.use();
-        baseShader.setUniform("view", camera.getViewMatrix());
-        baseShader.setUniform("projection", camera.getProjectionMatrix());
-        player.update(baseShader);
         
+        player.update(baseShader);
+        camera.update(baseShader);
         glfwSwapBuffers(window);
     }
     

@@ -3,7 +3,7 @@
 #include <cmath>
 
 #include "tools/LocalBasis.hpp"
-#include "Camera.hpp"
+#include "entities/camera/Camera.hpp"
 
 /**
  * Creates a perspective Camera which holds the view & projection matrices. In
@@ -21,9 +21,9 @@ Camera::Camera(
     const glm::vec3& position, const glm::vec3& direction,
     float fov, float width, float height, float zNear, float zFar
 ) :
+    Entity(position),
     cameraMouseHandler(this)
 {
-    this->position = position;
     this->direction = glm::normalize(direction);
     
     this->fov = fov;
@@ -53,6 +53,11 @@ void Camera::rotate(const glm::vec2& delta) {
 
 void Camera::zoom(float value) {
     position += direction * value;
+}
+
+void Camera::update(Shader& shader) {
+    shader.setUniform("view", getViewMatrix());
+    shader.setUniform("projection", getProjectionMatrix());
 }
 
 glm::mat4 Camera::getViewMatrix() {

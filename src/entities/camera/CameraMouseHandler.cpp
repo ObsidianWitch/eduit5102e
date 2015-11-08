@@ -1,5 +1,5 @@
-#include "CameraMouseHandler.hpp"
-#include "Camera.hpp"
+#include "entities/camera/Camera.hpp"
+#include "entities/camera/CameraMouseHandler.hpp"
 
 const double CameraMouseHandler::MOUSE_SENSITIVITY = 0.25;
 
