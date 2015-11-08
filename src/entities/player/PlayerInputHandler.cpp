@@ -1,5 +1,5 @@
-#include "Player.hpp"
-#include "PlayerInputHandler.hpp"
+#include "entities/player/Player.hpp"
+#include "entities/player/PlayerInputHandler.hpp"
 
 #include <iostream>
 

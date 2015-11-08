@@ -7,7 +7,7 @@
 #include "inputs/Inputs.hpp"
 #include "shaders/BaseShader.hpp"
 #include "camera/Camera.hpp"
-#include "entities/Player.hpp"
+#include "entities/player/Player.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;

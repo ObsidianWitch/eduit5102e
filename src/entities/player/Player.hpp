@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 
 #include "models/Model.hpp"
-#include "PlayerInputHandler.hpp"
+#include "entities/player/PlayerInputHandler.hpp"
 
 class Player {
 public:

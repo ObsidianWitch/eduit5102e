@@ -1,6 +1,6 @@
 #include <glm/gtc/constants.hpp>
 
-#include "Player.hpp"
+#include "entities/player/Player.hpp"
 
 Player::Player(const glm::vec3& position, float speed) :
     model("resources/nanosuit/nanosuit.obj")
