@@ -2,11 +2,11 @@
 #include <fstream>
 #include <sstream>
 #include <glm/gtc/type_ptr.hpp>
-#include "ShaderProgram.hpp"
+#include "Shader.hpp"
 
-ShaderProgram::ShaderProgram() {}
+Shader::Shader() {}
 
-ShaderProgram& ShaderProgram::add(GLenum type, std::string filename) {
+Shader& Shader::add(GLenum type, std::string filename) {
     std::string str = readShader(filename);
     const GLchar* shaderCode = str.c_str();
 
@@ -26,7 +26,7 @@ ShaderProgram& ShaderProgram::add(GLenum type, std::string filename) {
     return *this;
 }
 
-std::string ShaderProgram::readShader(std::string filename) {
+std::string Shader::readShader(std::string filename) {
     std::ifstream ifs(filename, std::ifstream::in);
     
     if (!ifs) {
@@ -41,7 +41,7 @@ std::string ShaderProgram::readShader(std::string filename) {
     return ss.str();
 }
 
-void ShaderProgram::link() {
+void Shader::link() {
     program = glCreateProgram();
     
     for (GLuint shader : shaders) {
@@ -57,11 +57,11 @@ void ShaderProgram::link() {
     }
 }
 
-void ShaderProgram::use() {
+void Shader::use() {
     glUseProgram(program);
 }
 
-void ShaderProgram::compilationErrors(GLint shader) {
+void Shader::compilationErrors(GLint shader) {
     GLint length;
     
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length);
@@ -74,7 +74,7 @@ void ShaderProgram::compilationErrors(GLint shader) {
     delete[] log;
 }
 
-void ShaderProgram::linkageErrors() {
+void Shader::linkageErrors() {
     GLint length;
     
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length);
@@ -87,26 +87,39 @@ void ShaderProgram::linkageErrors() {
     delete[] log;
 }
 
-GLuint ShaderProgram::uniformLocation(std::string uniformName) {
-    return glGetUniformLocation(program, uniformName.c_str());
+GLuint Shader::uniformLocation(std::string name) {
+    auto it = uniformsMap.find(name);
+    
+    if (it != uniformsMap.end()) {
+        return it->second;
+    }
+    else {
+        GLuint id = glGetUniformLocation(program, name.c_str());
+        uniformsMap.insert({name, id});
+        return id;
+    }
 }
 
-void ShaderProgram::setUniform(GLuint id, GLuint value) {
-    glUniform1i(id, value);
+void Shader::setUniform(std::string name, GLuint value) {
+    glUniform1i(uniformLocation(name), value);
 }
 
-void ShaderProgram::setUniform(GLuint id, GLfloat value) {
-    glUniform1f(id, value);
+void Shader::setUniform(std::string name, GLfloat value) {
+    glUniform1f(uniformLocation(name), value);
 }
 
-void ShaderProgram::setUniform(GLuint id, const glm::vec3& value) {
-    glUniform3fv(id, 1, glm::value_ptr(value));
+void Shader::setUniform(std::string name, const glm::vec3& value) {
+    glUniform3fv(uniformLocation(name), 1, glm::value_ptr(value));
 }
 
-void ShaderProgram::setUniform(GLuint id, const glm::mat3& value) {
-    glUniformMatrix3fv(id, 1, GL_FALSE, glm::value_ptr(value));
+void Shader::setUniform(std::string name, const glm::mat3& value) {
+    glUniformMatrix3fv(
+        uniformLocation(name), 1, GL_FALSE, glm::value_ptr(value)
+    );
 }
 
-void ShaderProgram::setUniform(GLuint id, const glm::mat4& value) {
-    glUniformMatrix4fv(id, 1, GL_FALSE, glm::value_ptr(value));
+void Shader::setUniform(std::string name, const glm::mat4& value) {
+    glUniformMatrix4fv(
+        uniformLocation(name), 1, GL_FALSE, glm::value_ptr(value)
+    );
 }

@@ -105,9 +105,9 @@ int main() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         baseShader.use();
-        baseShader.updateModelUniform(player.getModelMatrix());
-        baseShader.updateViewUniform(camera.getViewMatrix());
-        baseShader.updateProjectionUniform(camera.getProjectionMatrix());
+        baseShader.setUniform("model", player.getModelMatrix());
+        baseShader.setUniform("view", camera.getViewMatrix());
+        baseShader.setUniform("projection", camera.getProjectionMatrix());
         player.update();
         
         glfwSwapBuffers(window);
