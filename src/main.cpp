@@ -8,6 +8,7 @@
 #include "shaders/BaseShader.hpp"
 #include "entities/camera/Camera.hpp"
 #include "entities/player/Player.hpp"
+#include "entities/lights/DirectionalLight.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -98,6 +99,14 @@ int main() {
     );
     Inputs::instance().addKeyHandler(player.getInputHandler());
     Inputs::instance().addMouseHandler(player.getInputHandler());
+    
+    DirectionalLight dL(
+        glm::vec3(-1.0f, -0.5f, 0.0f), // direction
+        glm::vec3(1.0f, 1.0f, 1.0f)    // color
+    );
+    
+    baseShader.use();
+    dL.update(baseShader);
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
