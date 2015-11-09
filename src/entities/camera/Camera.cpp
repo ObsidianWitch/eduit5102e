@@ -21,7 +21,7 @@ Camera::Camera(
     const glm::vec3& position, const glm::vec3& direction,
     float fov, float width, float height, float zNear, float zFar
 ) :
-    Entity(position),
+    Entity("camera", position),
     cameraMouseHandler(this)
 {
     this->direction = glm::normalize(direction);

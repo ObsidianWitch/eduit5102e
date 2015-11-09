@@ -5,7 +5,9 @@
 
 class DirectionalLight : public Entity {
 public:
-    DirectionalLight(const glm::vec3& direction, const glm::vec3& color);
+    DirectionalLight(
+        std::string name, const glm::vec3& direction, const glm::vec3& color
+    );
     
     void update(Shader& shader) override;
     

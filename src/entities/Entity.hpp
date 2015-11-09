@@ -1,13 +1,14 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
+#include <string>
 #include <glm/glm.hpp>
 
 #include "shaders/Shader.hpp"
 
 class Entity {
 public:
-    Entity(const glm::vec3& position);
+    Entity(std::string name, const glm::vec3& position);
     
     /**
      * Updates this Entity's state, and update uniforms linked to this
@@ -17,6 +18,7 @@ public:
     virtual void update(Shader& shader) = 0;
     
 protected:
+    std::string name;
     glm::vec3 position;
 };
 

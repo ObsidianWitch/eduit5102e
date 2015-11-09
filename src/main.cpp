@@ -102,10 +102,12 @@ int main() {
     Inputs::instance().addMouseHandler(player.getInputHandler());
     
     AmbientLight aL(
+        "aL",                       // name
         glm::vec3(0.1f, 0.1f, 0.1f) // color
     );
     
     DirectionalLight dL(
+        "dL",                          // name
         glm::vec3(-1.0f, -0.5f, 0.0f), // direction
         glm::vec3(1.0f, 1.0f, 1.0f)    // color
     );

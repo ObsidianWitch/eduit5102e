@@ -2,8 +2,10 @@
 
 /**
  * Creates an entity. An entity is any object which can be added to a scene and
- * which can be updated each frame.
+ * which can be updated each frame. The name attribute can be used to associate
+ * an Entity instance to its counterpart in glsl code.
  */
-Entity::Entity(const glm::vec3& position) {
+Entity::Entity(std::string name, const glm::vec3& position) {
+    this->name = name;
     this->position = position;
 }

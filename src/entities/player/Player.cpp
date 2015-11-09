@@ -3,7 +3,7 @@
 #include "entities/player/Player.hpp"
 
 Player::Player(const glm::vec3& position, float speed) :
-    Entity(position),
+    Entity("player", position),
     model("resources/nanosuit/nanosuit.obj")
 {
     // approximately centers the model

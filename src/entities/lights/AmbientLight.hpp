@@ -5,7 +5,7 @@
 
 class AmbientLight : public Entity {
 public:
-    AmbientLight(const glm::vec3& color);
+    AmbientLight(std::string name, const glm::vec3& color);
     
     void update(Shader& shader) override;
     
