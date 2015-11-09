@@ -8,6 +8,7 @@
 #include "shaders/BaseShader.hpp"
 #include "entities/camera/Camera.hpp"
 #include "entities/player/Player.hpp"
+#include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
 
 const GLuint WIDTH = 800;
@@ -100,12 +101,17 @@ int main() {
     Inputs::instance().addKeyHandler(player.getInputHandler());
     Inputs::instance().addMouseHandler(player.getInputHandler());
     
+    AmbientLight aL(
+        glm::vec3(0.1f, 0.1f, 0.1f) // color
+    );
+    
     DirectionalLight dL(
         glm::vec3(-1.0f, -0.5f, 0.0f), // direction
         glm::vec3(1.0f, 1.0f, 1.0f)    // color
     );
     
     baseShader.use();
+    aL.update(baseShader);
     dL.update(baseShader);
     
     while (!glfwWindowShouldClose(window)) {
