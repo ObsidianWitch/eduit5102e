@@ -1,5 +1,6 @@
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_inverse.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -47,3 +48,13 @@ void Model::rotate(float angle) {
 }
 
 glm::mat4 Model::getModelMatrix() { return modelMatrix; }
+
+/**
+ * Computes the normalMatrix from the model matrix. This matrix is used to
+ * transform a normal from local to world coordinates. Directly using the
+ * Model matrix to do the transformation would cause problems in case of
+ * non-uniform scaling.
+ */
+glm::mat3 Model::getNormalMatrix() {
+    return glm::mat3(glm::inverseTranspose(modelMatrix));
+}

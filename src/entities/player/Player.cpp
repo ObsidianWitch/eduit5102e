@@ -77,6 +77,7 @@ void Player::move(
 void Player::update(Shader& shader) {
     updateMove();
     shader.setUniform("model", model.getModelMatrix());
+    shader.setUniform("normalMatrix", model.getNormalMatrix());
     model.draw(shader);
 }
 

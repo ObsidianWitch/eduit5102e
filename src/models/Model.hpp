@@ -17,6 +17,7 @@ public:
     void rotate(float angle);
     
     glm::mat4 getModelMatrix();
+    glm::mat3 getNormalMatrix();
     
 private:
     std::vector<Mesh> meshes;

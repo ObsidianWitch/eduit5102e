@@ -9,6 +9,7 @@ out vec3 fsNormal;
 out vec2 fsTextureCoords;
 
 uniform mat4 model;
+uniform mat3 normalMatrix;
 uniform mat4 view;
 uniform mat4 projection;
 
@@ -16,6 +17,6 @@ void main() {
     gl_Position = projection * view * model * vec4(position, 1.0f);
     
     fsPosition = vec3(model * vec4(position, 1.0f));
-    fsNormal = mat3(transpose(inverse(model))) * normal;
+    fsNormal = normalMatrix * normal;
     fsTextureCoords = textureCoords;
 }
