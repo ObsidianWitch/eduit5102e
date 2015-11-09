@@ -115,8 +115,8 @@ int main() {
         
         baseShader.use();
         
-        player.update(baseShader);
         camera.update(baseShader);
+        player.update(baseShader);
         glfwSwapBuffers(window);
     }
     

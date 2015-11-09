@@ -77,7 +77,7 @@ void Player::move(
 void Player::update(Shader& shader) {
     updateMove();
     shader.setUniform("model", model.getModelMatrix());
-    model.draw();
+    model.draw(shader);
 }
 
 PlayerInputHandler& Player::getInputHandler() { return playerInputHandler; }

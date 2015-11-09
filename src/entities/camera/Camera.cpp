@@ -58,6 +58,7 @@ void Camera::zoom(float value) {
 void Camera::update(Shader& shader) {
     shader.setUniform("view", getViewMatrix());
     shader.setUniform("projection", getProjectionMatrix());
+    shader.setUniform("cameraPosition", position);
 }
 
 glm::mat4 Camera::getViewMatrix() {

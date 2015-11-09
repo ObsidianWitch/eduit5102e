@@ -5,11 +5,4 @@ BaseShader::BaseShader() {
     .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/base.fs")
     .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/illumination.fs")
     .link();
-    
-    setSamplersUniforms();
-}
-
-void BaseShader::setSamplersUniforms() {
-    use();
-    setUniform("diffuseTexture", (GLuint) 0);
 }

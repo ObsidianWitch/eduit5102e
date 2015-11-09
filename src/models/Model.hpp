@@ -4,13 +4,14 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+#include "shaders/Shader.hpp"
 #include "Mesh.hpp"
 
 class Model {
 public:
     Model(std::string path);
     
-    void draw();
+    void draw(Shader& shader);
     
     void translate(const glm::vec3& vec);
     void rotate(float angle);

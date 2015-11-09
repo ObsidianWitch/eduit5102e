@@ -63,7 +63,9 @@ void Mesh::createBuffers() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
-void Mesh::draw() {
+void Mesh::draw(Shader& shader) {
+    material.update(shader);
+    
     material.bindTextures();
     
     glBindVertexArray(vertexArray);

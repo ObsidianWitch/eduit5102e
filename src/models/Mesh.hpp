@@ -6,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <assimp/mesh.h>
 
+#include "shaders/Shader.hpp"
 #include "Vertex.hpp"
 #include "Material.hpp"
 
@@ -13,7 +14,7 @@ class Mesh {
 public:
     Mesh(const aiMesh& mesh, const aiMaterial& material, std::string directory);
     
-    void draw();
+    void draw(Shader& shader);
     
 private:
     GLuint vertexArray;

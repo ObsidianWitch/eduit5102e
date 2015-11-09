@@ -29,9 +29,9 @@ Model::Model(std::string path) {
     }
 }
 
-void Model::draw() {
+void Model::draw(Shader& shader) {
     for (Mesh mesh : meshes) {
-        mesh.draw();
+        mesh.draw(shader);
     }
 }
 

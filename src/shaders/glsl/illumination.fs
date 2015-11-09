@@ -2,9 +2,9 @@
 
 struct Material {
     sampler2D diffuse;
-    float kAmbient;
-    float kDiffuse;
-    float kSpecular;
+    vec3 cAmbient;
+    vec3 cDiffuse;
+    vec3 cSpecular;
     float shininess;
 };
 
@@ -30,16 +30,16 @@ vec3 computeDirectionalLight(DirectionalLight light) {
     vec3 reflectedDirection = reflect(-lightDirection, normal);
     
     // Ambient component
-    vec3 ambient = light.color * material.kAmbient * diffuseTexColor;
+    vec3 ambient = light.color * material.cAmbient * diffuseTexColor;
     
     // Diffuse component
     float diffuseCoeff = max(dot(normal, lightDirection), 0.0);
-    vec3 diffuse = light.color * material.kDiffuse * diffuseCoeff
+    vec3 diffuse = light.color * material.cDiffuse * diffuseCoeff
                  * diffuseTexColor;
     
     // Specular component
     float specularCoeff = max(dot(viewDirection, reflectedDirection), 0.0);
-    vec3 specular = light.color * material.kSpecular
+    vec3 specular = light.color * material.cSpecular
                   * pow(specularCoeff, material.shininess);
     
     return ambient + diffuse + specular;

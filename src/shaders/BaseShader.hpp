@@ -6,9 +6,6 @@
 class BaseShader : public Shader {
 public:
     BaseShader();
-    
-private:
-    void setSamplersUniforms();
 };
 
 #endif // BASE_SHADER_HPP

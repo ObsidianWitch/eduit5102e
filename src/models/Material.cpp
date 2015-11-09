@@ -2,6 +2,11 @@
 
 Material::Material(const aiMaterial& material, std::string directory) {
     loadTexture(material, directory, aiTextureType_DIFFUSE);
+    
+    cAmbient = glm::vec3(0.4f); // FIXME
+    cDiffuse = glm::vec3(0.64f); // FIXME
+    cSpecular = glm::vec3(0.5f); // FIXME
+    shininess = 50.0f; // FIXME
 }
 
 void Material::loadTexture(
@@ -16,6 +21,14 @@ void Material::loadTexture(
             texturePath, GL_TEXTURE0
         ));
     }
+}
+
+void Material::update(Shader& shader) {
+    shader.setUniform("material.diffuse", (GLuint) 0);
+    shader.setUniform("material.cAmbient", cAmbient);
+    shader.setUniform("material.cDiffuse", cDiffuse);
+    shader.setUniform("material.cSpecular", cSpecular);
+    shader.setUniform("material.shininess", shininess);
 }
 
 void Material::bindTextures() {
