@@ -1,15 +1,9 @@
 #version 330 core
 
-in vec2 fsTextureCoords;
-
 out vec4 color;
 
-uniform sampler2D diffuseTexture;
-
-vec4 ambient();
+vec3 illumination();
 
 void main() {
-    vec4 textureColor = texture(diffuseTexture, fsTextureCoords);
-    
-    color = textureColor * ambient();
+    color = vec4(illumination(), 1.0);
 }
