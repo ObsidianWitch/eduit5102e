@@ -82,7 +82,7 @@ void Shader::linkageErrors() {
     
     glGetProgramInfoLog(program, length, &length, log);
     std::cout << "Compile Error, Log Below" << std::endl
-         << log << std::endl;
+              << log << std::endl;
     
     delete[] log;
 }
