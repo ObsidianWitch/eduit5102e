@@ -3,10 +3,18 @@
 Material::Material(const aiMaterial& material, std::string directory) {
     loadTexture(material, directory, aiTextureType_DIFFUSE);
     
-    cAmbient = glm::vec3(0.4f); // FIXME
-    cDiffuse = glm::vec3(0.64f); // FIXME
-    cSpecular = glm::vec3(0.5f); // FIXME
-    shininess = 50.0f; // FIXME
+    aiColor3D color;
+    
+    material.Get(AI_MATKEY_COLOR_AMBIENT, color);
+    cAmbient = glm::vec3(color.r, color.g, color.b);
+    
+    material.Get(AI_MATKEY_COLOR_DIFFUSE, color);
+    cDiffuse = glm::vec3(color.r, color.g, color.b);
+    
+    material.Get(AI_MATKEY_COLOR_SPECULAR, color);
+    cSpecular = glm::vec3(color.r, color.g, color.b);
+    
+    material.Get(AI_MATKEY_SHININESS, shininess);
 }
 
 void Material::loadTexture(
