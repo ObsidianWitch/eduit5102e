@@ -19,26 +19,26 @@ in vec3 fsPosition;
 uniform AmbientLight aL;
 uniform DirectionalLight dL;
 
-vec3 computeAmbientComponent(vec3 lightColor);
-vec3 computeDiffuseComponent(vec3 lightColor, vec3 lightDirection);
-vec3 computeSpecularComponent(vec3 lightColor, vec3 lightDirection);
+vec3 ambientComponent(vec3 lightColor);
+vec3 diffuseComponent(vec3 lightColor, vec3 lightDirection);
+vec3 specularComponent(vec3 lightColor, vec3 lightDirection);
 
 vec3 computeAmbientLight(AmbientLight light) {
-    return computeAmbientComponent(light.color);
+    return ambientComponent(light.color);
 }
 
 vec3 computeDirectionalLight(DirectionalLight light) {
     vec3 lightDirection = normalize(-light.direction);
     
-    return computeDiffuseComponent(light.color, lightDirection)
-         + computeSpecularComponent(light.color, lightDirection);
+    return diffuseComponent(light.color, lightDirection)
+         + specularComponent(light.color, lightDirection);
 }
 
 vec3 computePointLight(PointLight light) {
     vec3 lightDirection = normalize(light.postion - fsPosition);
     
-    return computeDiffuseComponent(light.color, lightDirection)
-         + computeSpecularComponent(light.color, lightDirection);
+    return diffuseComponent(light.color, lightDirection)
+         + specularComponent(light.color, lightDirection);
 }
 
 vec3 illumination() {
