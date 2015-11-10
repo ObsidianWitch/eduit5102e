@@ -15,8 +15,12 @@ in vec2 fsTextureCoords;
 uniform vec3 cameraPosition;
 uniform Material material;
 
+vec3 silhouette();
+
 vec3 normal = normalize(fsNormal);
-vec3 diffuseTexColor = vec3(texture(material.diffuse, fsTextureCoords));
+vec3 viewDirection = normalize(cameraPosition - fsPosition);
+vec3 diffuseTexColor = vec3(texture(material.diffuse, fsTextureCoords))
+                     + silhouette();
 
 vec3 ambientComponent(vec3 lightColor) {
     return lightColor * material.cAmbient * diffuseTexColor;
@@ -32,7 +36,6 @@ vec3 diffuseComponent(vec3 lightColor, vec3 lightDirection) {
 }
 
 vec3 specularComponent(vec3 lightColor, vec3 lightDirection) {
-    vec3 viewDirection = normalize(cameraPosition - fsPosition);
     vec3 reflectedDirection = reflect(-lightDirection, normal);
     
     float specularCoeff = pow(
@@ -43,4 +46,21 @@ vec3 specularComponent(vec3 lightColor, vec3 lightDirection) {
     else { specularCoeff = 1.0; }
     
     return lightColor * material.cSpecular * specularCoeff;
+}
+
+/**
+ * Computes the silhouette offset color. The computed color must be added
+ * to the object's color (e.g. texture color) for the current fragment. The
+ * silhouette is not completely black, it only darkens the current object's
+ * color.
+ */
+vec3 silhouette() {
+    float silhouetteCoeff = abs(dot(viewDirection, normal));
+    
+    if (silhouetteCoeff < 0.2) {
+        return vec3(-0.2, -0.2, -0.2);
+    }
+    else {
+        return vec3(0.0, 0.0, 0.0);
+    }
 }
