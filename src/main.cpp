@@ -84,7 +84,7 @@ int main() {
     Shader mainShader;
     mainShader.add(GL_VERTEX_SHADER, "src/shaders/glsl/main.vs")
               .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/main.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/phong.fs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/toon.fs")
               .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/lights.fs")
               .link();
     

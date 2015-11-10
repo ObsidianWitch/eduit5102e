@@ -23,7 +23,11 @@ vec3 computeAmbientComponent(vec3 lightColor) {
 }
 
 vec3 computeDiffuseComponent(vec3 lightColor, vec3 lightDirection) {
-    float diffuseCoeff = max(dot(normal, lightDirection), 0.0);
+    float diffuseCoeff = dot(normal, lightDirection);
+    if (diffuseCoeff > 0.2) { diffuseCoeff = 1.0; }
+    else if (diffuseCoeff > 0.0) { diffuseCoeff = 0.3; }
+    else { diffuseCoeff = 0.0; }
+    
     return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor;
 }
 
@@ -35,5 +39,8 @@ vec3 computeSpecularComponent(vec3 lightColor, vec3 lightDirection) {
         max(dot(viewDirection, reflectedDirection), 0.0),
         material.shininess
     );
+    if (specularCoeff < 0.5) { specularCoeff = 0.0; }
+    else { specularCoeff = 1.0; }
+    
     return lightColor * material.cSpecular * specularCoeff;
 }
