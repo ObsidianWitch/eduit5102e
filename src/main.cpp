@@ -81,9 +81,9 @@ int main() {
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     
-    Shader baseShader;
-    baseShader.add(GL_VERTEX_SHADER, "src/shaders/glsl/base.vs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/base.fs")
+    Shader mainShader;
+    mainShader.add(GL_VERTEX_SHADER, "src/shaders/glsl/main.vs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/main.fs")
               .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/phong.fs")
               .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/lights.fs")
               .link();
@@ -117,19 +117,19 @@ int main() {
         glm::vec3(1.0f, 1.0f, 1.0f)    // color
     );
     
-    baseShader.use();
-    aL.update(baseShader);
-    dL.update(baseShader);
+    mainShader.use();
+    aL.update(mainShader);
+    dL.update(mainShader);
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        baseShader.use();
+        mainShader.use();
         
-        camera.update(baseShader);
-        player.update(baseShader);
+        camera.update(mainShader);
+        player.update(mainShader);
         glfwSwapBuffers(window);
     }
     
