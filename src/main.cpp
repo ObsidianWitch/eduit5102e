@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "inputs/Inputs.hpp"
-#include "shaders/BaseShader.hpp"
+#include "shaders/Shader.hpp"
 #include "entities/camera/Camera.hpp"
 #include "entities/player/Player.hpp"
 #include "entities/lights/AmbientLight.hpp"
@@ -81,7 +81,12 @@ int main() {
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     
-    BaseShader baseShader;
+    Shader baseShader;
+    baseShader.add(GL_VERTEX_SHADER, "src/shaders/glsl/base.vs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/base.fs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/phong.fs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/lights.fs")
+              .link();
     
     Camera camera(
         glm::vec3(0.0f, 0.0f, -10.0f), // position
