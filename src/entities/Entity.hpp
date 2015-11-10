@@ -8,7 +8,7 @@
 
 class Entity {
 public:
-    Entity(std::string name, const glm::vec3& position);
+    Entity(std::string name);
     
     /**
      * Updates this Entity's state, and update uniforms linked to this
@@ -19,7 +19,6 @@ public:
     
 protected:
     std::string name;
-    glm::vec3 position;
 };
 
 #endif // ENTITY_HPP

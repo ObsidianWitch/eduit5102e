@@ -1,7 +1,7 @@
 #include "AmbientLight.hpp"
 
 AmbientLight::AmbientLight(std::string name, const glm::vec3& color) :
-    Entity(name, glm::vec3(0.0f, 0.0f, 0.0f))
+    Entity(name)
 {
     this->color = color;
 }

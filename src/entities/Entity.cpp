@@ -5,7 +5,6 @@
  * which can be updated each frame. The name attribute can be used to associate
  * an Entity instance to its counterpart in glsl code.
  */
-Entity::Entity(std::string name, const glm::vec3& position) {
+Entity::Entity(std::string name) {
     this->name = name;
-    this->position = position;
 }

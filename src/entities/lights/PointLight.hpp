@@ -12,6 +12,7 @@ public:
     void update(Shader& shader) override;
     
 private:
+    glm::vec3 position;
     glm::vec3 color;
 };
 

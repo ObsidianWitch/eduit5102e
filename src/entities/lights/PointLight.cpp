@@ -3,8 +3,9 @@
 PointLight::PointLight(
     std::string name, const glm::vec3& position, const glm::vec3& color
 ) :
-    Entity(name, position)
+    Entity(name)
 {
+    this->position = position;
     this->color = color;
 }
 
