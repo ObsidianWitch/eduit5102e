@@ -33,7 +33,8 @@ void Texture2D::load(std::string path) {
         SOIL_LOAD_RGB    // force channels
     );
     if (image == nullptr) {
-        std::cerr << "Texture " << path << " could not be loaded." << std::endl;
+        std::cerr << "Texture " << path << " could not be loaded." << std::endl
+                  << SOIL_last_result() << std::endl;
         exit(EXIT_FAILURE);
     }
     

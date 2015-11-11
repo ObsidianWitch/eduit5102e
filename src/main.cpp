@@ -10,6 +10,7 @@
 #include "entities/player/Player.hpp"
 #include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
+#include "entities/skybox/Skybox.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -118,6 +119,13 @@ int main() {
         glm::vec3(1.0f, 1.0f, 1.0f)    // color
     );
     
+    Shader skyboxShader;
+    skyboxShader.add(GL_VERTEX_SHADER, "src/shaders/skybox/skybox.vs")
+                .add(GL_FRAGMENT_SHADER, "src/shaders/skybox/skybox.fs")
+                .link();
+    
+    Skybox skybox;
+    
     mainShader.use();
     aL.update(mainShader);
     dL.update(mainShader);
@@ -131,6 +139,11 @@ int main() {
         
         player.update(mainShader);
         camera.update(mainShader, player.getPosition());
+        
+        skyboxShader.use();
+        camera.update(skyboxShader);
+        skybox.update(skyboxShader);
+        
         glfwSwapBuffers(window);
     }
     
