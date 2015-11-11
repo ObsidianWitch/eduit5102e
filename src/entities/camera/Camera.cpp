@@ -68,6 +68,12 @@ void Camera::zoom(float value) {
     }
 }
 
+/**
+ * Updates the specified shader uniforms (view, projection and camera position).
+ * The view matrix will contain its translation component. The newTarget
+ * parameter sets the new target position as its names implies. It is used for
+ * following a target with the camera (e.g. player).
+ */
 void Camera::update(Shader& shader, const glm::vec3& newTarget) {
     translate(newTarget + targetOffset - target);
     target = newTarget + targetOffset;
@@ -75,10 +81,28 @@ void Camera::update(Shader& shader, const glm::vec3& newTarget) {
     update(shader);
 }
 
-void Camera::update(Shader& shader) {
-    shader.setUniform("view", getViewMatrix());
+/**
+ * Updates the specified shader uniforms (view, projection and camera position).
+ * The viewTranslation boolean removes the translation part of the view matrix
+ * when set to false. It is useful for vectors that should not be affected
+ * by the view translation (e.g. skybox positions, normals).
+ */
+void Camera::update(Shader& shader, bool viewTranslation) {
+    glm::mat4 viewMatrix = viewTranslation ?
+                           getViewMatrix()
+                         : glm::mat4(glm::mat3(getViewMatrix()));
+    
+    shader.setUniform("view", viewMatrix);
     shader.setUniform("projection", getProjectionMatrix());
     shader.setUniform("cameraPosition", position);
+}
+
+/**
+ * Updates the specified shader uniforms (view, projection and camera position).
+ * The view matrix will contain its translation component.
+ */
+void Camera::update(Shader& shader) {
+    Camera::update(shader, true);
 }
 
 glm::mat4 Camera::getViewMatrix() {

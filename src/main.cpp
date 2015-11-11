@@ -141,7 +141,7 @@ int main() {
         camera.update(mainShader, player.getPosition());
         
         skyboxShader.use();
-        camera.update(skyboxShader);
+        camera.update(skyboxShader, false);
         skybox.update(skyboxShader);
         
         glfwSwapBuffers(window);
