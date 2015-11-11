@@ -16,6 +16,7 @@ Model::Model(std::string path) {
     if (!scene) {
         std::cerr << "Error loading model: " << importer.GetErrorString()
                   << std::endl;
+        exit(EXIT_FAILURE);
     }
     
     std::string directory = path.substr(0, path.find_last_of('/'));
