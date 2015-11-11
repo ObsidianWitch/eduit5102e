@@ -1,23 +1,22 @@
-#ifndef TEXTURE_HPP
-#define TEXTURE_HPP
+#ifndef TEXTURE_2D_HPP
+#define TEXTURE_2D_HPP
 
 #include <string>
 #include <vector>
 #include <GL/glew.h>
 #include <assimp/material.h>
 
-class Texture {
+class Texture2D {
 public:
-    Texture(std::string path, GLenum unit);
+    Texture2D(std::string path, GLenum unit);
     
-    std::string getPath();
     void bind();
     void unbind();
     
     bool operator==(const std::string& str) const;
     
 private:
-    static std::vector<Texture> loadedTextures;
+    static std::vector<Texture2D> loadedTextures;
     
     GLuint id;
     std::string path;
@@ -27,4 +26,4 @@ private:
     void setParameters();
 };
 
-#endif // TEXTURE_HPP
+#endif // TEXTURE_2D_HPP

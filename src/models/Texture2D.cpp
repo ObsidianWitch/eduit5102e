@@ -2,11 +2,11 @@
 #include <algorithm>
 #include <SOIL/SOIL.h>
 
-#include "Texture.hpp"
+#include "Texture2D.hpp"
 
-std::vector<Texture> Texture::loadedTextures;
+std::vector<Texture2D> Texture2D::loadedTextures;
 
-Texture::Texture(std::string path, GLenum unit) {
+Texture2D::Texture2D(std::string path, GLenum unit) {
     this->path = path;
     this->unit = unit;
     
@@ -24,7 +24,7 @@ Texture::Texture(std::string path, GLenum unit) {
 /**
  * Loads an image as a 2D Texture.
  */
-void Texture::load(std::string path) {
+void Texture2D::load(std::string path) {
     int width, height;
     unsigned char* image = SOIL_load_image(
         path.c_str(),    // path
@@ -65,7 +65,7 @@ void Texture::load(std::string path) {
  * Magnifying: linear filtering, interpolates values from the texture's
  * neighbouring texels.
  */
-void Texture::setParameters() {
+void Texture2D::setParameters() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     
@@ -75,18 +75,16 @@ void Texture::setParameters() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 }
 
-void Texture::bind() {
+void Texture2D::bind() {
     glActiveTexture(unit);
     glBindTexture(GL_TEXTURE_2D, id);
 }
 
-void Texture::unbind() {
+void Texture2D::unbind() {
     glActiveTexture(unit);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-std::string Texture::getPath() { return path; }
-
-bool Texture::operator==(const std::string& str) const {
+bool Texture2D::operator==(const std::string& str) const {
     return (path == str);
 }

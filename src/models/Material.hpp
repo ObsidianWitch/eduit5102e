@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 
 #include "shaders/Shader.hpp"
-#include "Texture.hpp"
+#include "Texture2D.hpp"
 
 class Material {
 public:
@@ -18,7 +18,7 @@ public:
     void unbindTextures();
     
 private:
-    std::vector<Texture> textures;
+    std::vector<Texture2D> textures;
     glm::vec3 cAmbient;
     glm::vec3 cDiffuse;
     glm::vec3 cSpecular;

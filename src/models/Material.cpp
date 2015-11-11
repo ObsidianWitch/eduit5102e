@@ -25,7 +25,7 @@ void Material::loadTexture(
         material.GetTexture(type, 0, &textureFile);
         
         std::string texturePath = directory + '/' + std::string(textureFile.C_Str());
-        textures.push_back(Texture(
+        textures.push_back(Texture2D(
             texturePath, GL_TEXTURE0
         ));
     }
@@ -40,13 +40,13 @@ void Material::update(Shader& shader) {
 }
 
 void Material::bindTextures() {
-    for (Texture& texture : textures) {
+    for (Texture2D& texture : textures) {
         texture.bind();
     }
 }
 
 void Material::unbindTextures() {
-    for (Texture& texture : textures) {
+    for (Texture2D& texture : textures) {
         texture.unbind();
     }
 }
