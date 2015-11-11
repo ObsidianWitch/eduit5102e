@@ -31,6 +31,11 @@ public:
     MouseHandler& getMouseHandler();
     
 private:
+    static const float MIN_PITCH;
+    static const float MAX_PITCH;
+    static const float MIN_ZOOM;
+    static const float MAX_ZOOM;
+    
     // View
     glm::vec3 position;
     glm::vec3 target;

@@ -5,6 +5,11 @@
 #include "tools/LocalBasis.hpp"
 #include "entities/camera/Camera.hpp"
 
+const float Camera::MIN_PITCH = -80.0f;
+const float Camera::MAX_PITCH = 60.0f;
+const float Camera::MIN_ZOOM  = 5.0f;
+const float Camera::MAX_ZOOM  = 30.0f;
+
 /**
  * Creates a perspective Camera which holds the view & projection matrices. In
  * order to create these matrices, we need the following parameters.
@@ -49,13 +54,18 @@ void Camera::rotate(const glm::vec2& delta) {
     rotate(glm::radians(delta.x), getUp()); // yaw
     
     float pitch = glm::degrees(std::asin(getDirection().y)) + delta.y;
-    if (pitch > -80.0f && pitch < 80.0f) {
+    if (pitch > MIN_PITCH && pitch < MAX_PITCH) {
         rotate(glm::radians(delta.y), getRight());
     }
 }
 
 void Camera::zoom(float value) {
-    position += getDirection() * value;
+    glm::vec3 deltaZoom = getDirection() * value;
+    float distanceToTarget = glm::distance(position + deltaZoom, target);
+    
+    if (distanceToTarget > MIN_ZOOM && distanceToTarget < MAX_ZOOM) {
+        position += deltaZoom;
+    }
 }
 
 
