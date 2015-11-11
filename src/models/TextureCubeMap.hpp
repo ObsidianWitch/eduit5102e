@@ -5,8 +5,7 @@
 
 class TextureCubeMap {
 public:
-    TextureCubeMap();
-    void init(const std::vector<std::string>& texturesPaths);
+    TextureCubeMap(const std::vector<std::string>& texturesPaths);
     
     void bind();
     void unbind();

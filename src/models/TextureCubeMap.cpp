@@ -4,9 +4,7 @@
 
 #include "TextureCubeMap.hpp"
 
-TextureCubeMap::TextureCubeMap() {}
-
-void TextureCubeMap::init(const std::vector<std::string>& texturesPaths) {
+TextureCubeMap::TextureCubeMap(const std::vector<std::string>& texturesPaths) {
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 

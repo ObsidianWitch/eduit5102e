@@ -1,7 +1,7 @@
 solution "IT5102E_OpenGL_Project"
     configurations { "Release" }
     
-    buildoptions { "-std=c++11", "-Wall", "-Wextra", "-O2" }
+    buildoptions { "-std=c++14", "-Wall", "-Wextra", "-O2" }
     
     project "project.out"
         kind "WindowedApp"
