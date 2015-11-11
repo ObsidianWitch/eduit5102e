@@ -68,7 +68,6 @@ void Camera::zoom(float value) {
     }
 }
 
-
 void Camera::update(Shader& shader, const glm::vec3& newTarget) {
     translate(newTarget + targetOffset - target);
     target = newTarget + targetOffset;
@@ -101,9 +100,6 @@ glm::vec3 Camera::getRight() {
 glm::vec3 Camera::getUp() {
     return glm::normalize(glm::cross(getRight(), getDirection()));
 }
-
-float Camera::getWidth() { return width; }
-float Camera::getHeight() { return height; }
 
 MouseHandler& Camera::getMouseHandler() {
     return cameraMouseHandler;

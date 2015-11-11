@@ -23,24 +23,23 @@ public:
     
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
-    glm::vec3 getDirection();
-    glm::vec3 getRight();
-    glm::vec3 getUp();
-    float getWidth();
-    float getHeight();
     MouseHandler& getMouseHandler();
     
 private:
+    // View
     static const float MIN_PITCH;
     static const float MAX_PITCH;
     static const float MIN_ZOOM;
     static const float MAX_ZOOM;
     
-    // View
     glm::vec3 position;
     glm::vec3 target;
     glm::vec3 targetOffset;
     CameraMouseHandler cameraMouseHandler;
+    
+    glm::vec3 getDirection();
+    glm::vec3 getRight();
+    glm::vec3 getUp();
     
     // Projection
     float fov;
