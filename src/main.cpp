@@ -82,10 +82,10 @@ int main() {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     
     Shader mainShader;
-    mainShader.add(GL_VERTEX_SHADER, "src/shaders/glsl/main.vs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/main.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/toon.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/lights.fs")
+    mainShader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/main/toon.fs")
+              .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
               .link();
     
     Player player(
