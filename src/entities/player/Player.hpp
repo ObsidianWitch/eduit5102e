@@ -12,6 +12,7 @@ public:
     void update(Shader& shader) override;
     
     PlayerInputHandler& getInputHandler();
+    glm::vec3 getPosition();
     
 private:
     Model model;

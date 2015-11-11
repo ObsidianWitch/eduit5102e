@@ -9,8 +9,8 @@
  * Creates a perspective Camera which holds the view & projection matrices. In
  * order to create these matrices, we need the following parameters.
  * @param position Position of the camera.
- * @param direction direction towards the camera's target (reversed, will be
- * normalized).
+ * @param target Camera's target.
+ * @param targetOffset
  * @param fov Fielf of view (radians).
  * @param width Used to compute the aspect ratio (width/height).
  * @param height Used to compute the aspect ratio (width/height).
@@ -18,14 +18,16 @@
  * @param zFar Distance from the camera to the far clipping plane.
  */
 Camera::Camera(
-    const glm::vec3& position, const glm::vec3& direction,
+    const glm::vec3& position, const glm::vec3& target,
+    const glm::vec3& targetOffset,
     float fov, float width, float height, float zNear, float zFar
 ) :
     Entity("camera"),
     cameraMouseHandler(this)
 {
     this->position = position;
-    this->direction = glm::normalize(direction);
+    this->target = target + targetOffset;
+    this-> targetOffset = targetOffset;
     
     this->fov = fov;
     this->width = width;
@@ -40,20 +42,28 @@ void Camera::translate(const glm::vec3& vec) {
 
 void Camera::rotate(float angle, const glm::vec3& axis) {
     position = glm::rotate(position, angle, axis);
-    direction = glm::normalize(glm::rotate(direction, angle, axis));
+    target = glm::rotate(target, angle, axis);
 }
 
 void Camera::rotate(const glm::vec2& delta) {
     rotate(glm::radians(delta.x), getUp()); // yaw
     
-    float pitch = glm::degrees(std::asin(direction.y)) + delta.y;
+    float pitch = glm::degrees(std::asin(getDirection().y)) + delta.y;
     if (pitch > -80.0f && pitch < 80.0f) {
         rotate(glm::radians(delta.y), getRight());
     }
 }
 
 void Camera::zoom(float value) {
-    position += direction * value;
+    position += getDirection() * value;
+}
+
+
+void Camera::update(Shader& shader, const glm::vec3& newTarget) {
+    translate(newTarget + targetOffset - target);
+    target = newTarget + targetOffset;
+    
+    update(shader);
 }
 
 void Camera::update(Shader& shader) {
@@ -63,23 +73,23 @@ void Camera::update(Shader& shader) {
 }
 
 glm::mat4 Camera::getViewMatrix() {
-    return glm::lookAt(
-        position,
-        position + direction,
-        getUp()
-    );
+    return glm::lookAt(position, target, getUp());
 }
 
 glm::mat4 Camera::getProjectionMatrix() {
     return glm::perspectiveFov(fov, width, height, zNear, zFar);
 }
 
+glm::vec3 Camera::getDirection() {
+    return glm::normalize(target - position);
+}
+
 glm::vec3 Camera::getRight() {
-    return glm::normalize(glm::cross(direction, LocalBasis::y));
+    return glm::normalize(glm::cross(getDirection(), LocalBasis::y));
 }
 
 glm::vec3 Camera::getUp() {
-    return glm::normalize(glm::cross(getRight(), direction));
+    return glm::normalize(glm::cross(getRight(), getDirection()));
 }
 
 float Camera::getWidth() { return width; }

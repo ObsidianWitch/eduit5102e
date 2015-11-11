@@ -21,7 +21,7 @@ Model::Model(std::string path) {
     std::string directory = path.substr(0, path.find_last_of('/'));
     for (unsigned int i = 0 ; i < scene->mNumMeshes ; i++) {
         aiMesh* mesh = scene->mMeshes[i];
-
+        
         meshes.push_back(Mesh(
             *mesh,
             *scene->mMaterials[mesh->mMaterialIndex],
@@ -37,14 +37,14 @@ void Model::draw(Shader& shader) {
 }
 
 void Model::translate(const glm::vec3& vec) {
-    modelMatrix *= glm::translate(glm::mat4(), vec);
+    modelMatrix = glm::translate(modelMatrix, vec);
 }
 
 /**
  * Rotates the model around its own y axis and the specified angle in radians.
  */
 void Model::rotate(float angle) {
-    modelMatrix *= glm::rotate(glm::mat4(), angle, LocalBasis::y);
+    modelMatrix = glm::rotate(modelMatrix, angle, LocalBasis::y);
 }
 
 glm::mat4 Model::getModelMatrix() { return modelMatrix; }
@@ -57,4 +57,16 @@ glm::mat4 Model::getModelMatrix() { return modelMatrix; }
  */
 glm::mat3 Model::getNormalMatrix() {
     return glm::mat3(glm::inverseTranspose(modelMatrix));
+}
+
+/**
+ * Retrieves the model's position with the translation column from the model
+ * matrix.
+ */
+glm::vec3 Model::getPosition() {
+    return glm::vec3(
+        modelMatrix[3][0],
+        modelMatrix[3][1],
+        modelMatrix[3][2]
+    );
 }

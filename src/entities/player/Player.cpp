@@ -6,7 +6,6 @@ Player::Player(const glm::vec3& position, float speed) :
     Entity("player"),
     model("resources/nanosuit/nanosuit.obj")
 {
-    model.translate(glm::vec3(0.0f, -10.0f, 0.0f));
     model.translate(position);
     
     this->speed = speed;
@@ -79,3 +78,7 @@ void Player::update(Shader& shader) {
 }
 
 PlayerInputHandler& Player::getInputHandler() { return playerInputHandler; }
+
+glm::vec3 Player::getPosition() {
+    return model.getPosition();
+}

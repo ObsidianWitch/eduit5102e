@@ -18,6 +18,7 @@ public:
     
     glm::mat4 getModelMatrix();
     glm::mat3 getNormalMatrix();
+    glm::vec3 getPosition();
     
 private:
     std::vector<Mesh> meshes;

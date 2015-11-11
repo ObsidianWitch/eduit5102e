@@ -88,23 +88,24 @@ int main() {
               .add(GL_FRAGMENT_SHADER, "src/shaders/glsl/lights.fs")
               .link();
     
-    Camera camera(
-        glm::vec3(0.0f, 0.0f, -10.0f), // position
-        glm::vec3(0.0f, 0.0f, 1.0f),   // direction
-        glm::radians(90.0f),           // fov
-        WIDTH,                         // width
-        HEIGHT,                        // height
-        0.1f,                          // zNear
-        100.0f                         // zFar
-    );
-    Inputs::instance().addMouseHandler(camera.getMouseHandler());
-    
     Player player(
         glm::vec3(0.0f, 0.0f, 0.0f), // position
         0.3f                         // speed
     );
     Inputs::instance().addKeyHandler(player.getInputHandler());
     Inputs::instance().addMouseHandler(player.getInputHandler());
+    
+    Camera camera(
+        glm::vec3(0.0f, 10.0f, -10.0f), // position
+        player.getPosition(),           // target
+        glm::vec3(0.0f, 10.0f, 0.0f),   // target offset
+        glm::radians(90.0f),            // fov
+        WIDTH,                          // width
+        HEIGHT,                         // height
+        0.1f,                           // zNear
+        100.0f                          // zFar
+    );
+    Inputs::instance().addMouseHandler(camera.getMouseHandler());
     
     AmbientLight aL(
         "aL",                       // name
@@ -128,8 +129,8 @@ int main() {
         
         mainShader.use();
         
-        camera.update(mainShader);
         player.update(mainShader);
+        camera.update(mainShader, player.getPosition());
         glfwSwapBuffers(window);
     }
     
