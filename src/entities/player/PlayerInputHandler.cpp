@@ -4,30 +4,27 @@
 #include <iostream>
 
 PlayerInputHandler::PlayerInputHandler() {
-    keyStates[GLFW_KEY_W] = false;
-    keyStates[GLFW_KEY_S] = false;
-    keyStates[GLFW_KEY_A] = false;
-    keyStates[GLFW_KEY_D] = false;
-    
-    strafing = false;
+    for (int mvt = FORWARD ; mvt <= RIGHT ; mvt++) {
+        states[mvt] = false;
+    }
 }
 
 void PlayerInputHandler::keyCallback(
     GLFWwindow*, int key, int, int action, int
 ) {
-    bool keyState = (action != GLFW_RELEASE);
+    bool state = (action != GLFW_RELEASE);
     
     if (key == GLFW_KEY_W) {
-        keyStates[GLFW_KEY_W] = keyState;
+        states[FORWARD] = state;
     }
     else if (key == GLFW_KEY_S) {
-        keyStates[GLFW_KEY_S] = keyState;
+        states[BACKWARD] = state;
     }
     else if (key == GLFW_KEY_A) {
-        keyStates[GLFW_KEY_A] = keyState;
+        states[LEFT] = state;
     }
     else if (key == GLFW_KEY_D) {
-        keyStates[GLFW_KEY_D] = keyState;
+        states[RIGHT] = state;
     }
 }
 
@@ -43,10 +40,10 @@ void PlayerInputHandler::cursorPositionCallback(GLFWwindow*, double, double) {}
 
 void PlayerInputHandler::scrollCallback(GLFWwindow*, double, double) {}
 
-std::map<int, bool>& PlayerInputHandler::getKeyStates() {
-    return keyStates;
+bool PlayerInputHandler::isDiagonal() {
+    return (states[FORWARD] || states[BACKWARD])
+        && (states[LEFT] || states[RIGHT]);
 }
 
-bool PlayerInputHandler::getStrafing() {
-    return strafing;
-}
+std::map<int, bool>& PlayerInputHandler::getStates() { return states; }
+bool PlayerInputHandler::getStrafing() { return strafing; }

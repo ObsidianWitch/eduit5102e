@@ -6,6 +6,10 @@
 #include "inputs/KeyHandler.hpp"
 #include "inputs/MouseHandler.hpp"
 
+enum Movements {
+    FORWARD, BACKWARD, LEFT, RIGHT
+};
+
 class PlayerInputHandler : public KeyHandler, public MouseHandler {
 public:
     PlayerInputHandler();
@@ -24,11 +28,12 @@ public:
         GLFWwindow* window, double xoffset, double yoffset
     ) override;
     
-    std::map<int, bool>& getKeyStates();
+    bool isDiagonal();
+    std::map<int, bool>& getStates();
     bool getStrafing();
     
 private:
-    std::map<int, bool> keyStates;
+    std::map<int, bool> states;
     bool strafing;
 };
 

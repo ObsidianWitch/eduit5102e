@@ -17,10 +17,9 @@ public:
 private:
     Model model;
     float speed;
-    PlayerInputHandler playerInputHandler;
+    PlayerInputHandler inputHandler;
     
-    void move(bool forward, bool backward, bool left, bool right, bool strafing);
-    void updateMove();
+    void move();
 };
 
 #endif // PLAYER_HPP

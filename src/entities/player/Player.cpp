@@ -11,55 +11,35 @@ Player::Player(const glm::vec3& position, float speed) :
     this->speed = speed;
 }
 
-void Player::updateMove() {
-    auto& keyStates = playerInputHandler.getKeyStates();
-    
-    move(
-        keyStates[GLFW_KEY_W], // forward
-        keyStates[GLFW_KEY_S], // backward
-        keyStates[GLFW_KEY_A], // left
-        keyStates[GLFW_KEY_D], // right
-        playerInputHandler.getStrafing()
-    );
-}
-
 /**
- * Moves the player in the directions specified in parameter. The Player's speed
- * is used to determine the movement delta. If the Player moves at the same time
- * along the x and z axes, then the movement direction is a diagonal. The axes
- * are handled separately, meaning if the player moves in a diagonal, he would
- * move sqrt(2) units in this direction if nothing was done. We divide the
- * delta by sqrt(2) in this case to avoid straferunning (moving quicker in the
- * diagonal directions).
+ * Moves/Rotates the player in the directions specified by the inputHandler. The
+ * movement vector's magnitude is clampled in order to move at the same speed in
+ * all directions and avoid problems such as straferunning.
  */
-void Player::move(
-    bool forward, bool backward, bool left, bool right, bool strafing
-) {
-    bool diagonal = (forward || backward) && (left || right);
+void Player::move() {
+    auto& states = inputHandler.getStates();
     
-    float delta = speed;
-    if (diagonal) { delta /= glm::root_two<float>(); }
+    // translate
+    glm::vec3 movementVec = glm::vec3(0.0f);
+    if (states[FORWARD]) { movementVec.z += speed; }
+    else if (states[BACKWARD]) { movementVec.z -= speed; }
     
-    if (forward) {
-        model.translate(glm::vec3(0.0f, 0.0f, delta));
-    }
-    else if (backward) {
-        model.translate(glm::vec3(0.0f, 0.0f, -delta));
+    if (inputHandler.getStrafing()) {
+        if (states[LEFT]) { movementVec.x += speed; }
+        else if (states[RIGHT]) { movementVec.x -= speed; }
     }
     
-    if (strafing) {
-        if (left) {
-            model.translate(glm::vec3(delta, 0.0f, 0.0f));
-        }
-        else if (right) {
-            model.translate(glm::vec3(-delta, 0.0f, 0.0f));
-        }
-    }
-    else {
-        if (left) {
+    /// clamp movementVec's magnitude
+    float ratio = glm::length(movementVec) / speed;
+    if (ratio != 0) { movementVec /= ratio; }
+    model.translate(movementVec);
+    
+    // rotate
+    if (!inputHandler.getStrafing()) {
+        if (states[LEFT]) {
             model.rotate(glm::radians(speed * 10));
         }
-        else if (right) {
+        else if (states[RIGHT]) {
             model.rotate(glm::radians(-speed * 10));
         }
     }
@@ -71,13 +51,13 @@ void Player::move(
  * The shader in parameter should be bound before calling this method.
  */
 void Player::update(Shader& shader) {
-    updateMove();
+    move();
     shader.setUniform("model", model.getModelMatrix());
     shader.setUniform("normalMatrix", model.getNormalMatrix());
     model.draw(shader);
 }
 
-PlayerInputHandler& Player::getInputHandler() { return playerInputHandler; }
+PlayerInputHandler& Player::getInputHandler() { return inputHandler; }
 
 glm::vec3 Player::getPosition() {
     return model.getPosition();
