@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 
 #include "shaders/Shader.hpp"
-#include "Mesh.hpp"
+#include "models/Mesh.hpp"
 
 class Model {
 public:

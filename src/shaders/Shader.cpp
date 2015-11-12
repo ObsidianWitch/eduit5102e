@@ -4,7 +4,7 @@
 #include <cassert>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Shader.hpp"
+#include "shaders/Shader.hpp"
 
 Shader::Shader() {
     program = 0;

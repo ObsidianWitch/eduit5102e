@@ -3,8 +3,8 @@
 
 #include <vector>
 #include <GLFW/glfw3.h>
-#include "KeyHandler.hpp"
-#include "MouseHandler.hpp"
+#include "inputs/KeyHandler.hpp"
+#include "inputs/MouseHandler.hpp"
 
 class Inputs {
 public:

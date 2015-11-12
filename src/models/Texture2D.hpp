@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include <GL/glew.h>
-#include <assimp/material.h>
 
 class Texture2D {
 public:

@@ -1,4 +1,4 @@
-#include "AmbientLight.hpp"
+#include "entities/lights/AmbientLight.hpp"
 
 AmbientLight::AmbientLight(std::string name, const glm::vec3& color) :
     Entity(name)

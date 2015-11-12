@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <SOIL/SOIL.h>
 
-#include "Texture2D.hpp"
+#include "models/Texture2D.hpp"
 
 std::vector<Texture2D> Texture2D::loadedTextures;
 

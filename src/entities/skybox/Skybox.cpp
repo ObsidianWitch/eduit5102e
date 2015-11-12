@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "Skybox.hpp"
+#include "entities/skybox/Skybox.hpp"
 
 Skybox::Skybox() :
     Entity("skybox"),

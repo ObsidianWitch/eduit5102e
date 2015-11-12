@@ -1,4 +1,4 @@
-#include "Material.hpp"
+#include "models/Material.hpp"
 
 Material::Material(const aiMaterial& material, std::string directory) {
     loadTexture(material, directory, aiTextureType_DIFFUSE);

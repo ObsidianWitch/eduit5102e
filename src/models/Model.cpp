@@ -6,7 +6,7 @@
 #include <assimp/postprocess.h>
 
 #include "tools/LocalBasis.hpp"
-#include "Model.hpp"
+#include "models/Model.hpp"
 
 Model::Model(std::string path) {
     Assimp::Importer importer;

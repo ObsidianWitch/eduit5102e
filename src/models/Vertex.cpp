@@ -1,6 +1,6 @@
 #include <GL/glew.h>
 
-#include "Vertex.hpp"
+#include "models/Vertex.hpp"
 
 Vertex::Vertex(
     const aiVector3D& position, const aiVector3D& normal,

@@ -1,4 +1,4 @@
-#include "Inputs.hpp"
+#include "inputs/Inputs.hpp"
 
 std::vector<KeyHandler*> Inputs::keyHandlers;
 std::vector<MouseHandler*> Inputs::mouseHandlers;

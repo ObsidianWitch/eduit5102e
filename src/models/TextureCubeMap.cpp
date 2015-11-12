@@ -2,7 +2,7 @@
 #include <vector>
 #include <SOIL/SOIL.h>
 
-#include "TextureCubeMap.hpp"
+#include "models/TextureCubeMap.hpp"
 
 TextureCubeMap::TextureCubeMap(const std::vector<std::string>& texturesPaths) {
     glGenTextures(1, &id);

@@ -1,6 +1,4 @@
-#include "Mesh.hpp"
-
-#include <iostream>
+#include "models/Mesh.hpp"
 
 Mesh::Mesh(
     const aiMesh& mesh, const aiMaterial& material, std::string directory

@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 
 #include "shaders/Shader.hpp"
-#include "Texture2D.hpp"
+#include "models/Texture2D.hpp"
 
 class Material {
 public:

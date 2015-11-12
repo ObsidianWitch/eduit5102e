@@ -1,4 +1,4 @@
-#include "PointLight.hpp"
+#include "entities/lights/PointLight.hpp"
 
 PointLight::PointLight(
     std::string name, const glm::vec3& position, const glm::vec3& color

@@ -7,8 +7,8 @@
 #include <assimp/mesh.h>
 
 #include "shaders/Shader.hpp"
-#include "Vertex.hpp"
-#include "Material.hpp"
+#include "models/Vertex.hpp"
+#include "models/Material.hpp"
 
 class Mesh {
 public:
