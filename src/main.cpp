@@ -1,16 +1,9 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 
 #include "inputs/Inputs.hpp"
-#include "shaders/Shader.hpp"
-#include "entities/camera/Camera.hpp"
-#include "entities/player/Player.hpp"
-#include "entities/lights/AmbientLight.hpp"
-#include "entities/lights/DirectionalLight.hpp"
-#include "entities/skybox/Skybox.hpp"
+#include "Scene.hpp"
 
 const GLuint WIDTH = 800;
 const GLuint HEIGHT = 600;
@@ -82,67 +75,14 @@ int main() {
     
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     
-    Shader mainShader;
-    mainShader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/main/toon.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
-              .link();
-    
-    Player player(
-        glm::vec3(0.0f, 0.0f, 0.0f), // position
-        0.3f                         // speed
-    );
-    Inputs::instance().addKeyHandler(player.getInputHandler());
-    Inputs::instance().addMouseHandler(player.getInputHandler());
-    
-    Camera camera(
-        glm::vec3(0.0f, 10.0f, -10.0f), // position
-        player.getPosition(),           // target
-        glm::vec3(0.0f, 10.0f, 0.0f),   // target offset
-        glm::radians(90.0f),            // fov
-        WIDTH,                          // width
-        HEIGHT,                         // height
-        0.1f,                           // zNear
-        100.0f                          // zFar
-    );
-    Inputs::instance().addMouseHandler(camera.getMouseHandler());
-    
-    AmbientLight aL(
-        "aL",                       // name
-        glm::vec3(0.1f, 0.1f, 0.1f) // color
-    );
-    
-    DirectionalLight dL(
-        "dL",                          // name
-        glm::vec3(-1.0f, -0.5f, 0.0f), // direction
-        glm::vec3(1.0f, 1.0f, 1.0f)    // color
-    );
-    
-    Shader skyboxShader;
-    skyboxShader.add(GL_VERTEX_SHADER, "src/shaders/skybox/skybox.vs")
-                .add(GL_FRAGMENT_SHADER, "src/shaders/skybox/skybox.fs")
-                .link();
-    
-    Skybox skybox;
-    
-    mainShader.use();
-    aL.update(mainShader);
-    dL.update(mainShader);
+    Scene scene(WIDTH, HEIGHT);
     
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
-        mainShader.use();
-        
-        player.update(mainShader);
-        camera.update(mainShader, player.getPosition());
-        
-        skyboxShader.use();
-        camera.update(skyboxShader, false);
-        skybox.update(skyboxShader);
+        scene.update();
         
         glfwSwapBuffers(window);
     }
