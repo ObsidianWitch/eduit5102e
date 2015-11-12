@@ -77,7 +77,7 @@ void Camera::update(Shader& shader, const glm::vec3& newTarget) {
     translate(newTarget + targetOffset - target);
     target = newTarget + targetOffset;
     
-    update(shader);
+    update(shader, true);
 }
 
 /**
@@ -94,14 +94,6 @@ void Camera::update(Shader& shader, bool viewTranslation) {
     shader.setUniform("view", viewMatrix);
     shader.setUniform("projection", getProjectionMatrix());
     shader.setUniform("cameraPosition", position);
-}
-
-/**
- * Updates the specified shader uniforms (view, projection and camera position).
- * The view matrix will contain its translation component.
- */
-void Camera::update(Shader& shader) {
-    Camera::update(shader, true);
 }
 
 glm::mat4 Camera::getViewMatrix() {

@@ -20,7 +20,6 @@ public:
     
     void update(Shader& shader, const glm::vec3& newTarget);
     void update(Shader& shader, bool viewTranslation);
-    void update(Shader& shader) override;
     
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
