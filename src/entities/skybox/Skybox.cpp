@@ -1,6 +1,4 @@
-#include <iostream>
 #include <vector>
-#include <SOIL/SOIL.h>
 
 #include "Skybox.hpp"
 
