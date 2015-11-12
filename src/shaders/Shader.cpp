@@ -1,10 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <cassert>
 #include <glm/gtc/type_ptr.hpp>
+
 #include "Shader.hpp"
 
-Shader::Shader() {}
+Shader::Shader() {
+    program = 0;
+}
 
 Shader& Shader::add(GLenum type, std::string filename) {
     std::string str = readShader(filename);
@@ -58,6 +62,7 @@ void Shader::link() {
 }
 
 void Shader::use() {
+    assert(program != 0);
     glUseProgram(program);
 }
 
