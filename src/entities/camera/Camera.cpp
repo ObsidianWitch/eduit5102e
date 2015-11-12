@@ -16,7 +16,7 @@ const float Camera::MAX_ZOOM  = 30.0f;
  * @param position Position of the camera.
  * @param target Camera's target.
  * @param targetOffset
- * @param fov Fielf of view (radians).
+ * @param fov Field of view (radians).
  * @param width Used to compute the aspect ratio (width/height).
  * @param height Used to compute the aspect ratio (width/height).
  * @param zNear Distance from the camera to the near clipping plane.
@@ -28,17 +28,17 @@ Camera::Camera(
     float fov, float width, float height, float zNear, float zFar
 ) :
     Entity("camera"),
-    cameraMouseHandler(this)
+    cameraMouseHandler(this),
+    cameraWindowHandler(this)
 {
     this->position = position;
     this->target = target + targetOffset;
     this-> targetOffset = targetOffset;
     
     this->fov = fov;
-    this->width = width;
-    this->height = height;
     this->zNear = zNear;
     this->zFar = zFar;
+    setViewport(width, height);
 }
 
 void Camera::translate(const glm::vec3& vec) {
@@ -127,4 +127,14 @@ glm::vec3 Camera::getUp() {
 
 MouseHandler& Camera::getMouseHandler() {
     return cameraMouseHandler;
+}
+
+WindowHandler& Camera::getWindowHandler() {
+    return cameraWindowHandler;
+}
+
+void Camera::setViewport(int width, int height) {
+    glViewport(0, 0, width, height);
+    this->width = width;
+    this->height = height;
 }

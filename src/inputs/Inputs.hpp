@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include "inputs/KeyHandler.hpp"
 #include "inputs/MouseHandler.hpp"
+#include "inputs/WindowHandler.hpp"
 
 class Inputs {
 public:
@@ -25,10 +26,14 @@ public:
         GLFWwindow* window, double xoffset, double yoffset
     );
     static void addMouseHandler(MouseHandler& mh);
+    
+    static void windowSizeCallback(GLFWwindow* window, int width, int height);
+    static void addWindowHandler(WindowHandler& wh);
 
 private:
     static std::vector<KeyHandler*> keyHandlers;
     static std::vector<MouseHandler*> mouseHandlers;
+    static std::vector<WindowHandler*> windowHandlers;
     
     Inputs(); // prevent more than one instance
     Inputs(Inputs const&); // prevent copies

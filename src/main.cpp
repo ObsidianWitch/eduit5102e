@@ -47,6 +47,7 @@ void initLibraries() {
     glfwSetMouseButtonCallback(window, Inputs::instance().mouseButtonCallback);
     glfwSetCursorPosCallback(window, Inputs::instance().cursorPositionCallback);
     glfwSetScrollCallback(window, Inputs::instance().scrollCallback);
+    glfwSetWindowSizeCallback(window, Inputs::instance().windowSizeCallback);
     
     // GLEW
     glewExperimental = GL_TRUE;

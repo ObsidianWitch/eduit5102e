@@ -2,6 +2,7 @@
 
 std::vector<KeyHandler*> Inputs::keyHandlers;
 std::vector<MouseHandler*> Inputs::mouseHandlers;
+std::vector<WindowHandler*> Inputs::windowHandlers;
 
 Inputs::Inputs() {}
 
@@ -53,4 +54,15 @@ void Inputs::scrollCallback(
 
 void Inputs::addMouseHandler(MouseHandler& mh) {
     mouseHandlers.push_back(&mh);
+}
+
+
+void Inputs::windowSizeCallback(GLFWwindow* window, int width, int height) {
+    for (WindowHandler* wh : windowHandlers) {
+        wh->windowSizeCallback(window, width, height);
+    }
+}
+
+void Inputs::addWindowHandler(WindowHandler& wh) {
+    windowHandlers.push_back(&wh);
 }
