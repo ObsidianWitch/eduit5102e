@@ -6,13 +6,14 @@ Skybox::Skybox() :
     Entity("skybox"),
     model("resources/skybox/skybox.obj")
 {
-    std::vector<std::string> texturesPaths;
-    texturesPaths.push_back("resources/skybox/right.jpg");
-    texturesPaths.push_back("resources/skybox/left.jpg");
-    texturesPaths.push_back("resources/skybox/top.jpg");
-    texturesPaths.push_back("resources/skybox/bottom.jpg");
-    texturesPaths.push_back("resources/skybox/back.jpg");
-    texturesPaths.push_back("resources/skybox/front.jpg");
+    std::vector<std::string> texturesPaths({
+        "resources/skybox/right.jpg",
+        "resources/skybox/left.jpg",
+        "resources/skybox/top.jpg",
+        "resources/skybox/bottom.jpg",
+        "resources/skybox/back.jpg",
+        "resources/skybox/front.jpg"
+    });
     
     texture = std::make_unique<TextureCubeMap>(texturesPaths);
 }
