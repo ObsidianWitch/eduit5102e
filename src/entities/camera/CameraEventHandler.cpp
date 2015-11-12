@@ -1,14 +1,14 @@
 #include "entities/camera/Camera.hpp"
-#include "entities/camera/CameraMouseHandler.hpp"
+#include "entities/camera/CameraEventHandler.hpp"
 
-const double CameraMouseHandler::MOUSE_SENSITIVITY = 0.25;
+const double CameraEventHandler::MOUSE_SENSITIVITY = 0.25;
 
-CameraMouseHandler::CameraMouseHandler(Camera* camera) {
+CameraEventHandler::CameraEventHandler(Camera* camera) {
     this->camera = camera;
     cameraIsMoving = false;
 }
 
-void CameraMouseHandler::mouseButtonCallback(
+void CameraEventHandler::mouseButtonCallback(
     GLFWwindow* window, int button, int action, int
 ) {
     if (button == GLFW_MOUSE_BUTTON_LEFT) {
@@ -24,7 +24,7 @@ void CameraMouseHandler::mouseButtonCallback(
     }
 }
 
-void CameraMouseHandler::cursorPositionCallback(
+void CameraEventHandler::cursorPositionCallback(
     GLFWwindow*, double xpos, double ypos
 ) {
     if (!cameraIsMoving) { return; }
@@ -40,8 +40,14 @@ void CameraMouseHandler::cursorPositionCallback(
     camera->rotate(delta);
 }
 
-void CameraMouseHandler::scrollCallback(
+void CameraEventHandler::scrollCallback(
     GLFWwindow*, double, double yoffset
 ) {
     camera->zoom(yoffset);
+}
+
+void CameraEventHandler::windowSizeCallback(
+    GLFWwindow*, int width, int height
+) {
+    camera->setViewport(width, height);
 }

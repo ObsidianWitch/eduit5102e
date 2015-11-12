@@ -3,8 +3,7 @@
 
 #include <glm/glm.hpp>
 #include "entities/Entity.hpp"
-#include "entities/camera/CameraMouseHandler.hpp"
-#include "entities/camera/CameraWindowHandler.hpp"
+#include "entities/camera/CameraEventHandler.hpp"
 
 class Camera : public Entity {
 public:
@@ -26,14 +25,12 @@ public:
     glm::mat4 getViewMatrix();
     glm::mat4 getProjectionMatrix();
     
-    MouseHandler& getMouseHandler();
-    WindowHandler& getWindowHandler();
+    CameraEventHandler& getEventHandler();
     
     void setViewport(int width, int height);
     
 private:
-    CameraMouseHandler cameraMouseHandler;
-    CameraWindowHandler cameraWindowHandler;
+    CameraEventHandler cameraEventHandler;
     
     // View
     static const float MIN_PITCH;

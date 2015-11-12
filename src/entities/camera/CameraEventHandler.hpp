@@ -1,14 +1,15 @@
-#ifndef CAMERA_MOUSE_HANDLER
-#define CAMERA_MOUSE_HANDLER
+#ifndef CAMERA_EVENT_HANDLER
+#define CAMERA_EVENT_HANDLER
 
 #include <glm/glm.hpp>
 #include "inputs/MouseHandler.hpp"
+#include "inputs/WindowHandler.hpp"
 
 class Camera;
 
-class CameraMouseHandler : public MouseHandler {
+class CameraEventHandler : public MouseHandler, public WindowHandler {
 public:
-    CameraMouseHandler(Camera* camera);
+    CameraEventHandler(Camera* camera);
     
     void mouseButtonCallback(
         GLFWwindow* window, int button, int action, int mods
@@ -20,6 +21,10 @@ public:
         GLFWwindow* window, double xoffset, double yoffset
     ) override;
     
+    void windowSizeCallback(
+        GLFWwindow* window, int width, int height
+    ) override;
+    
 private:
     static const double MOUSE_SENSITIVITY;
     
@@ -28,4 +33,4 @@ private:
     glm::dvec2 mousePosition;
 };
 
-#endif // CAMERA_MOUSE_HANDLER
+#endif // CAMERA_EVENT_HANDLER

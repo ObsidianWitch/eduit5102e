@@ -23,8 +23,8 @@ Scene::Scene(GLuint width, GLuint height) :
     // key & mouse handlers
     Inputs::instance().addKeyHandler(player.getInputHandler());
     Inputs::instance().addMouseHandler(player.getInputHandler());
-    Inputs::instance().addMouseHandler(camera.getMouseHandler());
-    Inputs::instance().addWindowHandler(camera.getWindowHandler());
+    Inputs::instance().addMouseHandler(camera.getEventHandler());
+    Inputs::instance().addWindowHandler(camera.getEventHandler());
     
     // shaders
     mainShader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")

@@ -28,8 +28,7 @@ Camera::Camera(
     float fov, float width, float height, float zNear, float zFar
 ) :
     Entity("camera"),
-    cameraMouseHandler(this),
-    cameraWindowHandler(this)
+    cameraEventHandler(this)
 {
     this->position = position;
     this->target = target + targetOffset;
@@ -125,12 +124,8 @@ glm::vec3 Camera::getUp() {
     return glm::normalize(glm::cross(getRight(), getDirection()));
 }
 
-MouseHandler& Camera::getMouseHandler() {
-    return cameraMouseHandler;
-}
-
-WindowHandler& Camera::getWindowHandler() {
-    return cameraWindowHandler;
+CameraEventHandler& Camera::getEventHandler() {
+    return cameraEventHandler;
 }
 
 void Camera::setViewport(int width, int height) {
