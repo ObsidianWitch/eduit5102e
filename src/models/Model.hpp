@@ -15,6 +15,7 @@ public:
     
     void translate(const glm::vec3& vec);
     void rotate(float angle);
+    void scale(const glm::vec3& vec);
     
     glm::mat4 getModelMatrix();
     glm::mat3 getNormalMatrix();

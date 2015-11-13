@@ -4,6 +4,7 @@
 #include "inputs/Inputs.hpp"
 #include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
+#include "entities/objects/BgObject.hpp"
 
 Scene::Scene(GLuint width, GLuint height) :
     player(
@@ -16,7 +17,7 @@ Scene::Scene(GLuint width, GLuint height) :
         glm::vec3(0.0f, 10.0f, 0.0f),   // target offset
         glm::radians(90.0f),            // fov
         width, height,                  // width & height
-        0.1f, 100.0f                    // zNear & zFar
+        0.1f, 1000.0f                   // zNear & zFar
     ),
     skybox()
 {
@@ -44,9 +45,17 @@ Scene::Scene(GLuint width, GLuint height) :
     ));
     
     addEntity(new DirectionalLight(
-        "dL",                          // name
-        glm::vec3(-1.0f, -0.5f, 0.0f), // direction
-        glm::vec3(1.0f, 1.0f, 1.0f)    // color
+        "dL",                         // name
+        glm::vec3(1.0f, -0.5f, 0.0f), // direction
+        glm::vec3(1.0f, 1.0f, 1.0f)   // color
+    ));
+    
+    // background objects
+    /// ground
+    addEntity(new BgObject(
+        "resources/ground/ground.obj",     // file path
+        glm::vec3(0.0f),                   // position
+        glm::vec3(1000.0f, 1.0f, 1000.0f)  // scaling vector
     ));
 }
 

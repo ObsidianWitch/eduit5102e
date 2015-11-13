@@ -48,6 +48,10 @@ void Model::rotate(float angle) {
     modelMatrix = glm::rotate(modelMatrix, angle, LocalBasis::y);
 }
 
+void Model::scale(const glm::vec3& vec) {
+    modelMatrix = glm::scale(modelMatrix, vec);
+}
+
 glm::mat4 Model::getModelMatrix() { return modelMatrix; }
 
 /**
