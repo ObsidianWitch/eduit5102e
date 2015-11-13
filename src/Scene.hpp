@@ -2,6 +2,7 @@
 #define SCENES_HPP
 
 #include <vector>
+#include <memory>
 
 #include "entities/Entity.hpp"
 #include "entities/player/Player.hpp"
@@ -16,13 +17,16 @@ public:
     void update();
     
 private:
-    std::vector<Entity*> lights;
+    std::vector<std::shared_ptr<Entity>> entities;
     Player player;
     Camera camera;
     Skybox skybox;
     
     Shader mainShader;
     Shader skyboxShader;
+    
+    void addEntity(Entity* entity);
+    void updateEntities(Shader& shader);
 };
 
 #endif // SCENES_HPP

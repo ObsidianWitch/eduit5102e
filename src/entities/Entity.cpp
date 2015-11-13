@@ -2,6 +2,8 @@
 
 #include "entities/Entity.hpp"
 
+Entity::~Entity() {}
+
 /**
  * Creates an entity. An entity is any object which can be added to a scene and
  * which can be updated each frame. The name attribute can be used to associate

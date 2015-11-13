@@ -9,6 +9,7 @@
 class Entity {
 public:
     Entity(std::string name);
+    virtual ~Entity();
     
     virtual void update(Shader& shader);
     

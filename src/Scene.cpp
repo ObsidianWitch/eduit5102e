@@ -38,30 +38,35 @@ Scene::Scene(GLuint width, GLuint height) :
                 .link();
     
     // lights
-    AmbientLight aL(
+    addEntity(new AmbientLight(
         "aL",                       // name
         glm::vec3(0.1f, 0.1f, 0.1f) // color
-    );
-    lights.push_back(&aL);
+    ));
     
-    DirectionalLight dL(
+    addEntity(new DirectionalLight(
         "dL",                          // name
         glm::vec3(-1.0f, -0.5f, 0.0f), // direction
         glm::vec3(1.0f, 1.0f, 1.0f)    // color
-    );
-    lights.push_back(&dL);
-    
-    mainShader.use();
-    aL.update(mainShader);
-    dL.update(mainShader);
+    ));
 }
 
 void Scene::update() {
     mainShader.use();
-    player.update(mainShader);
     camera.update(mainShader, player.getPosition());
+    player.update(mainShader);
+    updateEntities(mainShader);
     
     skyboxShader.use();
     camera.update(skyboxShader, false);
     skybox.update(skyboxShader);
+}
+
+void Scene::addEntity(Entity* entity) {
+    entities.push_back(std::shared_ptr<Entity>(entity));
+}
+
+void Scene::updateEntities(Shader& shader) {
+    for (auto e : entities) {
+        e->update(shader);
+    }
 }
