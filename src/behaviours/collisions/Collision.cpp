@@ -1,4 +1,4 @@
-#include "Collision.hpp"
+#include "behaviours/collisions/Collision.hpp"
 
 bool Collision::check(const BoundingBox& box1, const BoundingBox& box2) {
     return (

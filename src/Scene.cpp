@@ -4,10 +4,7 @@
 #include "inputs/Inputs.hpp"
 #include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
-#include "collisions/Collision.hpp"
-
-
-#include <iostream> // FIXME
+#include "behaviours/collisions/Collision.hpp"
 
 Scene::Scene(GLuint width, GLuint height) :
     player(

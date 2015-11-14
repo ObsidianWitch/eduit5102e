@@ -4,7 +4,7 @@
 #include "models/Model.hpp"
 #include "entities/Entity.hpp"
 #include "entities/player/PlayerEventHandler.hpp"
-#include "collisions/BoundingBox.hpp"
+#include "behaviours/collisions/BoundingBox.hpp"
 
 class Player : public Entity {
 public:

@@ -1,7 +1,7 @@
 #ifndef COLLISION_HPP
 #define COLLISION_HPP
 
-#include "collisions/BoundingBox.hpp"
+#include "behaviours/collisions/BoundingBox.hpp"
 
 class Collision {
 public:

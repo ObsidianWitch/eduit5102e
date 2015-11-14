@@ -5,7 +5,7 @@
 
 #include "entities/Entity.hpp"
 #include "models/Model.hpp"
-#include "collisions/BoundingBox.hpp"
+#include "behaviours/collisions/BoundingBox.hpp"
 
 class BgObject : public Entity {
 public:

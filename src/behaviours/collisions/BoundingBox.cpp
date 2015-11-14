@@ -1,4 +1,4 @@
-#include "BoundingBox.hpp"
+#include "behaviours/collisions/BoundingBox.hpp"
 
 /**
  * Instantiates an Axis Aligned Bounding Box (AABB). An AABB is a nonrotatable
