@@ -6,9 +6,10 @@
 
 std::vector<Texture2D> Texture2D::loadedTextures;
 
-Texture2D::Texture2D(std::string path, GLenum unit) {
+Texture2D::Texture2D(std::string path, GLenum unit, bool alpha) {
     this->path = path;
     this->unit = unit;
+    this->alpha = alpha;
     
     // Only load the texture if it has not already been loaded.
     auto it = std::find(loadedTextures.begin(), loadedTextures.end(), path);
@@ -27,10 +28,10 @@ Texture2D::Texture2D(std::string path, GLenum unit) {
 void Texture2D::load(std::string path) {
     int width, height;
     unsigned char* image = SOIL_load_image(
-        path.c_str(),    // path
-        &width, &height, // width & height
-        nullptr,         // channels
-        SOIL_LOAD_RGB    // force channels
+        path.c_str(),                            // path
+        &width, &height,                         // width & height
+        nullptr,                                 // channels
+        alpha ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB   // force channels
     );
     if (image == nullptr) {
         std::cerr << "Texture " << path << " could not be loaded." << std::endl
@@ -41,14 +42,14 @@ void Texture2D::load(std::string path) {
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
     glTexImage2D(
-        GL_TEXTURE_2D,    // target
-        0,                // manual mipmap level (0 base image level)
-        GL_RGB,           // texture internal format (channels)
-        width, height,    // width & height
-        0,                // border (legacy)
-        GL_RGB,           // texel data format
-        GL_UNSIGNED_BYTE, // texel data type
-        image             // image data
+        GL_TEXTURE_2D,            // target
+        0,                        // manual mipmap level (0 base image level)
+        alpha ? GL_RGBA : GL_RGB, // texture internal format (channels)
+        width, height,            // width & height
+        0,                        // border (legacy)
+        alpha ? GL_RGBA : GL_RGB, // texel data format
+        GL_UNSIGNED_BYTE,         // texel data type
+        image                     // image data
     );
     glGenerateMipmap(GL_TEXTURE_2D);
     
@@ -73,7 +74,9 @@ void Texture2D::setParameters() {
     glTexParameteri(
         GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR
     );
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(
+        GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR
+    );
 }
 
 void Texture2D::bind() {

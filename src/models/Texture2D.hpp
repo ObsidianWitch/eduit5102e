@@ -7,7 +7,7 @@
 
 class Texture2D {
 public:
-    Texture2D(std::string path, GLenum unit);
+    Texture2D(std::string path, GLenum unit, bool alpha = false);
     
     void bind();
     void unbind();
@@ -20,6 +20,7 @@ private:
     GLuint id;
     std::string path;
     GLenum unit;
+    bool alpha;
     
     void load(std::string path);
     void setParameters();

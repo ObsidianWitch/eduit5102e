@@ -24,9 +24,12 @@ void Material::loadTexture(
         aiString textureFile;
         material.GetTexture(type, 0, &textureFile);
         
+        int opacity;
+        material.Get(AI_MATKEY_OPACITY, opacity);
+        
         std::string texturePath = directory + '/' + std::string(textureFile.C_Str());
         textures.push_back(Texture2D(
-            texturePath, GL_TEXTURE0
+            texturePath, GL_TEXTURE0, !opacity
         ));
     }
 }
