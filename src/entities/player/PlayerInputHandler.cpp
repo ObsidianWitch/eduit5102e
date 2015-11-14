@@ -7,6 +7,8 @@ PlayerInputHandler::PlayerInputHandler() {
     for (int mvt = FORWARD ; mvt <= RIGHT ; mvt++) {
         states[mvt] = false;
     }
+    
+    strafing = false;
 }
 
 void PlayerInputHandler::keyCallback(
@@ -31,7 +33,7 @@ void PlayerInputHandler::keyCallback(
 void PlayerInputHandler::mouseButtonCallback(
     GLFWwindow*, int button, int action, int
 ) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (button == GLFW_MOUSE_BUTTON_RIGHT) {
         strafing = (action == GLFW_PRESS);
     }
 }

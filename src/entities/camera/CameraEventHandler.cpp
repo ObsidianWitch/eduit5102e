@@ -11,7 +11,7 @@ CameraEventHandler::CameraEventHandler(Camera* camera) {
 void CameraEventHandler::mouseButtonCallback(
     GLFWwindow* window, int button, int action, int
 ) {
-    if (button == GLFW_MOUSE_BUTTON_LEFT) {
+    if (button == GLFW_MOUSE_BUTTON_LEFT || button == GLFW_MOUSE_BUTTON_RIGHT) {
         if (action == GLFW_PRESS) {
             cameraIsMoving = true;
             glfwGetCursorPos(window, &mousePosition.x, &mousePosition.y);
