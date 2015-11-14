@@ -13,7 +13,7 @@ public:
     
 private:
     glm::vec3 position;
-    glm::vec3 color;
+    glm::vec4 color;
 };
 
 #endif // POINT_LIGHT_HPP

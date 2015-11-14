@@ -2,9 +2,9 @@
 
 struct Material {
     sampler2D diffuse;
-    vec3 cAmbient;
-    vec3 cDiffuse;
-    vec3 cSpecular;
+    vec4 cAmbient;
+    vec4 cDiffuse;
+    vec4 cSpecular;
     float shininess;
 };
 
@@ -16,18 +16,19 @@ uniform vec3 cameraPosition;
 uniform Material material;
 
 vec3 normal = normalize(fsNormal);
-vec3 diffuseTexColor = vec3(texture(material.diffuse, fsTextureCoords));
+vec4 diffuseTexColor = texture(material.diffuse, fsTextureCoords);
+if (diffuseTexColor.a < 0.1) { discard; } // alpha testing
 
-vec3 ambientComponent(vec3 lightColor) {
+vec4 ambientComponent(vec4 lightColor) {
     return lightColor * material.cAmbient * diffuseTexColor;
 }
 
-vec3 diffuseComponent(vec3 lightColor, vec3 lightDirection) {
+vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection) {
     float diffuseCoeff = max(dot(normal, lightDirection), 0.0);
     return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor;
 }
 
-vec3 specularComponent(vec3 lightColor, vec3 lightDirection) {
+vec4 specularComponent(vec4 lightColor, vec3 lightDirection) {
     vec3 viewDirection = normalize(cameraPosition - fsPosition);
     vec3 reflectedDirection = reflect(-lightDirection, normal);
     

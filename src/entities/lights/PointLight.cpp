@@ -6,7 +6,7 @@ PointLight::PointLight(
     Entity(name)
 {
     this->position = position;
-    this->color = color;
+    this->color = glm::vec4(color, 1.0f);
 }
 
 void PointLight::update(Shader& shader) {

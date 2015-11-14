@@ -109,7 +109,6 @@ void Shader::setUniform(std::string name, bool value) {
     glUniform1i(uniformLocation(name), value);
 }
 
-
 void Shader::setUniform(std::string name, GLuint value) {
     glUniform1i(uniformLocation(name), value);
 }
@@ -120,6 +119,10 @@ void Shader::setUniform(std::string name, GLfloat value) {
 
 void Shader::setUniform(std::string name, const glm::vec3& value) {
     glUniform3fv(uniformLocation(name), 1, glm::value_ptr(value));
+}
+
+void Shader::setUniform(std::string name, const glm::vec4& value) {
+    glUniform4fv(uniformLocation(name), 1, glm::value_ptr(value));
 }
 
 void Shader::setUniform(std::string name, const glm::mat3& value) {

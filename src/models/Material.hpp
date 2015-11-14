@@ -19,9 +19,9 @@ public:
     
 private:
     std::vector<Texture2D> textures;
-    glm::vec3 cAmbient;
-    glm::vec3 cDiffuse;
-    glm::vec3 cSpecular;
+    glm::vec4 cAmbient;
+    glm::vec4 cDiffuse;
+    glm::vec4 cSpecular;
     float shininess;
     
     void loadTexture(

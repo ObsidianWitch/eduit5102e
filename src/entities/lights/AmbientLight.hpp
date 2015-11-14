@@ -10,7 +10,7 @@ public:
     void update(Shader& shader) override;
     
 private:
-    glm::vec3 color;
+    glm::vec4 color;
 };
 
 #endif // AMBIENT_LIGHT_HPP

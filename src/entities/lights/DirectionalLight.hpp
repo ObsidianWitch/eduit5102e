@@ -13,7 +13,7 @@ public:
     
 private:
     glm::vec3 direction;
-    glm::vec3 color;
+    glm::vec4 color;
 };
 
 #endif // DIRECTIONAL_LIGHT_HPP

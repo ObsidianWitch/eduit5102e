@@ -3,7 +3,7 @@
 AmbientLight::AmbientLight(std::string name, const glm::vec3& color) :
     Entity(name)
 {
-    this->color = color;
+    this->color = glm::vec4(color, 1.0f);
 }
 
 void AmbientLight::update(Shader& shader) {

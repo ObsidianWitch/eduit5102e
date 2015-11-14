@@ -20,6 +20,7 @@ public:
     void setUniform(std::string name, GLuint value);
     void setUniform(std::string name, GLfloat value);
     void setUniform(std::string name, const glm::vec3& value);
+    void setUniform(std::string name, const glm::vec4& value);
     void setUniform(std::string name, const glm::mat3& value);
     void setUniform(std::string name, const glm::mat4& value);
     

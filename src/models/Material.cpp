@@ -6,13 +6,13 @@ Material::Material(const aiMaterial& material, std::string directory) {
     aiColor3D color;
     
     material.Get(AI_MATKEY_COLOR_AMBIENT, color);
-    cAmbient = glm::vec3(color.r, color.g, color.b);
+    cAmbient = glm::vec4(color.r, color.g, color.b, 1.0f);
     
     material.Get(AI_MATKEY_COLOR_DIFFUSE, color);
-    cDiffuse = glm::vec3(color.r, color.g, color.b);
+    cDiffuse = glm::vec4(color.r, color.g, color.b, 1.0f);
     
     material.Get(AI_MATKEY_COLOR_SPECULAR, color);
-    cSpecular = glm::vec3(color.r, color.g, color.b);
+    cSpecular = glm::vec4(color.r, color.g, color.b, 1.0f);
     
     material.Get(AI_MATKEY_SHININESS, shininess);
 }

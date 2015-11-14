@@ -2,8 +2,8 @@
 
 out vec4 color;
 
-vec3 illumination();
+vec4 illumination();
 
 void main() {
-    color = vec4(illumination(), 1.0);
+    color = illumination();
 }

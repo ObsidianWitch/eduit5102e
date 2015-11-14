@@ -6,7 +6,7 @@ DirectionalLight::DirectionalLight(
     Entity(name)
 {
     this->direction = direction;
-    this->color = color;
+    this->color = glm::vec4(color, 1.0f);
 }
 
 void DirectionalLight::update(Shader& shader) {
