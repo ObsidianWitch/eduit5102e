@@ -1,9 +1,9 @@
 #include "entities/player/Player.hpp"
-#include "entities/player/PlayerInputHandler.hpp"
+#include "entities/player/PlayerEventHandler.hpp"
 
 #include <iostream>
 
-PlayerInputHandler::PlayerInputHandler() {
+PlayerEventHandler::PlayerEventHandler() {
     for (int mvt = FORWARD ; mvt <= RIGHT ; mvt++) {
         states[mvt] = false;
     }
@@ -11,7 +11,7 @@ PlayerInputHandler::PlayerInputHandler() {
     strafing = false;
 }
 
-void PlayerInputHandler::keyCallback(
+void PlayerEventHandler::keyCallback(
     GLFWwindow*, int key, int, int action, int
 ) {
     bool state = (action != GLFW_RELEASE);
@@ -30,7 +30,7 @@ void PlayerInputHandler::keyCallback(
     }
 }
 
-void PlayerInputHandler::mouseButtonCallback(
+void PlayerEventHandler::mouseButtonCallback(
     GLFWwindow*, int button, int action, int
 ) {
     if (button == GLFW_MOUSE_BUTTON_RIGHT) {
@@ -38,14 +38,14 @@ void PlayerInputHandler::mouseButtonCallback(
     }
 }
 
-void PlayerInputHandler::cursorPositionCallback(GLFWwindow*, double, double) {}
+void PlayerEventHandler::cursorPositionCallback(GLFWwindow*, double, double) {}
 
-void PlayerInputHandler::scrollCallback(GLFWwindow*, double, double) {}
+void PlayerEventHandler::scrollCallback(GLFWwindow*, double, double) {}
 
-bool PlayerInputHandler::isDiagonal() {
+bool PlayerEventHandler::isDiagonal() {
     return (states[FORWARD] || states[BACKWARD])
         && (states[LEFT] || states[RIGHT]);
 }
 
-std::map<int, bool>& PlayerInputHandler::getStates() { return states; }
-bool PlayerInputHandler::getStrafing() { return strafing; }
+std::map<int, bool>& PlayerEventHandler::getStates() { return states; }
+bool PlayerEventHandler::getStrafing() { return strafing; }

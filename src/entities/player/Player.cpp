@@ -12,19 +12,19 @@ Player::Player(const glm::vec3& position, float speed) :
 }
 
 /**
- * Moves/Rotates the player in the directions specified by the inputHandler. The
+ * Moves/Rotates the player in the directions specified by the eventHandler. The
  * movement vector's magnitude is clampled in order to move at the same speed in
  * all directions and avoid problems such as straferunning.
  */
 void Player::move() {
-    auto& states = inputHandler.getStates();
+    auto& states = eventHandler.getStates();
     
     // translate
     glm::vec3 movementVec = glm::vec3(0.0f);
     if (states[FORWARD]) { movementVec.z += speed; }
     else if (states[BACKWARD]) { movementVec.z -= speed; }
     
-    if (inputHandler.getStrafing()) {
+    if (eventHandler.getStrafing()) {
         if (states[LEFT]) { movementVec.x += speed; }
         else if (states[RIGHT]) { movementVec.x -= speed; }
     }
@@ -35,7 +35,7 @@ void Player::move() {
     model.translate(movementVec);
     
     // rotate
-    if (!inputHandler.getStrafing()) {
+    if (!eventHandler.getStrafing()) {
         if (states[LEFT]) {
             model.rotate(glm::radians(speed * 10));
         }
@@ -58,7 +58,7 @@ void Player::update(Shader& shader) {
     model.draw(shader);
 }
 
-PlayerInputHandler& Player::getInputHandler() { return inputHandler; }
+PlayerEventHandler& Player::getEventHandler() { return eventHandler; }
 
 glm::vec3 Player::getPosition() {
     return model.getPosition();

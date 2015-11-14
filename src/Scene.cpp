@@ -22,8 +22,8 @@ Scene::Scene(GLuint width, GLuint height) :
     skybox()
 {
     // key & mouse handlers
-    Inputs::instance().addKeyHandler(player.getInputHandler());
-    Inputs::instance().addMouseHandler(player.getInputHandler());
+    Inputs::instance().addKeyHandler(player.getEventHandler());
+    Inputs::instance().addMouseHandler(player.getEventHandler());
     Inputs::instance().addMouseHandler(camera.getEventHandler());
     Inputs::instance().addWindowHandler(camera.getEventHandler());
     

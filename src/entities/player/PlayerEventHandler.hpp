@@ -1,5 +1,5 @@
-#ifndef PLAYER_INPUT_HANDLER
-#define PLAYER_INPUT_HANDLER
+#ifndef PLAYER_EVENT_HANDLER
+#define PLAYER_EVENT_HANDLER
 
 #include <map>
 
@@ -10,9 +10,9 @@ enum Movements {
     FORWARD, BACKWARD, LEFT, RIGHT
 };
 
-class PlayerInputHandler : public KeyHandler, public MouseHandler {
+class PlayerEventHandler : public KeyHandler, public MouseHandler {
 public:
-    PlayerInputHandler();
+    PlayerEventHandler();
     
     void keyCallback(
         GLFWwindow* window, int key, int scancode, int action, int mods
@@ -37,4 +37,4 @@ private:
     bool strafing;
 };
 
-#endif // PLAYER_INPUT_HANDLER
+#endif // PLAYER_EVENT_HANDLER

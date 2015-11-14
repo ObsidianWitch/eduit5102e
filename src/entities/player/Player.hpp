@@ -3,7 +3,7 @@
 
 #include "models/Model.hpp"
 #include "entities/Entity.hpp"
-#include "entities/player/PlayerInputHandler.hpp"
+#include "entities/player/PlayerEventHandler.hpp"
 
 class Player : public Entity {
 public:
@@ -11,13 +11,13 @@ public:
     
     void update(Shader& shader) override;
     
-    PlayerInputHandler& getInputHandler();
+    PlayerEventHandler& getEventHandler();
     glm::vec3 getPosition();
     
 private:
     Model model;
     float speed;
-    PlayerInputHandler inputHandler;
+    PlayerEventHandler eventHandler;
     
     void move();
 };
