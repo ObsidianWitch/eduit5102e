@@ -1,0 +1,48 @@
+# Blender MTL File: 'Forest_tree.blend'
+# Material Count: 4
+
+newmtl Leaves
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.391572 0.737911 0.135633
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd textures/Toon_Leaves.png
+map_Bump textures/Toon_Leaves.png
+map_d textures/Toon_Leaves.png
+
+newmtl Leaves_Down
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.407240 0.752942 0.165132
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 0.000000
+illum 1
+map_Kd textures/Toon_Leaves.png
+map_Bump textures/Toon_Leaves_Down.png
+map_d textures/Toon_Leaves_Down.png
+
+newmtl Mushroom
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.082283 0.023153 0.005182
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump textures/Toon_Mushroom.png
+map_Kd textures/Toon_Mushroom.png
+
+newmtl Tree_Bark
+Ns 96.078431
+Ka 0.000000 0.000000 0.000000
+Kd 0.146657 0.050406 0.017946
+Ks 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+map_Bump textures/Toon_Tree.png
+map_Kd textures/Toon_Tree.png

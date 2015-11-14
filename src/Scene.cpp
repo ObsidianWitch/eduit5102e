@@ -58,6 +58,14 @@ Scene::Scene(GLuint width, GLuint height) :
         glm::vec3(1000.0f, 1.0f, 1000.0f), // scaling vector
         false                              // silhouette
     ));
+    
+    ///tree
+    addEntity(new BgObject(
+        "resources/tree1/Forest_tree.obj",
+        glm::vec3(20.0f, 0.0f, 0.0f), // position
+        glm::vec3(10.0f),             // scaling vector
+        false                         // silhouette
+    ));
 }
 
 void Scene::update() {
