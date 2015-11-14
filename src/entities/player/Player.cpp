@@ -1,15 +1,16 @@
 #include <glm/gtc/constants.hpp>
 
 #include "entities/player/Player.hpp"
+#include "behaviours/collisions/BoundingBox.hpp"
 
 Player::Player(const glm::vec3& position, float speed) :
     Entity("player"),
     Movable(speed),
-    model("resources/nanosuit/nanosuit.obj"),
-    boundingBox(
-        glm::vec3(0.0f),
-        glm::vec3(1.0f)
-    )
+    Collidable(BoundingBox(
+        glm::vec3(-3.0f, 0.0f, -3.0f), // minPos
+        glm::vec3(3.0f)                // maxPos
+    )),
+    model("resources/nanosuit/nanosuit.obj")
 {
     model.translate(position);
 }
@@ -68,6 +69,3 @@ void Player::update(Shader& shader) {
 
 PlayerEventHandler& Player::getEventHandler() { return eventHandler; }
 glm::vec3 Player::getPosition() { return model.getPosition(); }
-BoundingBox Player::getBoundingBox() {
-    return boundingBox + getPosition();
-}

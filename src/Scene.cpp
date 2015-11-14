@@ -4,7 +4,6 @@
 #include "inputs/Inputs.hpp"
 #include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
-#include "behaviours/collisions/Collision.hpp"
 
 Scene::Scene(GLuint width, GLuint height) :
     player(
@@ -73,13 +72,8 @@ void Scene::update() {
     mainShader.use();
     
     player.move();
-    bool collision = false;
     for (auto o : bgObjects) {
-        collision = Collision::check(
-            player.getBoundingBox(),
-            o.getBoundingBox()
-        );
-        if (collision) {
+        if (player.collide(o)) {
             player.cancelMove();
             break;
         }

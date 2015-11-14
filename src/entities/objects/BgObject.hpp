@@ -6,8 +6,9 @@
 #include "entities/Entity.hpp"
 #include "models/Model.hpp"
 #include "behaviours/collisions/BoundingBox.hpp"
+#include "behaviours/collisions/Collidable.hpp"
 
-class BgObject : public Entity {
+class BgObject : public Entity, public Collidable {
 public:
     BgObject(
         std::string path, const glm::vec3& position, const glm::vec3& scale,
@@ -20,12 +21,10 @@ public:
     );
     
     void update(Shader& shader) override;
-    
-    BoundingBox getBoundingBox();
+    glm::vec3 getPosition() override;
     
 private:
     Model model;
-    BoundingBox boundingBox;
     bool silhouette;
 };
 

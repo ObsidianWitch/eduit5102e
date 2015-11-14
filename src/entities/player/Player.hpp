@@ -5,9 +5,9 @@
 #include "entities/Entity.hpp"
 #include "entities/player/PlayerEventHandler.hpp"
 #include "behaviours/movements/Movable.hpp"
-#include "behaviours/collisions/BoundingBox.hpp"
+#include "behaviours/collisions/Collidable.hpp"
 
-class Player : public Entity, public Movable {
+class Player : public Entity, public Movable, public Collidable {
 public:
     Player(const glm::vec3& position, float speed);
     
@@ -16,12 +16,10 @@ public:
     void update(Shader& shader) override;
     
     PlayerEventHandler& getEventHandler();
-    glm::vec3 getPosition();
-    BoundingBox getBoundingBox();
+    glm::vec3 getPosition() override;
     
 private:
     Model model;
-    BoundingBox boundingBox;
     PlayerEventHandler eventHandler;
 };
 

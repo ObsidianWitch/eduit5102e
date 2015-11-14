@@ -2,11 +2,11 @@
 
 BgObject::BgObject(
     std::string path, const glm::vec3& position, const glm::vec3& scale,
-    bool silhouette
+    const BoundingBox& boundingBox, bool silhouette
 ) :
     Entity("bgobject"),
-    model(path),
-    boundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
+    Collidable(boundingBox),
+    model(path)
 {
     model.translate(position);
     model.scale(scale);
@@ -15,11 +15,14 @@ BgObject::BgObject(
 
 BgObject::BgObject(
     std::string path, const glm::vec3& position, const glm::vec3& scale,
-    const BoundingBox& boundingBox, bool silhouette
-) : BgObject(path, position, scale, silhouette)
-{
-    this->boundingBox = boundingBox;
-}
+    bool silhouette
+) :
+    BgObject(
+        path, position, scale,
+        BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f)),
+        silhouette
+    )
+{}
 
 void BgObject::update(Shader& shader) {
     shader.setUniform("model", model.getModelMatrix());
@@ -28,6 +31,4 @@ void BgObject::update(Shader& shader) {
     model.draw(shader);
 }
 
-BoundingBox BgObject::getBoundingBox() {
-    return boundingBox + model.getPosition();
-}
+glm::vec3 BgObject::getPosition() { return model.getPosition(); }
