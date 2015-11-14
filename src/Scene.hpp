@@ -8,6 +8,7 @@
 #include "entities/player/Player.hpp"
 #include "entities/camera/Camera.hpp"
 #include "entities/skybox/Skybox.hpp"
+#include "entities/objects/BgObject.hpp"
 #include "shaders/Shader.hpp"
 
 class Scene {
@@ -17,7 +18,8 @@ public:
     void update();
     
 private:
-    std::vector<std::shared_ptr<Entity>> entities;
+    std::vector<std::shared_ptr<Entity>> lights;
+    std::vector<BgObject> bgObjects;
     Player player;
     Camera camera;
     Skybox skybox;
@@ -25,7 +27,8 @@ private:
     Shader mainShader;
     Shader skyboxShader;
     
-    void addEntity(Entity* entity);
+    void addLight(Entity* entity);
+    void addBgObject(BgObject& bgObject);
     void updateEntities(Shader& shader);
 };
 

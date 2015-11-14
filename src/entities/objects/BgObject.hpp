@@ -5,6 +5,7 @@
 
 #include "entities/Entity.hpp"
 #include "models/Model.hpp"
+#include "collisions/BoundingBox.hpp"
 
 class BgObject : public Entity {
 public:
@@ -13,10 +14,18 @@ public:
         bool silhouette = true
     );
     
+    BgObject(
+        std::string path, const glm::vec3& position, const glm::vec3& scale,
+        const BoundingBox& boundingBox, bool silhouette = true
+    );
+    
     void update(Shader& shader) override;
+    
+    BoundingBox getBoundingBox();
     
 private:
     Model model;
+    BoundingBox boundingBox;
     bool silhouette;
 };
 

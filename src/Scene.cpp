@@ -4,7 +4,10 @@
 #include "inputs/Inputs.hpp"
 #include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
-#include "entities/objects/BgObject.hpp"
+#include "collisions/Collision.hpp"
+
+
+#include <iostream> // FIXME
 
 Scene::Scene(GLuint width, GLuint height) :
     player(
@@ -39,12 +42,12 @@ Scene::Scene(GLuint width, GLuint height) :
                 .link();
     
     // lights
-    addEntity(new AmbientLight(
+    addLight(new AmbientLight(
         "aL",                       // name
         glm::vec3(0.1f, 0.1f, 0.1f) // color
     ));
     
-    addEntity(new DirectionalLight(
+    addLight(new DirectionalLight(
         "dL",                         // name
         glm::vec3(1.0f, -0.5f, 0.0f), // direction
         glm::vec3(1.0f, 1.0f, 1.0f)   // color
@@ -52,7 +55,7 @@ Scene::Scene(GLuint width, GLuint height) :
     
     // background objects
     /// ground
-    addEntity(new BgObject(
+    bgObjects.push_back(BgObject(
         "resources/ground/ground.obj",     // file path
         glm::vec3(0.0f),                   // position
         glm::vec3(1000.0f, 1.0f, 1000.0f), // scaling vector
@@ -60,11 +63,12 @@ Scene::Scene(GLuint width, GLuint height) :
     ));
     
     ///tree
-    addEntity(new BgObject(
+    bgObjects.push_back(BgObject(
         "resources/tree1/Forest_tree.obj",
-        glm::vec3(20.0f, 0.0f, 0.0f), // position
-        glm::vec3(10.0f),             // scaling vector
-        false                         // silhouette
+        glm::vec3(20.0f, 0.0f, 0.0f),                  // position
+        glm::vec3(10.0f),                              // scaling vector
+        BoundingBox(glm::vec3(0.0f), glm::vec3(1.0f)), // bounding box
+        false                                          // silhouette
     ));
 }
 
@@ -74,17 +78,35 @@ void Scene::update() {
     player.update(mainShader);
     updateEntities(mainShader);
     
+    bool collision = false;
+    for (auto o : bgObjects) {
+        collision = Collision::check(
+            player.getBoundingBox(),
+            o.getBoundingBox()
+        );
+        if (collision) { break; }
+    }
+    std::cout << collision << std::endl;
+    
     skyboxShader.use();
     camera.update(skyboxShader, false);
     skybox.update(skyboxShader);
 }
 
-void Scene::addEntity(Entity* entity) {
-    entities.push_back(std::shared_ptr<Entity>(entity));
+void Scene::addLight(Entity* light) {
+    lights.push_back(std::shared_ptr<Entity>(light));
+}
+
+void Scene::addBgObject(BgObject& bgObject) {
+    bgObjects.push_back(bgObject);
 }
 
 void Scene::updateEntities(Shader& shader) {
-    for (auto e : entities) {
+    for (auto e : lights) {
         e->update(shader);
+    }
+    
+    for (auto o : bgObjects) {
+        o.update(shader);
     }
 }

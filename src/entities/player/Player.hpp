@@ -4,6 +4,7 @@
 #include "models/Model.hpp"
 #include "entities/Entity.hpp"
 #include "entities/player/PlayerEventHandler.hpp"
+#include "collisions/BoundingBox.hpp"
 
 class Player : public Entity {
 public:
@@ -13,10 +14,12 @@ public:
     
     PlayerEventHandler& getEventHandler();
     glm::vec3 getPosition();
+    BoundingBox getBoundingBox();
     
 private:
     Model model;
     float speed;
+    BoundingBox boundingBox;
     PlayerEventHandler eventHandler;
     
     void move();
