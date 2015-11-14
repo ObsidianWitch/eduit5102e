@@ -24,7 +24,7 @@ void Player::move() {
     auto& states = eventHandler.getStates();
     
     // translate
-    glm::vec3 movementVec = glm::vec3(0.0f);
+    movementVec = glm::vec3(0.0f);
     if (states[FORWARD]) { movementVec.z += speed; }
     else if (states[BACKWARD]) { movementVec.z -= speed; }
     
@@ -50,12 +50,17 @@ void Player::move() {
 }
 
 /**
- * Updates the Player's position, updates the model matrix for the specified
- * shader, and draws his model.
+ * Cancels the last translaton added by the movement vector.
+ */
+void Player::cancelMove() {
+    model.translate(-movementVec);
+}
+
+/**
+ * Updates the model matrix for the specified shader, and draws the model.
  * The shader in parameter should be bound before calling this method.
  */
 void Player::update(Shader& shader) {
-    move();
     shader.setUniform("model", model.getModelMatrix());
     shader.setUniform("normalMatrix", model.getNormalMatrix());
     shader.setUniform("setSilhouette", true);

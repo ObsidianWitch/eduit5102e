@@ -65,28 +65,32 @@ Scene::Scene(GLuint width, GLuint height) :
     ///tree
     bgObjects.push_back(BgObject(
         "resources/tree1/Forest_tree.obj",
-        glm::vec3(20.0f, 0.0f, 0.0f),                  // position
-        glm::vec3(10.0f),                              // scaling vector
-        BoundingBox(glm::vec3(0.0f), glm::vec3(1.0f)), // bounding box
-        false                                          // silhouette
+        glm::vec3(20.0f, 0.0f, 0.0f),                     // position
+        glm::vec3(10.0f),                                 // scaling vector
+        BoundingBox(glm::vec3(-10.0f), glm::vec3(10.0f)), // bounding box
+        false                                             // silhouette
     ));
 }
 
 void Scene::update() {
     mainShader.use();
-    camera.update(mainShader, player.getPosition());
-    player.update(mainShader);
-    updateEntities(mainShader);
     
+    player.move();
     bool collision = false;
     for (auto o : bgObjects) {
         collision = Collision::check(
             player.getBoundingBox(),
             o.getBoundingBox()
         );
-        if (collision) { break; }
+        if (collision) {
+            player.cancelMove();
+            break;
+        }
     }
-    std::cout << collision << std::endl;
+    player.update(mainShader);
+    camera.update(mainShader, player.getPosition());
+    updateEntities(mainShader);
+    
     
     skyboxShader.use();
     camera.update(skyboxShader, false);

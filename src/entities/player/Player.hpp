@@ -10,6 +10,8 @@ class Player : public Entity {
 public:
     Player(const glm::vec3& position, float speed);
     
+    void move();
+    void cancelMove();
     void update(Shader& shader) override;
     
     PlayerEventHandler& getEventHandler();
@@ -21,8 +23,7 @@ private:
     float speed;
     BoundingBox boundingBox;
     PlayerEventHandler eventHandler;
-    
-    void move();
+    glm::vec3 movementVec;
 };
 
 #endif // PLAYER_HPP

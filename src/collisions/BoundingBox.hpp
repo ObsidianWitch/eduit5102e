@@ -5,12 +5,12 @@
 
 class BoundingBox {
 public:
-    BoundingBox(const glm::vec3& minVec, const glm::vec3& maxVec);
+    BoundingBox(const glm::vec3& minPos, const glm::vec3& maxPos);
     
     BoundingBox operator+(const glm::vec3& vec);
     
-    glm::vec3 minVec;
-    glm::vec3 maxVec;
+    glm::vec3 minPos;
+    glm::vec3 maxPos;
 };
 
 #endif // BOUNDING_BOX_HPP
