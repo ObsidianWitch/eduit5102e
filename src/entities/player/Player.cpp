@@ -4,6 +4,7 @@
 
 Player::Player(const glm::vec3& position, float speed) :
     Entity("player"),
+    Movable(speed),
     model("resources/nanosuit/nanosuit.obj"),
     boundingBox(
         glm::vec3(0.0f),
@@ -11,8 +12,6 @@ Player::Player(const glm::vec3& position, float speed) :
     )
 {
     model.translate(position);
-    
-    this->speed = speed;
 }
 
 /**

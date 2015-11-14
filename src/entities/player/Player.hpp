@@ -4,14 +4,15 @@
 #include "models/Model.hpp"
 #include "entities/Entity.hpp"
 #include "entities/player/PlayerEventHandler.hpp"
+#include "behaviours/movements/Movable.hpp"
 #include "behaviours/collisions/BoundingBox.hpp"
 
-class Player : public Entity {
+class Player : public Entity, public Movable {
 public:
     Player(const glm::vec3& position, float speed);
     
-    void move();
-    void cancelMove();
+    void move() override;
+    void cancelMove() override;
     void update(Shader& shader) override;
     
     PlayerEventHandler& getEventHandler();
@@ -20,10 +21,8 @@ public:
     
 private:
     Model model;
-    float speed;
     BoundingBox boundingBox;
     PlayerEventHandler eventHandler;
-    glm::vec3 movementVec;
 };
 
 #endif // PLAYER_HPP
