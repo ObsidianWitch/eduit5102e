@@ -14,6 +14,7 @@ in vec2 fsTextureCoords;
 
 uniform vec3 cameraPosition;
 uniform Material material;
+uniform bool setSilhouette;
 
 vec3 silhouette();
 
@@ -55,6 +56,8 @@ vec3 specularComponent(vec3 lightColor, vec3 lightDirection) {
  * color.
  */
 vec3 silhouette() {
+    if (!setSilhouette) { return vec3(0.0, 0.0, 0.0); }
+    
     float silhouetteCoeff = abs(dot(viewDirection, normal));
     
     if (silhouetteCoeff < 0.2) {

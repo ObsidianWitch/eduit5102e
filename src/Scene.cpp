@@ -55,7 +55,8 @@ Scene::Scene(GLuint width, GLuint height) :
     addEntity(new BgObject(
         "resources/ground/ground.obj",     // file path
         glm::vec3(0.0f),                   // position
-        glm::vec3(1000.0f, 1.0f, 1000.0f)  // scaling vector
+        glm::vec3(1000.0f, 1.0f, 1000.0f), // scaling vector
+        false                              // silhouette
     ));
 }
 

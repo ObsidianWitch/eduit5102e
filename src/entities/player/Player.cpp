@@ -54,6 +54,7 @@ void Player::update(Shader& shader) {
     move();
     shader.setUniform("model", model.getModelMatrix());
     shader.setUniform("normalMatrix", model.getNormalMatrix());
+    shader.setUniform("setSilhouette", true);
     model.draw(shader);
 }
 

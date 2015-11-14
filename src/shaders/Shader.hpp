@@ -16,6 +16,7 @@ public:
     void use();
     
     GLuint uniformLocation(std::string name);
+    void setUniform(std::string name, bool value);
     void setUniform(std::string name, GLuint value);
     void setUniform(std::string name, GLfloat value);
     void setUniform(std::string name, const glm::vec3& value);

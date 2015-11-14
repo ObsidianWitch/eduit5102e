@@ -105,6 +105,11 @@ GLuint Shader::uniformLocation(std::string name) {
     }
 }
 
+void Shader::setUniform(std::string name, bool value) {
+    glUniform1i(uniformLocation(name), value);
+}
+
+
 void Shader::setUniform(std::string name, GLuint value) {
     glUniform1i(uniformLocation(name), value);
 }
