@@ -16,16 +16,21 @@ uniform vec3 cameraPosition;
 uniform Material material;
 
 vec3 normal = normalize(fsNormal);
-vec4 diffuseTexColor = texture(material.diffuse, fsTextureCoords);
-if (diffuseTexColor.a < 0.1) { discard; } // alpha testing
+
+vec4 diffuseTexColor() {
+    vec4 diffuseTexColor = texture(material.diffuse, fsTextureCoords);
+    if (diffuseTexColor.a < 0.1) { discard; } // alpha testing
+    
+    return diffuseTexColor;
+}
 
 vec4 ambientComponent(vec4 lightColor) {
-    return lightColor * material.cAmbient * diffuseTexColor;
+    return lightColor * material.cAmbient * diffuseTexColor();
 }
 
 vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection) {
     float diffuseCoeff = max(dot(normal, lightDirection), 0.0);
-    return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor;
+    return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor();
 }
 
 vec4 specularComponent(vec4 lightColor, vec3 lightDirection) {
