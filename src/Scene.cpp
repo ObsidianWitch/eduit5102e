@@ -70,7 +70,7 @@ Scene::Scene(GLuint width, GLuint height) :
 
 void Scene::update() {
     mainShader.use();
-    
+    mainShader.setUniform("time", (float) glfwGetTime());
     player.move();
     for (auto o : bgObjects) {
         if (player.collide(o)) {
@@ -81,7 +81,6 @@ void Scene::update() {
     player.update(mainShader);
     camera.update(mainShader, player.getPosition());
     updateEntities(mainShader);
-    
     
     skyboxShader.use();
     camera.update(skyboxShader, false);

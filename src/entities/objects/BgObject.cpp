@@ -28,6 +28,7 @@ void BgObject::update(Shader& shader) {
     shader.setUniform("model", model.getModelMatrix());
     shader.setUniform("normalMatrix", model.getNormalMatrix());
     shader.setUniform("setSilhouette", silhouette);
+    shader.setUniform("breathing", false);
     model.draw(shader);
 }
 

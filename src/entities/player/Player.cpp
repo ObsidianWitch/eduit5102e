@@ -65,6 +65,7 @@ void Player::update(Shader& shader) {
     shader.setUniform("model", model.getModelMatrix());
     shader.setUniform("normalMatrix", model.getNormalMatrix());
     shader.setUniform("setSilhouette", true);
+    shader.setUniform("breathing", true);
     model.draw(shader);
 }
 
