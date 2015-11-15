@@ -8,7 +8,7 @@
 Scene::Scene(GLuint width, GLuint height) :
     player(
         glm::vec3(0.0f, 0.0f, 0.0f), // position
-        0.3f                         // speed
+        0.2f                         // speed
     ),
     camera(
         glm::vec3(0.0f, 10.0f, -10.0f), // position
@@ -44,9 +44,9 @@ Scene::Scene(GLuint width, GLuint height) :
     ));
     
     addLight(new DirectionalLight(
-        "dL",                         // name
+        "dL",                        // name
         glm::vec3(1.0f, -0.5f, 0.0f), // direction
-        glm::vec3(1.0f, 1.0f, 1.0f)   // color
+        glm::vec3(0.8f, 0.8f, 0.8f)   // color
     ));
     
     // background objects

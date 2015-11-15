@@ -10,9 +10,10 @@ Player::Player(const glm::vec3& position, float speed) :
         glm::vec3(-3.0f, 0.0f, -3.0f), // minPos
         glm::vec3(3.0f)                // maxPos
     )),
-    model("resources/nanosuit/nanosuit.obj")
+    model("resources/elf/elf.obj")
 {
     model.translate(position);
+    model.scale(glm::vec3(2.0f));
 }
 
 /**
