@@ -53,7 +53,7 @@ vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection) {
     float diffuseCoeff = dot(normal, lightDirection);
     if (diffuseCoeff > 0.2) { diffuseCoeff = 1.0; }
     else if (diffuseCoeff > 0.0) { diffuseCoeff = 0.3; }
-    else { diffuseCoeff = 0.0; }
+    else { diffuseCoeff = 0.2; }
     
     return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor();
 }
