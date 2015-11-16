@@ -19,13 +19,15 @@ public:
     
 private:
     std::vector<Texture2D> textures;
+    bool normalMapIsSet;
     glm::vec4 cAmbient;
     glm::vec4 cDiffuse;
     glm::vec4 cSpecular;
     float shininess;
     
-    void loadTexture(
-        const aiMaterial& material, std::string directory, aiTextureType type
+    bool loadTexture(
+        const aiMaterial& material, std::string directory, aiTextureType type,
+        GLenum unit
     );
 };
 

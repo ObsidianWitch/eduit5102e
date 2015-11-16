@@ -1,7 +1,10 @@
 #include "models/Material.hpp"
 
 Material::Material(const aiMaterial& material, std::string directory) {
-    loadTexture(material, directory, aiTextureType_DIFFUSE);
+    loadTexture(material, directory, aiTextureType_DIFFUSE, GL_TEXTURE0);
+    normalMapIsSet = loadTexture(
+        material, directory, aiTextureType_HEIGHT, GL_TEXTURE1
+    );
     
     aiColor3D color;
     
@@ -17,25 +20,31 @@ Material::Material(const aiMaterial& material, std::string directory) {
     material.Get(AI_MATKEY_SHININESS, shininess);
 }
 
-void Material::loadTexture(
-    const aiMaterial& material, std::string directory, aiTextureType type
+bool Material::loadTexture(
+    const aiMaterial& material, std::string directory, aiTextureType type,
+    GLenum unit
 ) {
-    if (material.GetTextureCount(type) > 0) {
-        aiString textureFile;
-        material.GetTexture(type, 0, &textureFile);
-        
-        int opacity;
-        material.Get(AI_MATKEY_OPACITY, opacity);
-        
-        std::string texturePath = directory + '/' + std::string(textureFile.C_Str());
-        textures.push_back(Texture2D(
-            texturePath, GL_TEXTURE0, !opacity
-        ));
-    }
+    if (material.GetTextureCount(type) <= 0) { return false; }
+    
+    aiString textureFile;
+    material.GetTexture(type, 0, &textureFile);
+    
+    int opacity;
+    material.Get(AI_MATKEY_OPACITY, opacity);
+    
+    std::string texturePath = directory + '/' + std::string(textureFile.C_Str());
+    textures.push_back(Texture2D(
+        texturePath, unit, !opacity
+    ));
+    
+    return true;
 }
 
 void Material::update(Shader& shader) {
-    shader.setUniform("material.diffuse", (GLuint) 0);
+    shader.setUniform("material.diffuseMap", (GLuint) 0);
+    shader.setUniform("material.normalMap", (GLuint) 1);
+    shader.setUniform("material.normalMapIsSet", normalMapIsSet);
+    
     shader.setUniform("material.cAmbient", cAmbient);
     shader.setUniform("material.cDiffuse", cDiffuse);
     shader.setUniform("material.cSpecular", cSpecular);
