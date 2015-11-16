@@ -73,8 +73,6 @@ Scene::Scene(GLuint width, GLuint height) :
 
 void Scene::update() {
     // logic
-    camera.setTarget(player.getPosition());
-    
     player.move();
     for (Collidable* c : collidables) {
         if (player.collide(*c)) {
@@ -82,6 +80,8 @@ void Scene::update() {
             break;
         }
     }
+    
+    camera.setTarget(player.getPosition());
     
     // render
     playerRenderer->render();
