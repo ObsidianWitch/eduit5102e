@@ -29,7 +29,7 @@ Scene::Scene(GLuint width, GLuint height) :
     // lights
     lights.push_back(std::make_unique<AmbientLight>(
         "aL",                       // name
-        glm::vec3(0.1f, 0.1f, 0.1f) // color
+        glm::vec3(0.1f, 0.0f, 0.0f) // color
     ));
     
     lights.push_back(std::make_unique<DirectionalLight>(

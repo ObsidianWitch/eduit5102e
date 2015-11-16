@@ -5,13 +5,17 @@
 
 class TextureCubeMap {
 public:
-    TextureCubeMap(const std::vector<std::string>& texturesPaths);
+    TextureCubeMap(
+        const std::vector<std::string>& texturesPaths, GLenum unit, bool alpha
+    );
     
     void bind();
     void unbind();
     
 private:
     GLuint id;
+    GLenum unit;
+    bool alpha;
     
     void load(const std::vector<std::string>& texturesPaths);
     void setParameters();

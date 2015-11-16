@@ -23,16 +23,19 @@ void SkyboxRenderer::render() {
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
     
-    shader.setUniform("skybox", (GLuint) 0);
+    shader.setUniform("skyboxBack", (GLuint) 0);
+    shader.setUniform("skyboxFront", (GLuint) 1);
     shader.setUniform("rotationMatrix", glm::rotate(
         glm::mat4(),                   // matrix
-        0.01f * (float) glfwGetTime(), // angle
+        0.02f * (float) glfwGetTime(), // angle
         glm::vec3(0.0f, 1.0f, 0.0f)    // axis
     ));
     
     glDepthFunc(GL_LEQUAL);
-    skybox.getTexture().bind();
+    skybox.getTextureFront().bind();
+    skybox.getTextureBack().bind();
     skybox.getModel().draw(shader);
-    skybox.getTexture().unbind();
+    skybox.getTextureBack().unbind();
+    skybox.getTextureFront().unbind();
     glDepthFunc(GL_LESS);
 }

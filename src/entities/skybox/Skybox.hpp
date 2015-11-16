@@ -12,11 +12,13 @@ public:
     Skybox();
     
     Model& getModel();
-    TextureCubeMap& getTexture();
+    TextureCubeMap& getTextureBack();
+    TextureCubeMap& getTextureFront();
 
 private:
     Model model;
-    std::unique_ptr<TextureCubeMap> texture;
+    std::unique_ptr<TextureCubeMap> textureBack;
+    std::unique_ptr<TextureCubeMap> textureFront;
 };
 
 #endif // SKYBOX_HPP

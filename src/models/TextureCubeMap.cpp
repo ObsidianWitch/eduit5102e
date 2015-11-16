@@ -4,7 +4,12 @@
 
 #include "models/TextureCubeMap.hpp"
 
-TextureCubeMap::TextureCubeMap(const std::vector<std::string>& texturesPaths) {
+TextureCubeMap::TextureCubeMap(
+    const std::vector<std::string>& texturesPaths, GLenum unit, bool alpha
+) {
+    this->alpha = alpha;
+    this->unit = unit;
+    
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 
@@ -18,10 +23,10 @@ void TextureCubeMap::load(const std::vector<std::string>& texturesPaths) {
     for (unsigned int i = 0 ; i < texturesPaths.size() ; i++) {
         int width, height;
         unsigned char* image = SOIL_load_image(
-            texturesPaths[i].c_str(), //path
-            &width, &height,          // width & height
-            nullptr,                  // channels
-            SOIL_LOAD_RGB             // force channels
+            texturesPaths[i].c_str(),              //path
+            &width, &height,                       // width & height
+            nullptr,                               // channels
+            alpha ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB // force channels
         );
         if (image == nullptr) {
             std::cerr << "Texture " << texturesPaths[i]
@@ -33,10 +38,10 @@ void TextureCubeMap::load(const std::vector<std::string>& texturesPaths) {
         glTexImage2D(
             GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, // target
             0,                                  // mipmap level (base image)
-            GL_RGB,                             // texture internal format
+            alpha ? GL_RGBA : GL_RGB,           // texture internal format
             width, height,                      // width & height
             0,                                  // border (legacy)
-            GL_RGB,                             // texel data format
+            alpha ? GL_RGBA : GL_RGB,           // texel data format
             GL_UNSIGNED_BYTE,                   // texel data type
             image                               // image data
         );
@@ -53,11 +58,11 @@ void TextureCubeMap::setParameters() {
 }
 
 void TextureCubeMap::bind() {
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(unit);
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 }
 
 void TextureCubeMap::unbind() {
-    glActiveTexture(GL_TEXTURE0);
+    glActiveTexture(unit);
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
