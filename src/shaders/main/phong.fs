@@ -12,28 +12,12 @@ struct Material {
 };
 
 in vec3 fsPosition;
-in vec3 fsNormal;
-in vec2 fsTextureCoords;
 
 uniform vec3 cameraPosition;
 uniform Material material;
 
-vec3 getNormal() {
-    if (!material.normalMapIsSet) { return normalize(fsNormal); }
-    
-    // retrieve normal information in the texture color (range [0,1])
-    vec3 normal = texture(material.normalMap, fsTextureCoords).rgb;
-    
-    // return normal in range [-1, 1]
-    return normalize(normal * 2.0 - 1.0);
-}
-
-vec4 diffuseTexColor() {
-    vec4 diffuseTexColor = texture(material.diffuseMap, fsTextureCoords);
-    if (diffuseTexColor.a < 0.1) { discard; } // alpha testing
-    
-    return diffuseTexColor;
-}
+vec3 getNormal();
+vec4 diffuseTexColor();
 
 vec4 ambientComponent(vec4 lightColor) {
     return lightColor * material.cAmbient * diffuseTexColor();

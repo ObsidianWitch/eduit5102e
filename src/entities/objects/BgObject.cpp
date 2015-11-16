@@ -15,4 +15,4 @@ BgObject::BgObject(
 
 glm::vec3 BgObject::getPosition() { return model.getPosition(); }
 Model& BgObject::getModel() { return model; }
-bool BgObject::getSilhouette() { return silhouette; }
+bool BgObject::hasSilhouette() { return silhouette; }

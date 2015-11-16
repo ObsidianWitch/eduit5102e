@@ -12,24 +12,15 @@ struct Material {
 };
 
 in vec3 fsPosition;
-in vec3 fsNormal;
-in vec2 fsTextureCoords;
 
 uniform vec3 cameraPosition;
 uniform Material material;
-uniform bool setSilhouette;
+uniform bool hasSilhouette;
 
 vec3 viewDirection = normalize(cameraPosition - fsPosition);
 
-vec3 getNormal() {
-    if (!material.normalMapIsSet) { return normalize(fsNormal); }
-    
-    // retrieve normal information in the texture color (range [0,1])
-    vec3 normal = texture(material.normalMap, fsTextureCoords).rgb;
-    
-    // return normal in range [-1, 1]
-    return normalize(normal * 2.0 - 1.0);
-}
+vec3 getNormal();
+vec4 diffuseTexColor();
 
 /**
  * Computes the silhouette offset color. The computed color must be added
@@ -38,7 +29,7 @@ vec3 getNormal() {
  * color.
  */
 vec4 silhouette() {
-    if (!setSilhouette) { return vec4(0.0, 0.0, 0.0, 0.0); }
+    if (!hasSilhouette) { return vec4(0.0, 0.0, 0.0, 0.0); }
     
     float silhouetteCoeff = abs(dot(viewDirection, getNormal()));
     
@@ -50,15 +41,12 @@ vec4 silhouette() {
     }
 }
 
-vec4 diffuseTexColor() {
-    vec4 diffuseTexColor = texture(material.diffuseMap, fsTextureCoords);
-    if (diffuseTexColor.a < 0.1) { discard; } // alpha testing
-    
-    return diffuseTexColor + silhouette();
+vec4 toonDiffuseTexColor() {
+    return diffuseTexColor() + silhouette();
 }
 
 vec4 ambientComponent(vec4 lightColor) {
-    return lightColor * material.cAmbient * diffuseTexColor();
+    return lightColor * material.cAmbient * toonDiffuseTexColor();
 }
 
 vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection) {
@@ -67,7 +55,8 @@ vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection) {
     else if (diffuseCoeff > 0.0) { diffuseCoeff = 0.3; }
     else { diffuseCoeff = 0.2; }
     
-    return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor();
+    return lightColor * material.cDiffuse * diffuseCoeff
+         * toonDiffuseTexColor();
 }
 
 vec4 specularComponent(vec4 lightColor, vec3 lightDirection) {

@@ -17,7 +17,7 @@ public:
     
     glm::vec3 getPosition() override;
     Model& getModel();
-    bool getSilhouette();
+    bool hasSilhouette();
     
 private:
     Model model;

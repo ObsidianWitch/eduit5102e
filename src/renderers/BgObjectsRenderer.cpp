@@ -8,6 +8,7 @@ BgObjectsRenderer::BgObjectsRenderer(
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
+          .add(GL_FRAGMENT_SHADER, "src/shaders/main/texture.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/toon.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
           .link();
@@ -25,7 +26,7 @@ void BgObjectsRenderer::render() {
     for (auto o : bgObjects) {
         shader.setUniform("model", o.getModel().getModelMatrix());
         shader.setUniform("normalMatrix", o.getModel().getNormalMatrix());
-        shader.setUniform("setSilhouette", o.getSilhouette());
+        shader.setUniform("hasSilhouette", o.hasSilhouette());
         
         o.getModel().draw(shader);
     }

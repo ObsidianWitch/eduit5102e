@@ -9,6 +9,7 @@ PlayerRenderer::PlayerRenderer(
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
+          .add(GL_FRAGMENT_SHADER, "src/shaders/main/texture.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/toon.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
           .link();
@@ -32,7 +33,7 @@ void PlayerRenderer::render() {
     
     shader.setUniform("model", modelMatrix);
     shader.setUniform("normalMatrix", player.getModel().getNormalMatrix());
-    shader.setUniform("setSilhouette", true);
+    shader.setUniform("hasSilhouette", true);
     
     player.getModel().draw(shader);
 }
