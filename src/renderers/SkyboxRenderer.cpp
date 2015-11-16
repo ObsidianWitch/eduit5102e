@@ -1,3 +1,5 @@
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "SkyboxRenderer.hpp"
 
 SkyboxRenderer::SkyboxRenderer(Skybox& skybox, Camera& camera) :
@@ -22,6 +24,11 @@ void SkyboxRenderer::render() {
     shader.setUniform("cameraPosition", camera.getPosition());
     
     shader.setUniform("skybox", (GLuint) 0);
+    shader.setUniform("rotationMatrix", glm::rotate(
+        glm::mat4(),                   // matrix
+        0.01f * (float) glfwGetTime(), // angle
+        glm::vec3(0.0f, 1.0f, 0.0f)    // axis
+    ));
     
     glDepthFunc(GL_LEQUAL);
     skybox.getTexture().bind();
