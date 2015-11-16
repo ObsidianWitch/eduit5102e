@@ -10,8 +10,9 @@
 class Skybox : public Entity {
 public:
     Skybox();
-
-    void update(Shader& shader);
+    
+    Model& getModel();
+    TextureCubeMap& getTexture();
 
 private:
     Model model;

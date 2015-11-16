@@ -26,24 +26,13 @@ Scene::Scene(GLuint width, GLuint height) :
     Inputs::instance().addMouseHandler(camera.getEventHandler());
     Inputs::instance().addWindowHandler(camera.getEventHandler());
     
-    // shaders
-    mainShader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/main/toon.fs")
-              .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
-              .link();
-    
-    skyboxShader.add(GL_VERTEX_SHADER, "src/shaders/skybox/skybox.vs")
-                .add(GL_FRAGMENT_SHADER, "src/shaders/skybox/skybox.fs")
-                .link();
-    
     // lights
-    addLight(new AmbientLight(
+    lights.push_back(std::make_unique<AmbientLight>(
         "aL",                       // name
         glm::vec3(0.1f, 0.1f, 0.1f) // color
     ));
     
-    addLight(new DirectionalLight(
+    lights.push_back(std::make_unique<DirectionalLight>(
         "dL",                        // name
         glm::vec3(1.0f, -0.5f, 0.0f), // direction
         glm::vec3(0.8f, 0.8f, 0.8f)   // color
@@ -52,55 +41,50 @@ Scene::Scene(GLuint width, GLuint height) :
     // background objects
     /// ground
     bgObjects.push_back(BgObject(
-        "resources/ground/ground.obj",     // file path
-        glm::vec3(0.0f),                   // position
-        glm::vec3(1000.0f, 1.0f, 1000.0f), // scaling vector
-        false                              // silhouette
+        "resources/ground/ground.obj",                 // file path
+        glm::vec3(0.0f),                               // position
+        glm::vec3(1000.0f, 1.0f, 1000.0f),             // scaling vector
+        BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f)), // bounding box
+        false                                          // silhouette
     ));
     
-    ///tree
+    /// tree
     bgObjects.push_back(BgObject(
-        "resources/tree1/Forest_tree.obj",
+        "resources/tree1/Forest_tree.obj",                // file path
         glm::vec3(20.0f, 0.0f, 0.0f),                     // position
         glm::vec3(10.0f),                                 // scaling vector
         BoundingBox(glm::vec3(-10.0f), glm::vec3(10.0f)), // bounding box
         false                                             // silhouette
     ));
+    
+    for (auto& o : bgObjects) { collidables.push_back(&o); }
+    
+    // Renderers
+    playerRenderer = std::make_unique<PlayerRenderer>(
+        player, camera, lights
+    );
+    bgObjectsRenderer = std::make_unique<BgObjectsRenderer>(
+        bgObjects, camera, lights
+    );
+    skyboxRenderer = std::make_unique<SkyboxRenderer>(
+        skybox, camera
+    );
 }
 
 void Scene::update() {
-    mainShader.use();
-    mainShader.setUniform("time", (float) glfwGetTime());
+    // logic
+    camera.setTarget(player.getPosition());
+    
     player.move();
-    for (auto o : bgObjects) {
-        if (player.collide(o)) {
+    for (Collidable* c : collidables) {
+        if (player.collide(*c)) {
             player.cancelMove();
             break;
         }
     }
-    player.update(mainShader);
-    camera.update(mainShader, player.getPosition());
-    updateEntities(mainShader);
     
-    skyboxShader.use();
-    camera.update(skyboxShader, false);
-    skybox.update(skyboxShader);
-}
-
-void Scene::addLight(Entity* light) {
-    lights.push_back(std::shared_ptr<Entity>(light));
-}
-
-void Scene::addBgObject(BgObject& bgObject) {
-    bgObjects.push_back(bgObject);
-}
-
-void Scene::updateEntities(Shader& shader) {
-    for (auto e : lights) {
-        e->update(shader);
-    }
-    
-    for (auto o : bgObjects) {
-        o.update(shader);
-    }
+    // render
+    playerRenderer->render();
+    bgObjectsRenderer->render();
+    skyboxRenderer->render();
 }

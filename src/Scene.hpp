@@ -9,7 +9,10 @@
 #include "entities/camera/Camera.hpp"
 #include "entities/skybox/Skybox.hpp"
 #include "entities/objects/BgObject.hpp"
-#include "shaders/Shader.hpp"
+#include "behaviours/collisions/Collidable.hpp"
+#include "renderers/PlayerRenderer.hpp"
+#include "renderers/BgObjectsRenderer.hpp"
+#include "renderers/SkyboxRenderer.hpp"
 
 class Scene {
 public:
@@ -19,17 +22,15 @@ public:
     
 private:
     std::vector<std::shared_ptr<Entity>> lights;
+    std::vector<Collidable*> collidables;
     std::vector<BgObject> bgObjects;
     Player player;
     Camera camera;
     Skybox skybox;
     
-    Shader mainShader;
-    Shader skyboxShader;
-    
-    void addLight(Entity* entity);
-    void addBgObject(BgObject& bgObject);
-    void updateEntities(Shader& shader);
+    std::unique_ptr<PlayerRenderer> playerRenderer;
+    std::unique_ptr<BgObjectsRenderer> bgObjectsRenderer;
+    std::unique_ptr<SkyboxRenderer> skyboxRenderer;
 };
 
 #endif // SCENES_HPP

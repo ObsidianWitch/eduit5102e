@@ -18,21 +18,5 @@ Skybox::Skybox() :
     texture = std::make_unique<TextureCubeMap>(texturesPaths);
 }
 
-/**
- * Displays the skybox.
- * @note The depth function is changed from LESS to LEQUAL so that the skybox
- * passes the depth test. The depth buffer will be filled with the maximum
- * value (1.0) for the skybox.
- */
-void Skybox::update(Shader& shader) {
-    shader.setUniform("skybox", (GLuint) 0);
-    
-    glDepthFunc(GL_LEQUAL);
-    
-    texture->bind();
-    
-    model.draw(shader);
-    
-    glDepthFunc(GL_LESS);
-    texture->unbind();
-}
+Model& Skybox::getModel() { return model; }
+TextureCubeMap& Skybox::getTexture() { return *texture; }

@@ -12,16 +12,12 @@ class BgObject : public Entity, public Collidable {
 public:
     BgObject(
         std::string path, const glm::vec3& position, const glm::vec3& scale,
-        bool silhouette = true
+        const BoundingBox& boundingBox, bool silhouette
     );
     
-    BgObject(
-        std::string path, const glm::vec3& position, const glm::vec3& scale,
-        const BoundingBox& boundingBox, bool silhouette = true
-    );
-    
-    void update(Shader& shader) override;
     glm::vec3 getPosition() override;
+    Model& getModel();
+    bool getSilhouette();
     
 private:
     Model model;

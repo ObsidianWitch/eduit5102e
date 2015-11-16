@@ -57,17 +57,6 @@ void Player::cancelMove() {
     model.translate(-movementVec);
 }
 
-/**
- * Updates the model matrix for the specified shader, and draws the model.
- * The shader in parameter should be bound before calling this method.
- */
-void Player::update(Shader& shader) {
-    shader.setUniform("model", model.getModelMatrix());
-    shader.setUniform("normalMatrix", model.getNormalMatrix());
-    shader.setUniform("setSilhouette", true);
-    shader.setUniform("breathing", true);
-    model.draw(shader);
-}
-
 PlayerEventHandler& Player::getEventHandler() { return eventHandler; }
 glm::vec3 Player::getPosition() { return model.getPosition(); }
+Model& Player::getModel() { return model; }

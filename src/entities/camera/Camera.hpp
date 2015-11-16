@@ -18,14 +18,13 @@ public:
     void rotate(const glm::vec2& delta);
     void zoom(float value);
     
-    void update(Shader& shader, const glm::vec3& newTarget);
-    void update(Shader& shader, bool viewTranslation);
-    
     glm::mat4 getViewMatrix();
+    glm::mat4 getNonTranslatedViewMatrix();
     glm::mat4 getProjectionMatrix();
-    
+    glm::vec3 getPosition();
     CameraEventHandler& getEventHandler();
     
+    void setTarget(const glm::vec3& target);
     void setViewport(int width, int height);
     
 private:

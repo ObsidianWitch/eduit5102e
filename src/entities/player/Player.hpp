@@ -13,10 +13,10 @@ public:
     
     void move() override;
     void cancelMove() override;
-    void update(Shader& shader) override;
     
     PlayerEventHandler& getEventHandler();
     glm::vec3 getPosition() override;
+    Model& getModel();
     
 private:
     Model model;
