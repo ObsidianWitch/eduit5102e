@@ -18,8 +18,6 @@ BgObjectsRenderer::BgObjectsRenderer(
     
 void BgObjectsRenderer::render() {
     shader.use();
-    shader.setUniform("time", (float) glfwGetTime());
-    
     shader.setUniform("view", camera.getViewMatrix());
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
@@ -28,7 +26,6 @@ void BgObjectsRenderer::render() {
         shader.setUniform("model", o.getModel().getModelMatrix());
         shader.setUniform("normalMatrix", o.getModel().getNormalMatrix());
         shader.setUniform("setSilhouette", o.getSilhouette());
-        shader.setUniform("breathing", false);
         
         o.getModel().draw(shader);
     }

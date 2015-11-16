@@ -13,18 +13,10 @@ uniform mat3 normalMatrix;
 uniform mat4 view;
 uniform mat4 projection;
 
-uniform float time;
-uniform bool breathing;
-
 void main() {
-    mat4 transformedModel = model;
-    if (breathing) {
-        transformedModel[1].y += 0.005 * exp(sin(time));
-    }
+    gl_Position = projection * view * model * vec4(position, 1.0f);
     
-    gl_Position = projection * view * transformedModel * vec4(position, 1.0f);
-    
-    fsPosition = vec3(transformedModel * vec4(position, 1.0f));
+    fsPosition = vec3(model * vec4(position, 1.0f));
     fsNormal = normalMatrix * normal;
     fsTextureCoords = textureCoords;
 }

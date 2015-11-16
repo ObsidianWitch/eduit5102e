@@ -1,3 +1,5 @@
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "PlayerRenderer.hpp"
 
 PlayerRenderer::PlayerRenderer(
@@ -16,17 +18,21 @@ PlayerRenderer::PlayerRenderer(
 }
 
 void PlayerRenderer::render() {
-    shader.use();
-    shader.setUniform("time", (float) glfwGetTime());
+    // breathe
+    glm::vec3 breathingScaleVector = glm::vec3(1.0f);
+    breathingScaleVector.y += 0.005f * exp(sin(glfwGetTime()));
+    glm::mat4 modelMatrix = glm::scale(
+        player.getModel().getModelMatrix(), breathingScaleVector
+    );
     
+    shader.use();
     shader.setUniform("view", camera.getViewMatrix());
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
     
-    shader.setUniform("model", player.getModel().getModelMatrix());
+    shader.setUniform("model", modelMatrix);
     shader.setUniform("normalMatrix", player.getModel().getNormalMatrix());
     shader.setUniform("setSilhouette", true);
-    shader.setUniform("breathing", true);
     
     player.getModel().draw(shader);
 }
