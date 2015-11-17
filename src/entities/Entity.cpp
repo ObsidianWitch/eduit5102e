@@ -20,3 +20,8 @@ Entity::Entity(std::string name) {
  * overridden. Overriding this method is optional.
  */
 void Entity::update(Shader&) { assert(false); }
+
+/**
+ * Updates this Entity's state.
+ */
+void Entity::update() { assert(false); }

@@ -65,7 +65,11 @@ glm::mat4 Model::getModelMatrix() { return modelMatrix; }
  * non-uniform scaling.
  */
 glm::mat3 Model::getNormalMatrix() {
-    return glm::mat3(glm::inverseTranspose(modelMatrix));
+    return Model::getNormalMatrix(modelMatrix);
+}
+
+glm::mat3 Model::getNormalMatrix(const glm::mat4& pModelMatrix) {
+    return glm::mat3(glm::inverseTranspose(pModelMatrix));
 }
 
 /**

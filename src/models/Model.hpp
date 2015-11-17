@@ -20,6 +20,7 @@ public:
     
     glm::mat4 getModelMatrix();
     glm::mat3 getNormalMatrix();
+    static glm::mat3 getNormalMatrix(const glm::mat4& pModelMatrix);
     glm::vec3 getPosition();
     void setPosition(const glm::vec3& position);
     

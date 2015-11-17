@@ -12,6 +12,7 @@ public:
     virtual ~Entity();
     
     virtual void update(Shader& shader);
+    virtual void update();
     
 protected:
     std::string name;
