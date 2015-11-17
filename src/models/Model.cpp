@@ -11,7 +11,10 @@
 Model::Model(std::string path) {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(
-        path, aiProcess_GenNormals | aiProcess_FlipUVs
+        path,
+        aiProcess_GenNormals
+        | aiProcess_FlipUVs
+        | aiProcess_CalcTangentSpace
     );
     if (!scene) {
         std::cerr << "Error loading model: " << importer.GetErrorString()

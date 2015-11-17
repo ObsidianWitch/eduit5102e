@@ -10,7 +10,9 @@ Mesh::Mesh(
         Vertex vertex(
             mesh.mVertices[i],
             mesh.mNormals[i],
-            mesh.mTextureCoords[0][i]
+            mesh.mTextureCoords[0][i],
+            mesh.mTangents[i],
+            mesh.mBitangents[i]
         );
         vertices.push_back(vertex);
     }
@@ -54,6 +56,8 @@ void Mesh::createBuffers() {
     Vertex::positionAttribPointer();
     Vertex::normalAttribPointer();
     Vertex::textureCoordAttribPointer();
+    Vertex::tangentAttribPointer();
+    Vertex::bitangentAttribPointer();
     
     // Unbind array & buffers
     glBindVertexArray(0);
