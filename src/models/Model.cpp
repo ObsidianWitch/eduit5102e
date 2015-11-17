@@ -68,6 +68,14 @@ glm::mat3 Model::getNormalMatrix() {
 }
 
 /**
+ * Sets the model's position by overriding the translation column from the
+ * model matrix.
+ */
+void Model::setPosition(const glm::vec3& position) {
+    modelMatrix[3] = glm::vec4(position, 1.0f);
+}
+
+/**
  * Retrieves the model's position with the translation column from the model
  * matrix.
  */

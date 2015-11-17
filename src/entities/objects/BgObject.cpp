@@ -8,7 +8,7 @@ BgObject::BgObject(
     Collidable(boundingBox),
     model(path)
 {
-    model.translate(position);
+    model.setPosition(position);
     model.scale(scale);
     this->silhouette = silhouette;
 }
