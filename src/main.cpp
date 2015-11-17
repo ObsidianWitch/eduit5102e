@@ -30,7 +30,7 @@ void initLibraries() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_SAMPLES, 2);
+    //glfwWindowHint(GLFW_SAMPLES, 2);
     
     window = glfwCreateWindow(
         WIDTH, HEIGHT, "OpenGL Application", nullptr, nullptr
@@ -62,7 +62,7 @@ void initLibraries() {
     glViewport(0, 0, WIDTH, HEIGHT);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    glEnable(GL_MULTISAMPLE);
+    //glEnable(GL_MULTISAMPLE);
 }
 
 /**
