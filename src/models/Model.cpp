@@ -35,7 +35,7 @@ Model::Model(std::string path) {
 }
 
 void Model::draw(Shader& shader) {
-    for (Mesh mesh : meshes) {
+    for (Mesh& mesh : meshes) {
         mesh.draw(shader);
     }
 }

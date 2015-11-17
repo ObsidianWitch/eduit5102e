@@ -23,7 +23,7 @@ void BgObjectsRenderer::render() {
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
     
-    for (auto o : bgObjects) {
+    for (auto& o : bgObjects) {
         shader.setUniform("model", o.getModel().getModelMatrix());
         shader.setUniform("normalMatrix", o.getModel().getNormalMatrix());
         shader.setUniform("hasSilhouette", o.hasSilhouette());
