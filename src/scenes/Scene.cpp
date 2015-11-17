@@ -1,6 +1,7 @@
 #include <glm/glm.hpp>
 
-#include "Scene.hpp"
+#include "scenes/Scene.hpp"
+#include "scenes/Forest.hpp"
 #include "inputs/Inputs.hpp"
 #include "entities/lights/AmbientLight.hpp"
 #include "entities/lights/DirectionalLight.hpp"
@@ -18,7 +19,8 @@ Scene::Scene(GLuint width, GLuint height) :
         width, height,                  // width & height
         0.1f, 1000.0f                   // zNear & zFar
     ),
-    skybox()
+    skybox(),
+    forest(100.0f) // radius
 {
     // key & mouse handlers
     Inputs::instance().addKeyHandler(player.getEventHandler());
@@ -39,25 +41,14 @@ Scene::Scene(GLuint width, GLuint height) :
     ));
     
     // background objects
-    /// ground
-    bgObjects.push_back(BgObject(
-        "resources/ground/ground.obj",                 // file path
-        glm::vec3(0.0f),                               // position
-        glm::vec3(1000.0f, 1.0f, 1000.0f),             // scaling vector
-        BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f)), // bounding box
-        false                                          // silhouette
-    ));
+    /// forest
+    const auto& forestBgObjs = forest.getBgObjects();
+    bgObjects.reserve(forestBgObjs.size());
+    for (BgObject* o : forestBgObjs) { bgObjects.push_back(o); }
     
-    /// tree
-    bgObjects.push_back(BgObject(
-        "resources/tree1/Forest_tree.obj",                // file path
-        glm::vec3(20.0f, 0.0f, 0.0f),                     // position
-        glm::vec3(10.0f),                                 // scaling vector
-        BoundingBox(glm::vec3(-10.0f), glm::vec3(10.0f)), // bounding box
-        false                                             // silhouette
-    ));
-    
-    for (auto& o : bgObjects) { collidables.push_back(&o); }
+    // Collidables
+    collidables.reserve(bgObjects.size());
+    for (Collidable* c : bgObjects) { collidables.push_back(c); }
     
     // Renderers
     playerRenderer = std::make_unique<PlayerRenderer>(

@@ -11,7 +11,7 @@
 class BgObjectsRenderer {
 public:
     BgObjectsRenderer(
-        std::vector<BgObject>& bgObjects, Camera& camera,
+        std::vector<BgObject*>& bgObjects, Camera& camera,
         std::vector<std::shared_ptr<Entity>>& lights
     );
     
@@ -19,7 +19,7 @@ public:
     
 private:
     Shader shader;
-    std::vector<BgObject>& bgObjects;
+    std::vector<BgObject*>& bgObjects;
     Camera& camera;
 };
 

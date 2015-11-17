@@ -1,7 +1,7 @@
 #include "BgObjectsRenderer.hpp"
 
 BgObjectsRenderer::BgObjectsRenderer(
-    std::vector<BgObject>& bgObjects, Camera& camera,
+    std::vector<BgObject*>& bgObjects, Camera& camera,
     std::vector<std::shared_ptr<Entity>>& lights
 ) :
     bgObjects(bgObjects), camera(camera)
@@ -23,11 +23,11 @@ void BgObjectsRenderer::render() {
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
     
-    for (auto& o : bgObjects) {
-        shader.setUniform("model", o.getModel().getModelMatrix());
-        shader.setUniform("normalMatrix", o.getModel().getNormalMatrix());
-        shader.setUniform("hasSilhouette", o.hasSilhouette());
+    for (auto o : bgObjects) {
+        shader.setUniform("model", o->getModel().getModelMatrix());
+        shader.setUniform("normalMatrix", o->getModel().getNormalMatrix());
+        shader.setUniform("hasSilhouette", o->hasSilhouette());
         
-        o.getModel().draw(shader);
+        o->getModel().draw(shader);
     }
 }

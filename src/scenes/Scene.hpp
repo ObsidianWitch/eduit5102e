@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 
+#include "scenes/Forest.hpp"
 #include "entities/Entity.hpp"
 #include "entities/player/Player.hpp"
 #include "entities/camera/Camera.hpp"
@@ -23,10 +24,11 @@ public:
 private:
     std::vector<std::shared_ptr<Entity>> lights;
     std::vector<Collidable*> collidables;
-    std::vector<BgObject> bgObjects;
+    std::vector<BgObject*> bgObjects;
     Player player;
     Camera camera;
     Skybox skybox;
+    Forest forest;
     
     std::unique_ptr<PlayerRenderer> playerRenderer;
     std::unique_ptr<BgObjectsRenderer> bgObjectsRenderer;
