@@ -22,11 +22,12 @@ Model::Model(std::string path) {
         exit(EXIT_FAILURE);
     }
     
+    meshes = std::make_shared<std::vector<Mesh>>();
     std::string directory = path.substr(0, path.find_last_of('/'));
     for (unsigned int i = 0 ; i < scene->mNumMeshes ; i++) {
         aiMesh* mesh = scene->mMeshes[i];
         
-        meshes.push_back(Mesh(
+        meshes->push_back(Mesh(
             *mesh,
             *scene->mMaterials[mesh->mMaterialIndex],
             directory
@@ -35,7 +36,7 @@ Model::Model(std::string path) {
 }
 
 void Model::draw(Shader& shader) {
-    for (Mesh& mesh : meshes) {
+    for (Mesh& mesh : *meshes) {
         mesh.draw(shader);
     }
 }

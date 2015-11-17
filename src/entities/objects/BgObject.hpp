@@ -14,6 +14,7 @@ public:
         std::string path, const glm::vec3& position, const glm::vec3& scale,
         const BoundingBox& boundingBox, bool silhouette
     );
+    BgObject(const BgObject& bgObject, const glm::vec3& position);
     
     glm::vec3 getPosition() override;
     Model& getModel();

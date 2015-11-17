@@ -1,6 +1,7 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
+#include <memory>
 #include <vector>
 #include <glm/glm.hpp>
 
@@ -23,7 +24,7 @@ public:
     void setPosition(const glm::vec3& position);
     
 private:
-    std::vector<Mesh> meshes;
+    std::shared_ptr<std::vector<Mesh>> meshes; // allow shallow copy
     glm::mat4 modelMatrix;
 };
 
