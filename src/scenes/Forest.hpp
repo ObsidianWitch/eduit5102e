@@ -19,7 +19,7 @@ private:
     float radius;
     
     void createCliffs();
-    void generate();
+    void generateTrees(unsigned int nTrees);
 };
 
 #endif // FOREST_HPP

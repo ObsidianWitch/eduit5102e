@@ -18,9 +18,7 @@ Forest::Forest(float radius, unsigned int nTrees) :
     radius(radius)
 {
     createCliffs();
-    
-    trees.reserve(nTrees);
-    generate();
+    generateTrees(nTrees);
     
     bgObjects.reserve(1 + cliffs.size() + trees.size());
     bgObjects.push_back(&ground);
@@ -58,7 +56,9 @@ void Forest::createCliffs() {
         .rotate(glm::radians(-90.0f));
 }
 
-void Forest::generate() {
+void Forest::generateTrees(unsigned int nTrees) {
+    trees.reserve(nTrees);
+    
     BgObject tree(
         "resources/tree1/Forest_tree.obj",                // file path
         glm::vec3(0.0f, 0.0f, 0.0f),                      // position
@@ -71,7 +71,7 @@ void Forest::generate() {
     std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dRadius(30.0f, this->radius);
     std::uniform_real_distribution<float> dAngle(0, glm::two_pi<float>());
-    for (unsigned int i = 0 ; i < trees.capacity() ; i++) {
+    for (unsigned int i = 0 ; i < nTrees ; i++) {
         float radius = dRadius(gen);
         float angle = dAngle(gen);
         
