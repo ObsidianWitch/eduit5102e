@@ -43,13 +43,16 @@ Scene::Scene(GLuint width, GLuint height) :
     lights.push_back(std::make_shared<DirectionalLight>(
         "dL",                         // name
         glm::vec3(1.0f, -0.5f, 0.0f), // direction
-        glm::vec3(0.9f, 0.8f, 0.8f)   // color
+        glm::vec3(0.9f, 0.7f, 0.7f)   // color
     ));
     
     lights.push_back(std::make_shared<PointLight>(
         "pL",                          // name
-        glm::vec3(10.0f, 0.0f, 10.0f), // position
-        glm::vec3(0.9f, 0.57f, 0.16f)  // color
+        glm::vec3(10.0f, 10.0f, 10.0f), // position
+        glm::vec3(0.9f, 0.57f, 0.16f), // color
+        0.1f,                          // constant
+        0.09f,                          // linear
+        0.01f                          // quadratic
     ));
     
     // Collidables

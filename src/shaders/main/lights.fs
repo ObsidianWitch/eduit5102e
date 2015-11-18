@@ -10,8 +10,12 @@ struct DirectionalLight {
 };
 
 struct PointLight {
-    vec3 postion;
+    vec3 position;
     vec4 color;
+    
+    float constant;
+    float linear;
+    float quadratic;
 };
 
 in vec3 fsPosition;
@@ -36,10 +40,18 @@ vec4 computeDirectionalLight(DirectionalLight light) {
 }
 
 vec4 computePointLight(PointLight light) {
-    vec3 lightDirection = normalize(light.postion - fsPosition);
+    vec3 lightVec = light.position - fsPosition;
+    vec3 lightDirection = normalize(lightVec);
     
-    return diffuseComponent(light.color, lightDirection)
-         + specularComponent(light.color, lightDirection);
+    float distance = length(lightVec);
+    float attenuation = 1.0f / (
+        light.constant
+      + light.linear * distance
+      + light.quadratic * (distance * distance)
+    );
+    
+    return attenuation * (diffuseComponent(light.color, lightDirection)
+         + specularComponent(light.color, lightDirection));
 }
 
 vec4 illumination() {
