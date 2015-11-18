@@ -35,9 +35,9 @@ Scene::Scene(GLuint width, GLuint height) :
     ));
     
     lights.push_back(std::make_unique<DirectionalLight>(
-        "dL",                        // name
+        "dL",                         // name
         glm::vec3(1.0f, -0.5f, 0.0f), // direction
-        glm::vec3(0.8f, 0.8f, 0.8f)   // color
+        glm::vec3(0.9f, 0.8f, 0.8f)   // color
     ));
     
     // background objects
