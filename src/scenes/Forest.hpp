@@ -14,9 +14,11 @@ public:
 private:
     std::vector<BgObject*> bgObjects;
     std::vector<BgObject> trees;
+    std::vector<BgObject> cliffs;
     BgObject ground;
     float radius;
     
+    void createCliffs();
     void generate();
 };
 

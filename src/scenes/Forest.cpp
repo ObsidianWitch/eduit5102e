@@ -17,12 +17,45 @@ Forest::Forest(float radius, unsigned int nTrees) :
     ),
     radius(radius)
 {
+    createCliffs();
+    
     trees.reserve(nTrees);
     generate();
     
-    bgObjects.reserve(1 + trees.size());
+    bgObjects.reserve(1 + cliffs.size() + trees.size());
     bgObjects.push_back(&ground);
     for (auto& t : trees) { bgObjects.push_back(&t); }
+    for (auto& c : cliffs) { bgObjects.push_back(&c); }
+}
+
+void Forest::createCliffs() {
+    BgObject cliff(
+        "resources/cliff/cliff.obj",   // file path
+        glm::vec3(0.0f, 0.0f, radius), // position
+        glm::vec3(10.0f),              // scaling vector
+        BoundingBox(                   // bounding box
+            glm::vec3(0.0f),
+            glm::vec3(0.0f)
+        ),
+        false                          // silhouette
+    );
+    
+    cliffs.reserve(3);
+    
+    // up
+    cliffs.push_back(cliff);
+    
+    // right
+    cliffs.push_back(BgObject(
+        cliff, glm::vec3(radius, 0.0f, 0.0f)
+    ));
+    cliffs.back().getModel().rotate(glm::radians(90.0f));
+    
+    // left
+    cliffs.push_back(BgObject(
+        cliff, glm::vec3(-radius, 0.0f, 0.0f)
+    ));
+    cliffs.back().getModel().rotate(glm::radians(-90.0f));
 }
 
 void Forest::generate() {
