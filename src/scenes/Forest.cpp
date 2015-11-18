@@ -1,4 +1,4 @@
-#include <random>
+#include <ctime>
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
@@ -15,7 +15,8 @@ Forest::Forest(float radius, unsigned int nTrees) :
         ),
         false                              // silhouette
     ),
-    radius(radius)
+    radius(radius),
+    randomGen(std::time(0))
 {
     createCliffs();
     generateTrees(nTrees);
@@ -74,35 +75,39 @@ void Forest::createCliffs() {
  * and rotation.
  */
 void Forest::generateTrees(unsigned int nTrees) {
-    trees.reserve(nTrees);
-    
-    BgObject tree(
-        "resources/tree1/Forest_tree.obj",                // file path
-        glm::vec3(0.0f, 0.0f, 0.0f),                      // position
-        glm::vec3(10.0f),                                 // scaling vector
-        BoundingBox(glm::vec3(-10.0f), glm::vec3(10.0f)), // bounding box
-        false                                             // silhouette
-    );
-    
-    std::random_device rd;
-    std::mt19937 gen(rd());
     std::uniform_real_distribution<float> dScale(1.0f, 1.5f);
     std::uniform_real_distribution<float> dRadius(30.0f, this->radius);
     std::uniform_real_distribution<float> dAngle(0, glm::two_pi<float>());
+    
+    trees.reserve(nTrees);
+    
+    Tree tree(
+        glm::vec3(0.0f, 0.0f, 0.0f), // position
+        glm::vec3(10.0f),            // scaling vector
+        dAngle(randomGen)            // phase shift
+    );
+    
     for (unsigned int i = 0 ; i < nTrees ; i++) {
-        float radius = dRadius(gen);
-        float angle = dAngle(gen);
+        float radius = dRadius(randomGen);
+        float angle = dAngle(randomGen);
         
-        trees.push_back(tree);
+        trees.push_back(Tree(
+            tree, dAngle(randomGen)
+        ));
         trees.back().getModel()
             .setPosition(glm::vec3(
                 radius * cos(angle),
                 0.0f,
                 radius * sin(angle)
             ))
-            .scale(glm::vec3(1.0f, dScale(gen), 1.0f))
-            .rotate(dAngle(gen));
+            .scale(glm::vec3(1.0f, dScale(randomGen), 1.0f))
+            .rotate(dAngle(randomGen));
     }
+}
+
+void Forest::update() {
+    // update trees
+    for (auto& t : trees) { t.update(); }
 }
 
 std::vector<BgObject*>& Forest::getBgObjects() { return bgObjects; }

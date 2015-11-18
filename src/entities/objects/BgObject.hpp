@@ -20,7 +20,7 @@ public:
     Model& getModel();
     bool hasSilhouette();
     
-private:
+protected:
     Model model;
     bool silhouette;
 };

@@ -74,6 +74,8 @@ void Scene::update() {
     
     camera.setTarget(player.getPosition());
     
+    forest.update();
+    
     // render
     playerRenderer->render();
     bgObjectsRenderer->render();
