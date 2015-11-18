@@ -6,6 +6,7 @@
 
 #include "entities/objects/BgObject.hpp"
 #include "entities/objects/Tree.hpp"
+#include "entities/lights/PointLight.hpp"
 
 class Forest {
 public:
@@ -20,6 +21,8 @@ private:
     std::vector<Tree> trees;
     std::vector<BgObject> cliffs;
     BgObject ground;
+    BgObject torch;
+    
     float radius;
     std::mt19937 randomGen;
     

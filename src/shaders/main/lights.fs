@@ -18,6 +18,7 @@ in vec3 fsPosition;
 
 uniform AmbientLight aL;
 uniform DirectionalLight dL;
+uniform PointLight pL;
 
 vec4 ambientComponent(vec4 lightColor);
 vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection);
@@ -43,5 +44,6 @@ vec4 computePointLight(PointLight light) {
 
 vec4 illumination() {
     return computeAmbientLight(aL)
-         + computeDirectionalLight(dL);
+         + computeDirectionalLight(dL)
+         + computePointLight(pL);
 }

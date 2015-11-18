@@ -28,23 +28,29 @@ Scene::Scene(GLuint width, GLuint height) :
     Inputs::instance().addMouseHandler(camera.getEventHandler());
     Inputs::instance().addWindowHandler(camera.getEventHandler());
     
+    
+    // forest
+    const auto& forestBgObjs = forest.getBgObjects();
+    bgObjects.reserve(forestBgObjs.size());
+    for (BgObject* o : forestBgObjs) { bgObjects.push_back(o); }
+    
     // lights
-    lights.push_back(std::make_unique<AmbientLight>(
+    lights.push_back(std::make_shared<AmbientLight>(
         "aL",                       // name
         glm::vec3(0.1f, 0.0f, 0.0f) // color
     ));
     
-    lights.push_back(std::make_unique<DirectionalLight>(
+    lights.push_back(std::make_shared<DirectionalLight>(
         "dL",                         // name
         glm::vec3(1.0f, -0.5f, 0.0f), // direction
         glm::vec3(0.9f, 0.8f, 0.8f)   // color
     ));
     
-    // background objects
-    /// forest
-    const auto& forestBgObjs = forest.getBgObjects();
-    bgObjects.reserve(forestBgObjs.size());
-    for (BgObject* o : forestBgObjs) { bgObjects.push_back(o); }
+    lights.push_back(std::make_shared<PointLight>(
+        "pL",                          // name
+        glm::vec3(10.0f, 0.0f, 10.0f), // position
+        glm::vec3(0.9f, 0.57f, 0.16f)  // color
+    ));
     
     // Collidables
     collidables.reserve(bgObjects.size());

@@ -15,14 +15,25 @@ Forest::Forest(float radius, unsigned int nTrees) :
         ),
         false                              // silhouette
     ),
+    torch(
+        "resources/staff/staff.obj",   // file path
+        glm::vec3(10.0f, 0.0f, 10.0f), // position
+        glm::vec3(5.0f),               // scale
+        BoundingBox(                   // bounding box
+            glm::vec3(-0.5f),
+            glm::vec3(0.5f)
+        ),
+        false                        // silhouette
+    ),
     radius(radius),
     randomGen(std::time(0))
 {
     createCliffs();
     generateTrees(nTrees);
     
-    bgObjects.reserve(1 + cliffs.size() + trees.size());
+    bgObjects.reserve(2 + cliffs.size() + trees.size());
     bgObjects.push_back(&ground);
+    bgObjects.push_back(&torch);
     for (auto& t : trees) { bgObjects.push_back(&t); }
     for (auto& c : cliffs) { bgObjects.push_back(&c); }
 }
