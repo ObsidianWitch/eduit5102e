@@ -16,8 +16,7 @@ Tree::Tree(
         BoundingBox(
             glm::vec3(-10.0f),
             glm::vec3(10.0f)
-        ),
-        false                              // silhouette
+        )
     ),
     phaseShift(phaseShift)
 {}

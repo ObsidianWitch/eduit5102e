@@ -26,7 +26,6 @@ void BgObjectsRenderer::render() {
     for (auto o : bgObjects) {
         shader.setUniform("model", o->getModel().getModelMatrix());
         shader.setUniform("normalMatrix", o->getModel().getNormalMatrix());
-        shader.setUniform("hasSilhouette", o->hasSilhouette());
         
         o->getModel().draw(shader);
     }

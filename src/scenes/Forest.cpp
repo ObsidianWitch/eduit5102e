@@ -12,8 +12,7 @@ Forest::Forest(float radius, unsigned int nTrees) :
         BoundingBox(                       // bounding box
             glm::vec3(0.0f),
             glm::vec3(0.0f)
-        ),
-        false                              // silhouette
+        )
     ),
     torch(
         "resources/staff/staff.obj",   // file path
@@ -22,8 +21,7 @@ Forest::Forest(float radius, unsigned int nTrees) :
         BoundingBox(                   // bounding box
             glm::vec3(-0.5f),
             glm::vec3(0.5f)
-        ),
-        false                        // silhouette
+        )
     ),
     radius(radius),
     randomGen(std::time(0))
@@ -49,8 +47,7 @@ void Forest::createCliffs() {
         BoundingBox(                   // bounding box
             glm::vec3(-500.0f, 0.0f, 20.0f),
             glm::vec3(500.0f, 5.0f, 30.0f)
-        ),
-        false                          // silhouette
+        )
     );
     cliffs.push_back(cliffUp);
     

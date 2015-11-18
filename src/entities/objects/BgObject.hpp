@@ -12,17 +12,15 @@ class BgObject : public Entity, public Collidable {
 public:
     BgObject(
         std::string path, const glm::vec3& position, const glm::vec3& scale,
-        const BoundingBox& boundingBox, bool silhouette
+        const BoundingBox& boundingBox
     );
     BgObject(const BgObject& bgObject, const BoundingBox& boundingBox);
     
     glm::vec3 getPosition() override;
     Model& getModel();
-    bool hasSilhouette();
     
 protected:
     Model model;
-    bool silhouette;
 };
 
 #endif // BG_OBJECT_HPP
