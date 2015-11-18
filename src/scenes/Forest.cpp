@@ -69,6 +69,10 @@ void Forest::createCliffs() {
         .rotate(glm::radians(-90.0f));
 }
 
+/**
+ * Generates n trees in a circle. The generated trees have a randomized scale
+ * and rotation.
+ */
 void Forest::generateTrees(unsigned int nTrees) {
     trees.reserve(nTrees);
     
