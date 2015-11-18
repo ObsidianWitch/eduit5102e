@@ -46,16 +46,16 @@ void Forest::createCliffs() {
     cliffs.push_back(cliff);
     
     // right
-    cliffs.push_back(BgObject(
-        cliff, glm::vec3(radius, 0.0f, 0.0f)
-    ));
-    cliffs.back().getModel().rotate(glm::radians(90.0f));
+    cliffs.push_back(cliff);
+    cliffs.back().getModel()
+        .setPosition(glm::vec3(radius, 0.0f, 0.0f))
+        .rotate(glm::radians(90.0f));
     
     // left
-    cliffs.push_back(BgObject(
-        cliff, glm::vec3(-radius, 0.0f, 0.0f)
-    ));
-    cliffs.back().getModel().rotate(glm::radians(-90.0f));
+    cliffs.push_back(cliff);
+    cliffs.back().getModel()
+        .setPosition(glm::vec3(-radius, 0.0f, 0.0f))
+        .rotate(glm::radians(-90.0f));
 }
 
 void Forest::generate() {
@@ -75,13 +75,13 @@ void Forest::generate() {
         float radius = dRadius(gen);
         float angle = dAngle(gen);
         
-        trees.push_back(BgObject(
-            tree, glm::vec3(
+        trees.push_back(tree);
+        trees.back().getModel()
+            .setPosition(glm::vec3(
                 radius * cos(angle),
                 0.0f,
                 radius * sin(angle)
-            )
-        ));
+            ));
     }
 }
 

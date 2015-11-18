@@ -14,15 +14,15 @@ public:
     
     void draw(Shader& shader);
     
-    void translate(const glm::vec3& vec);
-    void rotate(float angle);
-    void scale(const glm::vec3& vec);
+    Model& translate(const glm::vec3& vec);
+    Model& rotate(float angle);
+    Model& scale(const glm::vec3& vec);
     
     glm::mat4 getModelMatrix();
     glm::mat3 getNormalMatrix();
     static glm::mat3 getNormalMatrix(const glm::mat4& pModelMatrix);
     glm::vec3 getPosition();
-    void setPosition(const glm::vec3& position);
+    Model& setPosition(const glm::vec3& position);
     
 private:
     std::shared_ptr<std::vector<Mesh>> meshes; // allow shallow copy

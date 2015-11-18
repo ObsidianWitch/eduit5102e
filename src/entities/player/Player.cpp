@@ -13,8 +13,8 @@ Player::Player(const glm::vec3& position, float speed) :
     )),
     model("resources/elf/elf.obj")
 {
-    model.setPosition(position);
-    model.scale(glm::vec3(2.0f));
+    model.setPosition(position)
+         .scale(glm::vec3(2.0f));
 }
 
 /**

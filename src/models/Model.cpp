@@ -41,19 +41,22 @@ void Model::draw(Shader& shader) {
     }
 }
 
-void Model::translate(const glm::vec3& vec) {
+Model& Model::translate(const glm::vec3& vec) {
     modelMatrix = glm::translate(modelMatrix, vec);
+    return *this;
 }
 
 /**
  * Rotates the model around its own y axis and the specified angle in radians.
  */
-void Model::rotate(float angle) {
+Model& Model::rotate(float angle) {
     modelMatrix = glm::rotate(modelMatrix, angle, LocalBasis::y);
+    return *this;
 }
 
-void Model::scale(const glm::vec3& vec) {
+Model& Model::scale(const glm::vec3& vec) {
     modelMatrix = glm::scale(modelMatrix, vec);
+    return *this;
 }
 
 glm::mat4 Model::getModelMatrix() { return modelMatrix; }
@@ -76,8 +79,9 @@ glm::mat3 Model::getNormalMatrix(const glm::mat4& pModelMatrix) {
  * Sets the model's position by overriding the translation column from the
  * model matrix.
  */
-void Model::setPosition(const glm::vec3& position) {
+Model& Model::setPosition(const glm::vec3& position) {
     modelMatrix[3] = glm::vec4(position, 1.0f);
+    return *this;
 }
 
 /**

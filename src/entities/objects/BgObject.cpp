@@ -8,16 +8,17 @@ BgObject::BgObject(
     Collidable(boundingBox),
     model(path)
 {
-    model.setPosition(position);
-    model.scale(scale);
+    model.setPosition(position)
+         .scale(scale);
     this->silhouette = silhouette;
 }
 
-BgObject::BgObject(const BgObject& bgObject, const glm::vec3& position) :
-    BgObject(bgObject)
-{
-    model.setPosition(position);
-}
+BgObject::BgObject(const BgObject& bgObject, const BoundingBox& boundingBox) :
+    Entity("bgobject"),
+    Collidable(boundingBox),
+    model(bgObject.model),
+    silhouette(bgObject.silhouette)
+{}
 
 glm::vec3 BgObject::getPosition() { return model.getPosition(); }
 Model& BgObject::getModel() { return model; }
