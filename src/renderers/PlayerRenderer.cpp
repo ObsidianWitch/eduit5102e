@@ -24,8 +24,8 @@ void PlayerRenderer::render() {
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
     
-    shader.setUniform("model", player.getModelMatrix());
-    shader.setUniform("normalMatrix", player.getNormalMatrix());
+    shader.setUniform("model", player.getModel().getModelMatrix());
+    shader.setUniform("normalMatrix", player.getModel().getNormalMatrix());
     shader.setUniform("hasSilhouette", true);
     
     player.getModel().draw(shader);

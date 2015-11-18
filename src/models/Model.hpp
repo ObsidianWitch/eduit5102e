@@ -23,10 +23,12 @@ public:
     static glm::mat3 getNormalMatrix(const glm::mat4& pModelMatrix);
     glm::vec3 getPosition();
     Model& setPosition(const glm::vec3& position);
+    Model& setTransformation(const glm::mat4& transformation);
     
 private:
     std::shared_ptr<std::vector<Mesh>> meshes; // allow shallow copy
     glm::mat4 modelMatrix;
+    glm::mat4 transformation;
 };
 
 

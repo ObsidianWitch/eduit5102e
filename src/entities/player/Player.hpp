@@ -21,12 +21,9 @@ public:
     PlayerEventHandler& getEventHandler();
     glm::vec3 getPosition() override;
     Model& getModel();
-    glm::mat4 getModelMatrix();
-    glm::mat3 getNormalMatrix();
     
 private:
     Model model;
-    glm::mat4 transformation;
     PlayerEventHandler eventHandler;
 };
 

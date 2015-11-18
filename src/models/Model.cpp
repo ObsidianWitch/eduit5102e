@@ -59,7 +59,7 @@ Model& Model::scale(const glm::vec3& vec) {
     return *this;
 }
 
-glm::mat4 Model::getModelMatrix() { return modelMatrix; }
+glm::mat4 Model::getModelMatrix() { return transformation * modelMatrix; }
 
 /**
  * Computes the normalMatrix from the model matrix. This matrix is used to
@@ -68,7 +68,7 @@ glm::mat4 Model::getModelMatrix() { return modelMatrix; }
  * non-uniform scaling.
  */
 glm::mat3 Model::getNormalMatrix() {
-    return Model::getNormalMatrix(modelMatrix);
+    return Model::getNormalMatrix(getModelMatrix());
 }
 
 glm::mat3 Model::getNormalMatrix(const glm::mat4& pModelMatrix) {
@@ -94,4 +94,13 @@ glm::vec3 Model::getPosition() {
         modelMatrix[3][1],
         modelMatrix[3][2]
     );
+}
+
+/**
+ * Sets the transformation matrix. This matrix is used to apply temporary
+ * transformations to the model (e.g. to modify the model over time).
+ */
+Model& Model::setTransformation(const glm::mat4& transformation) {
+    this->transformation = transformation;
+    return *this;
 }

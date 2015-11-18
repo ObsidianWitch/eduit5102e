@@ -23,9 +23,9 @@ Player::Player(const glm::vec3& position, float speed) :
 void Player::update() {
     glm::vec3 breathingScaleVector = glm::vec3(1.0f);
     breathingScaleVector.y += 0.005f * exp(sin(glfwGetTime()));
-    transformation = glm::scale(
+    model.setTransformation(glm::scale(
         glm::mat4(), breathingScaleVector
-    );
+    ));
 }
 
 /**
@@ -72,9 +72,3 @@ void Player::cancelMove() {
 PlayerEventHandler& Player::getEventHandler() { return eventHandler; }
 glm::vec3 Player::getPosition() { return model.getPosition(); }
 Model& Player::getModel() { return model; }
-glm::mat4 Player::getModelMatrix() {
-    return transformation * model.getModelMatrix();
-}
-glm::mat3 Player::getNormalMatrix() {
-    return Model::getNormalMatrix(getModelMatrix());
-}
