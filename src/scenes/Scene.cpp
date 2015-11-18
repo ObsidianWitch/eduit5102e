@@ -20,7 +20,10 @@ Scene::Scene(GLuint width, GLuint height) :
         0.1f, 1000.0f                   // zNear & zFar
     ),
     skybox(),
-    forest(100.0f) // radius
+    forest(
+        300.0f, // radius
+        50      // nTrees
+    )
 {
     // key & mouse handlers
     Inputs::instance().addKeyHandler(player.getEventHandler());

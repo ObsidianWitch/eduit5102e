@@ -7,7 +7,7 @@
 
 class Forest {
 public:
-    Forest(float radius);
+    Forest(float radius, unsigned int nTrees);
     
     std::vector<BgObject*>& getBgObjects();
     

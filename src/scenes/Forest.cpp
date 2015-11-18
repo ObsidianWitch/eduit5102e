@@ -1,8 +1,10 @@
+#include <random>
 #include <glm/glm.hpp>
+#include <glm/gtc/constants.hpp>
 
 #include "scenes/Forest.hpp"
 
-Forest::Forest(float radius) :
+Forest::Forest(float radius, unsigned int nTrees) :
     ground(
         "resources/ground/ground.obj",     // file path
         glm::vec3(0.0f),                   // position
@@ -15,6 +17,7 @@ Forest::Forest(float radius) :
     ),
     radius(radius)
 {
+    trees.reserve(nTrees);
     generate();
     
     bgObjects.reserve(1 + trees.size());
@@ -31,11 +34,20 @@ void Forest::generate() {
         false                                             // silhouette
     );
     
-    for (float x = 30.0f ; x < radius ; x += 1.0f) {
-        float z = radius * radius - x * x;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<float> dRadius(30.0f, this->radius);
+    std::uniform_real_distribution<float> dAngle(0, glm::two_pi<float>());
+    for (unsigned int i = 0 ; i < trees.capacity() ; i++) {
+        float radius = dRadius(gen);
+        float angle = dAngle(gen);
         
         trees.push_back(BgObject(
-            tree, glm::vec3(x, 0.0f, 0.0f)
+            tree, glm::vec3(
+                radius * cos(angle),
+                0.0f,
+                radius * sin(angle)
+            )
         ));
     }
 }
