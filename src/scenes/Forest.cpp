@@ -27,13 +27,13 @@ Forest::Forest(float radius, unsigned int nTrees) :
 }
 
 void Forest::createCliffs() {
-    BgObject cliff(
+    BgObject cliffUp(
         "resources/cliff/cliff.obj",   // file path
         glm::vec3(0.0f, 0.0f, radius), // position
         glm::vec3(10.0f),              // scaling vector
         BoundingBox(                   // bounding box
-            glm::vec3(0.0f),
-            glm::vec3(0.0f)
+            glm::vec3(-500.0f, 0.0f, 20.0f),
+            glm::vec3(500.0f, 5.0f, 30.0f)
         ),
         false                          // silhouette
     );
@@ -41,16 +41,30 @@ void Forest::createCliffs() {
     cliffs.reserve(3);
     
     // up
-    cliffs.push_back(cliff);
+    cliffs.push_back(cliffUp);
     
-    // right
-    cliffs.push_back(cliff);
+    // left
+    BgObject cliffLeft(
+        cliffUp,
+        BoundingBox(
+            glm::vec3(20.0f, 0.0f, -500.0f),
+            glm::vec3(30.0f, 5.0f, 500.0f)
+        )
+    );
+    cliffs.push_back(cliffLeft);
     cliffs.back().getModel()
         .setPosition(glm::vec3(radius, 0.0f, 0.0f))
         .rotate(glm::radians(90.0f));
     
-    // left
-    cliffs.push_back(cliff);
+    // right
+    BgObject cliffRight(
+        cliffUp,
+        BoundingBox(
+            glm::vec3(-30.0f, 0.0f, -500.0f),
+            glm::vec3(-20.0f, 5.0f, 500.0f)
+        )
+    );
+    cliffs.push_back(cliffRight);
     cliffs.back().getModel()
         .setPosition(glm::vec3(-radius, 0.0f, 0.0f))
         .rotate(glm::radians(-90.0f));
