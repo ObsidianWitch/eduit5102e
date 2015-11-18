@@ -24,7 +24,7 @@ vec4 ambientComponent(vec4 lightColor) {
 }
 
 vec4 diffuseComponent(vec4 lightColor, vec3 lightDirection) {
-    float diffuseCoeff = max(dot(getNormal(), lightDirection), 0.0);
+    float diffuseCoeff = max(dot(getNormal(), lightDirection), 0.2);
     return lightColor * material.cDiffuse * diffuseCoeff * diffuseTexColor();
 }
 
@@ -33,7 +33,7 @@ vec4 specularComponent(vec4 lightColor, vec3 lightDirection) {
     vec3 reflectedDirection = reflect(-lightDirection, getNormal());
     
     float specularCoeff = pow(
-        max(dot(viewDirection, reflectedDirection), 0.0),
+        max(dot(viewDirection, reflectedDirection), 0.2),
         material.shininess
     );
     return lightColor * material.cSpecular * specularCoeff;
