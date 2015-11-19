@@ -5,6 +5,7 @@ FireRenderer::FireRenderer(BgObject& fire, Camera& camera) :
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/fire/fire.vs")
           .add(GL_VERTEX_SHADER, "includes/webgl-noise/classicnoise3D.glsl")
+          .add(GL_FRAGMENT_SHADER, "src/shaders/textures/scrollTexture.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/fire/fire.fs")
           .link();
 }

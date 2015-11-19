@@ -10,7 +10,7 @@ StreamRenderer::StreamRenderer(
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
-          .add(GL_FRAGMENT_SHADER, "src/shaders/waterfall/texture.fs")
+          .add(GL_FRAGMENT_SHADER, "src/shaders/textures/scrollTexture.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/phong.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
           .link();
