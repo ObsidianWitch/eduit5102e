@@ -23,6 +23,12 @@ Forest::Forest(float radius, unsigned int nTrees) :
             glm::vec3(0.5f)
         )
     ),
+    waterfall(
+        "resources/waterfall/waterfall.obj", // file path
+        glm::vec3(0.0f, 0.0f, 20.0f),        // position
+        glm::vec3(50.0f, 200.0f, 1.0f),      // scale
+        BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
+    ),
     radius(radius),
     randomGen(std::time(0))
 {
@@ -119,3 +125,4 @@ void Forest::update() {
 }
 
 std::vector<BgObject*>& Forest::getBgObjects() { return bgObjects; }
+BgObject& Forest::getWaterfall() { return waterfall; }

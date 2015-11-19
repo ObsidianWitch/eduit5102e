@@ -28,7 +28,6 @@ Scene::Scene(GLuint width, GLuint height) :
     Inputs::instance().addMouseHandler(camera.getEventHandler());
     Inputs::instance().addWindowHandler(camera.getEventHandler());
     
-    
     // forest
     const auto& forestBgObjs = forest.getBgObjects();
     bgObjects.reserve(forestBgObjs.size());
@@ -47,12 +46,12 @@ Scene::Scene(GLuint width, GLuint height) :
     ));
     
     lights.push_back(std::make_shared<PointLight>(
-        "pL",                          // name
+        "pL",                           // name
         glm::vec3(10.0f, 10.0f, 10.0f), // position
-        glm::vec3(0.9f, 0.57f, 0.16f), // color
-        0.1f,                          // constant
+        glm::vec3(0.9f, 0.57f, 0.16f),  // color
+        0.1f,                           // constant
         0.09f,                          // linear
-        0.01f                          // quadratic
+        0.01f                           // quadratic
     ));
     
     // Collidables
@@ -68,6 +67,9 @@ Scene::Scene(GLuint width, GLuint height) :
     );
     skyboxRenderer = std::make_unique<SkyboxRenderer>(
         skybox, camera
+    );
+    waterfallRenderer = std::make_unique<WaterfallRenderer>(
+        forest.getWaterfall(), camera, lights
     );
 }
 
@@ -89,4 +91,5 @@ void Scene::update() {
     playerRenderer->render();
     bgObjectsRenderer->render();
     skyboxRenderer->render();
+    waterfallRenderer->render();
 }

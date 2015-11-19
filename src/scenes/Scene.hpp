@@ -14,6 +14,7 @@
 #include "renderers/PlayerRenderer.hpp"
 #include "renderers/BgObjectsRenderer.hpp"
 #include "renderers/SkyboxRenderer.hpp"
+#include "renderers/WaterfallRenderer.hpp"
 
 class Scene {
 public:
@@ -33,6 +34,7 @@ private:
     std::unique_ptr<PlayerRenderer> playerRenderer;
     std::unique_ptr<BgObjectsRenderer> bgObjectsRenderer;
     std::unique_ptr<SkyboxRenderer> skyboxRenderer;
+    std::unique_ptr<WaterfallRenderer> waterfallRenderer;
 };
 
 #endif // SCENES_HPP
