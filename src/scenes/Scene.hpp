@@ -15,6 +15,7 @@
 #include "renderers/BgObjectsRenderer.hpp"
 #include "renderers/SkyboxRenderer.hpp"
 #include "renderers/StreamRenderer.hpp"
+#include "renderers/FireRenderer.hpp"
 
 class Scene {
 public:
@@ -35,6 +36,7 @@ private:
     std::unique_ptr<BgObjectsRenderer> bgObjectsRenderer;
     std::unique_ptr<SkyboxRenderer> skyboxRenderer;
     std::unique_ptr<StreamRenderer> streamRenderer;
+    std::unique_ptr<FireRenderer> fireRenderer;
 };
 
 #endif // SCENES_HPP

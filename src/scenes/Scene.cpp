@@ -71,6 +71,9 @@ Scene::Scene(GLuint width, GLuint height) :
     streamRenderer = std::make_unique<StreamRenderer>(
         forest.getRiver(), forest.getWaterfall(), camera, lights
     );
+    fireRenderer = std::make_unique<FireRenderer>(
+        forest.getFire(), camera
+    );
 }
 
 void Scene::update() {
@@ -92,4 +95,5 @@ void Scene::update() {
     bgObjectsRenderer->render();
     skyboxRenderer->render();
     streamRenderer->render();
+    fireRenderer->render();
 }

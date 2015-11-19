@@ -30,9 +30,15 @@ Forest::Forest(float radius, unsigned int nTrees) :
         BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
     ),
     river(
-        "resources/river/river.obj",    // file path
+        "resources/river/river.obj",   // file path
         glm::vec3(0.0f, 0.1f, radius), // position
-        glm::vec3(1.0f),                // scale
+        glm::vec3(1.0f),               // scale
+        BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
+    ),
+    fire(
+        "resources/fire/fire.obj",     // file path
+        glm::vec3(20.0f, 9.5f, 10.0f), // position
+        glm::vec3(0.5f, 0.7f, 0.5f),   // scale
         BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
     ),
     radius(radius),
@@ -139,3 +145,4 @@ void Forest::update() {
 std::vector<BgObject*>& Forest::getBgObjects() { return bgObjects; }
 BgObject& Forest::getWaterfall() { return waterfall; }
 BgObject& Forest::getRiver() { return river; }
+BgObject& Forest::getFire() { return fire; }
