@@ -1,12 +1,12 @@
 #include <glm/gtx/rotate_vector.hpp>
 
-#include "WaterfallRenderer.hpp"
+#include "StreamRenderer.hpp"
 
-WaterfallRenderer::WaterfallRenderer(
-    BgObject& waterfall, Camera& camera,
+StreamRenderer::StreamRenderer(
+    BgObject& river, BgObject& waterfall, Camera& camera,
     std::vector<std::shared_ptr<Entity>>& lights
 ) :
-    waterfall(waterfall), camera(camera)
+    river(river), waterfall(waterfall), camera(camera)
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
@@ -19,7 +19,7 @@ WaterfallRenderer::WaterfallRenderer(
     for (auto l : lights) { l->update(shader); }
 }
     
-void WaterfallRenderer::render() {
+void StreamRenderer::render() {
     shader.use();
     shader.setUniform("time", (float) glfwGetTime());
     
@@ -31,4 +31,9 @@ void WaterfallRenderer::render() {
     shader.setUniform("normalMatrix", waterfall.getModel().getNormalMatrix());
     
     waterfall.getModel().draw(shader);
+    
+    shader.setUniform("model", river.getModel().getModelMatrix());
+    shader.setUniform("normalMatrix", river.getModel().getNormalMatrix());
+    
+    river.getModel().draw(shader);
 }

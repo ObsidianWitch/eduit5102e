@@ -1,5 +1,5 @@
-#ifndef WATERFALL_RENDERER_HPP
-#define WATERFALL_RENDERER_HPP
+#ifndef STREAM_RENDERER_HPP
+#define STREAM_RENDERER_HPP
 
 #include <memory>
 
@@ -8,10 +8,10 @@
 #include "entities/objects/BgObject.hpp"
 #include "entities/camera/Camera.hpp"
 
-class WaterfallRenderer {
+class StreamRenderer {
 public:
-    WaterfallRenderer(
-        BgObject& waterfall, Camera& camera,
+    StreamRenderer(
+        BgObject& river, BgObject& waterfall, Camera& camera,
         std::vector<std::shared_ptr<Entity>>& lights
     );
     
@@ -19,8 +19,9 @@ public:
     
 private:
     Shader shader;
+    BgObject& river;
     BgObject& waterfall;
     Camera& camera;
 };
 
-#endif // WATERFALL_RENDERER_HPP
+#endif // STREAM_RENDERER_HPP

@@ -68,8 +68,8 @@ Scene::Scene(GLuint width, GLuint height) :
     skyboxRenderer = std::make_unique<SkyboxRenderer>(
         skybox, camera
     );
-    waterfallRenderer = std::make_unique<WaterfallRenderer>(
-        forest.getWaterfall(), camera, lights
+    streamRenderer = std::make_unique<StreamRenderer>(
+        forest.getRiver(), forest.getWaterfall(), camera, lights
     );
 }
 
@@ -91,5 +91,5 @@ void Scene::update() {
     playerRenderer->render();
     bgObjectsRenderer->render();
     skyboxRenderer->render();
-    waterfallRenderer->render();
+    streamRenderer->render();
 }

@@ -16,6 +16,7 @@ public:
     
     std::vector<BgObject*>& getBgObjects();
     BgObject& getWaterfall();
+    BgObject& getRiver();
     
 private:
     std::vector<BgObject*> bgObjects;
@@ -24,6 +25,7 @@ private:
     BgObject ground;
     BgObject torch;
     BgObject waterfall;
+    BgObject river;
     
     float radius;
     std::mt19937 randomGen;
