@@ -25,7 +25,7 @@ vec4 diffuseTexColor() {
     vec2 rotatingTexCoords = fsTextureCoords;
     rotatingTexCoords.y -= 0.5f * time;
     
-    vec4 diffuseTexColor = texture(material.diffuseMap, rotatingTexCoords);
+    vec4 diffuseTexColor = texture(material.diffuseMap, rotatingTexCoords) * 2;
     if (diffuseTexColor.a < 0.1) { discard; } // alpha testing
     
     return diffuseTexColor;

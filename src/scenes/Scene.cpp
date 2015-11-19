@@ -8,7 +8,7 @@
 
 Scene::Scene(GLuint width, GLuint height) :
     player(
-        glm::vec3(0.0f, 0.0f, 0.0f), // position
+        glm::vec3(20.0f, 0.0f, 0.0f), // position
         0.2f                         // speed
     ),
     camera(
@@ -47,7 +47,7 @@ Scene::Scene(GLuint width, GLuint height) :
     
     lights.push_back(std::make_shared<PointLight>(
         "pL",                           // name
-        glm::vec3(10.0f, 10.0f, 10.0f), // position
+        glm::vec3(20.0f, 10.0f, 10.0f), // position
         glm::vec3(0.9f, 0.57f, 0.16f),  // color
         0.1f,                           // constant
         0.09f,                          // linear

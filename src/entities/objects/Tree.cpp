@@ -10,7 +10,7 @@ Tree::Tree(
     const glm::vec3& position, const glm::vec3& scale, float phaseShift
 ) :
     BgObject(
-        "resources/tree1/Forest_tree.obj", // filepath
+        "resources/tree/Forest_tree.obj", // filepath
         position,
         scale,
         BoundingBox(

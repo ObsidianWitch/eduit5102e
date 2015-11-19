@@ -16,7 +16,7 @@ Forest::Forest(float radius, unsigned int nTrees) :
     ),
     torch(
         "resources/staff/staff.obj",   // file path
-        glm::vec3(10.0f, 0.0f, 10.0f), // position
+        glm::vec3(20.0f, 0.0f, 10.0f), // position
         glm::vec3(5.0f),               // scale
         BoundingBox(                   // bounding box
             glm::vec3(-0.5f),
@@ -26,13 +26,13 @@ Forest::Forest(float radius, unsigned int nTrees) :
     waterfall(
         "resources/waterfall/waterfall.obj", // file path
         glm::vec3(0.0f, 0.0f, radius),       // position
-        glm::vec3(50.0f, 200.0f, 1.0f),      // scale
+        glm::vec3(1.0f),                     // scale
         BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
     ),
     river(
-        "resources/river/river.obj",   // file path
-        glm::vec3(0.0f, 0.5f, radius), // position
-        glm::vec3(50.0f, 1.0f, 40.0f), // scale
+        "resources/river/river.obj",    // file path
+        glm::vec3(0.0f, 0.1f, radius), // position
+        glm::vec3(1.0f),                // scale
         BoundingBox(glm::vec3(0.0f), glm::vec3(0.0f))
     ),
     radius(radius),
@@ -55,7 +55,7 @@ void Forest::createCliffs() {
     BgObject cliffUp(
         "resources/cliff/cliff.obj",   // file path
         glm::vec3(0.0f, 0.0f, radius), // position
-        glm::vec3(10.0f),              // scaling vector
+        glm::vec3(1.0f),               // scaling vector
         BoundingBox(                   // bounding box
             glm::vec3(-500.0f, 0.0f, 20.0f),
             glm::vec3(500.0f, 5.0f, 30.0f)
@@ -96,7 +96,7 @@ void Forest::createCliffs() {
  */
 void Forest::generateTrees(unsigned int nTrees) {
     std::uniform_real_distribution<float> dScale(1.0f, 1.5f);
-    std::uniform_real_distribution<float> dRadius(30.0f, this->radius);
+    std::uniform_real_distribution<float> dRadius(0.0f, this->radius);
     std::uniform_real_distribution<float> dAngle(0, glm::two_pi<float>());
     
     trees.reserve(nTrees);
@@ -110,16 +110,22 @@ void Forest::generateTrees(unsigned int nTrees) {
     for (unsigned int i = 0 ; i < nTrees ; i++) {
         float radius = dRadius(randomGen);
         float angle = dAngle(randomGen);
+        glm::vec3 position(
+            radius * cos(angle),
+            0.0f,
+            radius * sin(angle)
+        );
+        
+        // discard trees generated in the river's path
+        if (position.x >= -50.0f && position.x <= 35.0f) {
+            i--; continue;
+        }
         
         trees.push_back(Tree(
             tree, dAngle(randomGen)
         ));
         trees.back().getModel()
-            .setPosition(glm::vec3(
-                radius * cos(angle),
-                0.0f,
-                radius * sin(angle)
-            ))
+            .setPosition(position)
             .scale(glm::vec3(1.0f, dScale(randomGen), 1.0f))
             .rotate(dAngle(randomGen));
     }
