@@ -6,7 +6,7 @@ StreamRenderer::StreamRenderer(
     BgObject& river, BgObject& waterfall, Camera& camera,
     std::vector<std::shared_ptr<Entity>>& lights
 ) :
-    river(river), waterfall(waterfall), camera(camera)
+    river(river), waterfall(waterfall), camera(camera), lights(lights)
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
@@ -14,13 +14,12 @@ StreamRenderer::StreamRenderer(
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/phong.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
           .link();
-    
-    shader.use();
-    for (auto l : lights) { l->update(shader); }
 }
     
 void StreamRenderer::render() {
     shader.use();
+    for (auto l : lights) { l->update(shader); }
+    
     shader.setUniform("time", (float) glfwGetTime());
     
     shader.setUniform("view", camera.getViewMatrix());

@@ -21,6 +21,7 @@ private:
     Shader shader;
     Player& player;
     Camera& camera;
+    std::vector<std::shared_ptr<Entity>>& lights;
 };
 
 #endif // PLAYER_RENDERER_HPP

@@ -19,6 +19,8 @@ private:
     float constant;
     float linear;
     float quadratic;
+    
+    int quadFrequency;
 };
 
 #endif // POINT_LIGHT_HPP

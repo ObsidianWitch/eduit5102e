@@ -21,6 +21,7 @@ private:
     Shader shader;
     std::vector<BgObject*>& bgObjects;
     Camera& camera;
+    std::vector<std::shared_ptr<Entity>>& lights;
 };
 
 #endif // BG_OBJECT_RENDERER_HPP

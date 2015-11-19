@@ -3,7 +3,7 @@
 PlayerRenderer::PlayerRenderer(
     Player& player, Camera& camera, std::vector<std::shared_ptr<Entity>>& lights
 ) :
-    player(player), camera(camera)
+    player(player), camera(camera), lights(lights)
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
@@ -13,13 +13,14 @@ PlayerRenderer::PlayerRenderer(
           .link();
     
     shader.use();
-    for (auto l : lights) { l->update(shader); }
 }
 
 void PlayerRenderer::render() {
     player.update();
     
     shader.use();
+    for (auto l : lights) { l->update(shader); }
+    
     shader.setUniform("view", camera.getViewMatrix());
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());

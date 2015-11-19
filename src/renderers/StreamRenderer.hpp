@@ -22,6 +22,7 @@ private:
     BgObject& river;
     BgObject& waterfall;
     Camera& camera;
+    std::vector<std::shared_ptr<Entity>>& lights;
 };
 
 #endif // STREAM_RENDERER_HPP
