@@ -63,8 +63,8 @@ void Forest::createCliffs() {
         glm::vec3(0.0f, 0.0f, radius), // position
         glm::vec3(1.0f),               // scaling vector
         BoundingBox(                   // bounding box
-            glm::vec3(-500.0f, 0.0f, 20.0f),
-            glm::vec3(500.0f, 5.0f, 30.0f)
+            glm::vec3(-500.0f, 0.0f, 0.0f),
+            glm::vec3(500.0f, 5.0f, 10.0f)
         )
     );
     cliffs.push_back(cliffUp);
