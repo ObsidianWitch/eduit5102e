@@ -28,7 +28,7 @@ void AttackRenderer::render() {
 }
 
 void AttackRenderer::render(Model& model) {
-    shader.setUniform("model", model.getModelMatrix());
+    shader.setUniform("model", attack.getModelMatrix(model));
     shader.setUniform("normalMatrix", model.getNormalMatrix());
     model.draw(shader);
 }

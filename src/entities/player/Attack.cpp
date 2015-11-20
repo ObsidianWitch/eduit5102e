@@ -6,13 +6,13 @@ Attack::Attack(Player& player) :
     player(player),
     magicCircle1("resources/attack/circle1.obj"),
     magicCircle2(magicCircle1),
-    magicTriangle("resources/attack/triangle.obj"),
-    positionOffsetGround(0.0f, 0.3f, 0.0f),
-    positionOffsetAir(0.0f, 8.0f, 5.0f)
+    magicTriangle("resources/attack/triangle.obj")
 {
-    updatePosition();
-    magicTriangle.scale(glm::vec3(2.0f));
-    magicCircle2.scale(glm::vec3(0.5f))
+    magicCircle1.translate(glm::vec3(0.0f, 0.3f, 0.0f))
+                .scale(glm::vec3(0.5f));
+    magicTriangle.translate(glm::vec3(0.0f, 0.3f, 0.0f));
+    magicCircle2.translate(glm::vec3(0.0f, 4.0f, 2.5f))
+                .scale(glm::vec3(0.25f))
                 .rotate(glm::radians(90.0f), LocalBasis::z)
                 .rotate(glm::radians(90.0f), LocalBasis::x);
 }
@@ -37,14 +37,14 @@ void Attack::update() {
         transformationTriangle, -0.5f * (float) glfwGetTime(), LocalBasis::y
     );
     magicTriangle.setTransformation(transformationTriangle);
-    
-    updatePosition();
 }
 
-void Attack::updatePosition() {
-    magicCircle1.setPosition(player.getPosition() + positionOffsetGround);
-    magicCircle2.setPosition(player.getPosition() + positionOffsetAir);
-    magicTriangle.setPosition(player.getPosition() + positionOffsetGround);
+/**
+ * Returns the model's modelMatrix multiplied by the player's modelMatrix in
+ * order for this model to follow the player.
+ */
+glm::mat4 Attack::getModelMatrix(Model& model) {
+    return player.getModel().getModelMatrix() * model.getModelMatrix();
 }
 
 Model& Attack::getMagicCircle1() { return magicCircle1; }

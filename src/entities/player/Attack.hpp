@@ -12,6 +12,7 @@ public:
     
     void update() override;
     
+    glm::mat4 getModelMatrix(Model& model);
     Model& getMagicCircle1();
     Model& getMagicCircle2();
     Model& getMagicTriangle();
@@ -25,8 +26,6 @@ private:
     // TODO Model laser;
     glm::vec3 positionOffsetGround;
     glm::vec3 positionOffsetAir;
-    
-    void updatePosition();
 };
 
 #endif // ATTACK_HPP
