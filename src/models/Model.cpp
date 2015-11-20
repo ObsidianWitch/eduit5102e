@@ -59,7 +59,7 @@ Model& Model::scale(const glm::vec3& vec) {
     return *this;
 }
 
-glm::mat4 Model::getModelMatrix() { return transformation * modelMatrix; }
+glm::mat4 Model::getModelMatrix() { return modelMatrix * transformation; }
 
 /**
  * Computes the normalMatrix from the model matrix. This matrix is used to

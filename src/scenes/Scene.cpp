@@ -9,8 +9,9 @@
 Scene::Scene(GLuint width, GLuint height) :
     player(
         glm::vec3(20.0f, 0.0f, 0.0f), // position
-        0.2f                         // speed
+        0.2f                          // speed
     ),
+    attack(player),
     camera(
         glm::vec3(0.0f, 10.0f, -10.0f), // position
         player.getPosition(),           // target
@@ -62,6 +63,9 @@ Scene::Scene(GLuint width, GLuint height) :
     playerRenderer = std::make_unique<PlayerRenderer>(
         player, camera, lights
     );
+    attackRenderer = std::make_unique<AttackRenderer>(
+        attack, camera, lights
+    );
     bgObjectsRenderer = std::make_unique<BgObjectsRenderer>(
         bgObjects, camera, lights
     );
@@ -88,10 +92,13 @@ void Scene::update() {
     
     camera.setTarget(player.getPosition());
     
+    attack.update();
+    
     forest.update();
     
     // render
     playerRenderer->render();
+    attackRenderer->render();
     bgObjectsRenderer->render();
     skyboxRenderer->render();
     streamRenderer->render();
