@@ -16,13 +16,14 @@ public:
     Model& getMagicCircle1();
     Model& getMagicCircle2();
     Model& getMagicTriangle();
+    Model& getOrb();
     
 private:
     Player& player;
     Model magicCircle1;
     Model magicCircle2;
     Model magicTriangle;
-    // TODO Model sphere;
+    Model orb;
     // TODO Model laser;
     glm::vec3 positionOffsetGround;
     glm::vec3 positionOffsetAir;

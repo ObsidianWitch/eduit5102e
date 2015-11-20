@@ -7,10 +7,8 @@ AttackRenderer::AttackRenderer(
     attack(attack), camera(camera), lights(lights)
 {
     shader.add(GL_VERTEX_SHADER, "src/shaders/main/main.vs")
-          .add(GL_FRAGMENT_SHADER, "src/shaders/main/main.fs")
           .add(GL_FRAGMENT_SHADER, "src/shaders/textures/texture.fs")
-          .add(GL_FRAGMENT_SHADER, "src/shaders/main/phong.fs")
-          .add(GL_FRAGMENT_SHADER, "src/shaders/main/lights.fs")
+          .add(GL_FRAGMENT_SHADER, "src/shaders/attack/attack.fs")
           .link();
 }
     
@@ -25,6 +23,7 @@ void AttackRenderer::render() {
     render(attack.getMagicCircle1());
     render(attack.getMagicCircle2());
     render(attack.getMagicTriangle());
+    render(attack.getOrb());
 }
 
 void AttackRenderer::render(Model& model) {
