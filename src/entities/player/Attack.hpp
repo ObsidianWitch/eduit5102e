@@ -12,17 +12,19 @@ public:
     
     void update() override;
     
-    Model& getMagicCircle();
+    Model& getMagicCircle1();
+    Model& getMagicCircle2();
     Model& getMagicTriangle();
     
 private:
     Player& player;
-    Model magicCircle;
+    Model magicCircle1;
+    Model magicCircle2;
     Model magicTriangle;
-    // TODO Model magicCircle2;
     // TODO Model sphere;
     // TODO Model laser;
-    glm::vec3 positionOffset;
+    glm::vec3 positionOffsetGround;
+    glm::vec3 positionOffsetAir;
     
     void updatePosition();
 };

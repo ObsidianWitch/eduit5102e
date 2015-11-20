@@ -15,6 +15,7 @@ public:
     );
     
     void render();
+    void render(Model& model);
     
 private:
     Shader shader;

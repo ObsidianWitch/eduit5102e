@@ -4,27 +4,34 @@
 Attack::Attack(Player& player) :
     Entity("attack"),
     player(player),
-    magicCircle("resources/attack/circle1.obj"),
+    magicCircle1("resources/attack/circle1.obj"),
+    magicCircle2(magicCircle1),
     magicTriangle("resources/attack/triangle.obj"),
-    positionOffset(0.0f, 0.3f, 0.0f)
+    positionOffsetGround(0.0f, 0.3f, 0.0f),
+    positionOffsetAir(0.0f, 8.0f, 5.0f)
 {
     updatePosition();
     magicTriangle.scale(glm::vec3(2.0f));
+    magicCircle2.scale(glm::vec3(0.5f))
+                .rotate(glm::radians(90.0f), LocalBasis::z)
+                .rotate(glm::radians(90.0f), LocalBasis::x);
 }
 
 void Attack::update() {
-    // transform 1st magic circle (ground)
+    // transform magic circles
     glm::mat4 transformationCircle(1.0f);
     transformationCircle = glm::rotate(
         transformationCircle, (float) glfwGetTime(), LocalBasis::y
     );
+    magicCircle2.setTransformation(transformationCircle);
+    
     transformationCircle = glm::scale(
         transformationCircle,
         glm::vec3((float) exp(sin(glfwGetTime())))
     );
-    magicCircle.setTransformation(transformationCircle);
+    magicCircle1.setTransformation(transformationCircle);
     
-    // transform triangle inside the 1st magic circle
+    // transform magic triangle
     glm::mat4 transformationTriangle(1.0f);
     transformationTriangle = glm::rotate(
         transformationTriangle, -0.5f * (float) glfwGetTime(), LocalBasis::y
@@ -35,9 +42,11 @@ void Attack::update() {
 }
 
 void Attack::updatePosition() {
-    magicCircle.setPosition(player.getPosition() + positionOffset);
-    magicTriangle.setPosition(player.getPosition() + positionOffset);
+    magicCircle1.setPosition(player.getPosition() + positionOffsetGround);
+    magicCircle2.setPosition(player.getPosition() + positionOffsetAir);
+    magicTriangle.setPosition(player.getPosition() + positionOffsetGround);
 }
 
-Model& Attack::getMagicCircle() { return magicCircle; }
+Model& Attack::getMagicCircle1() { return magicCircle1; }
+Model& Attack::getMagicCircle2() { return magicCircle2; }
 Model& Attack::getMagicTriangle() { return magicTriangle; }

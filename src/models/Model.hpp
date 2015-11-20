@@ -16,6 +16,7 @@ public:
     
     Model& translate(const glm::vec3& vec);
     Model& rotate(float angle);
+    Model& rotate(float angle, glm::vec3 axis);
     Model& scale(const glm::vec3& vec);
     
     glm::mat4 getModelMatrix();

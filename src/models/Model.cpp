@@ -50,7 +50,11 @@ Model& Model::translate(const glm::vec3& vec) {
  * Rotates the model around its own y axis and the specified angle in radians.
  */
 Model& Model::rotate(float angle) {
-    modelMatrix = glm::rotate(modelMatrix, angle, LocalBasis::y);
+    return rotate(angle, LocalBasis::y);
+}
+
+Model& Model::rotate(float angle, glm::vec3 axis) {
+    modelMatrix = glm::rotate(modelMatrix, angle, axis);
     return *this;
 }
 
@@ -58,6 +62,7 @@ Model& Model::scale(const glm::vec3& vec) {
     modelMatrix = glm::scale(modelMatrix, vec);
     return *this;
 }
+
 
 glm::mat4 Model::getModelMatrix() { return modelMatrix * transformation; }
 
