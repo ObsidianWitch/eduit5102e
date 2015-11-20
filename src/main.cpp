@@ -33,7 +33,7 @@ void initLibraries() {
     //glfwWindowHint(GLFW_SAMPLES, 2);
     
     window = glfwCreateWindow(
-        WIDTH, HEIGHT, "OpenGL Application", nullptr, nullptr
+        WIDTH, HEIGHT, "IT5102E project - Forest", nullptr, nullptr
     );
     if (!window) {
         std::cerr << "Failed to open GLFW window" << std::endl;
