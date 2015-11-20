@@ -22,6 +22,7 @@ void AttackRenderer::render() {
     shader.setUniform("projection", camera.getProjectionMatrix());
     shader.setUniform("cameraPosition", camera.getPosition());
     
+    // 1st magic circle
     shader.setUniform(
         "model",
         attack.getMagicCircle().getModelMatrix()
@@ -29,6 +30,15 @@ void AttackRenderer::render() {
     shader.setUniform(
         "normalMatrix", attack.getMagicCircle().getNormalMatrix()
     );
-    
     attack.getMagicCircle().draw(shader);
+    
+    // triangle
+    shader.setUniform(
+        "model",
+        attack.getMagicTriangle().getModelMatrix()
+    );
+    shader.setUniform(
+        "normalMatrix", attack.getMagicTriangle().getNormalMatrix()
+    );
+    attack.getMagicTriangle().draw(shader);
 }

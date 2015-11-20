@@ -13,10 +13,12 @@ public:
     void update() override;
     
     Model& getMagicCircle();
+    Model& getMagicTriangle();
     
 private:
     Player& player;
     Model magicCircle;
+    Model magicTriangle;
     // TODO Model magicCircle2;
     // TODO Model sphere;
     // TODO Model laser;
