@@ -24,6 +24,7 @@ void AttackRenderer::render() {
     
     render(attack.getMagicCircle1());
     render(attack.getMagicCircle2());
+    render(attack.getMagicCircle3());
     render(attack.getMagicTriangle());
     render(attack.getOrb());
     

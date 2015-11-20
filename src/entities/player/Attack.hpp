@@ -16,6 +16,7 @@ public:
     glm::mat4 getModelMatrix(Model& model);
     Model& getMagicCircle1();
     Model& getMagicCircle2();
+    Model& getMagicCircle3();
     Model& getMagicTriangle();
     Model& getOrb();
     Model& getLaser();
@@ -28,6 +29,7 @@ private:
     Player& player;
     Model magicCircle1;
     Model magicCircle2;
+    Model magicCircle3;
     Model magicTriangle;
     Model orb;
     Model laser;

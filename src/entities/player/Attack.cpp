@@ -6,6 +6,7 @@ Attack::Attack(Player& player) :
     player(player),
     magicCircle1("resources/attack/circle1.obj"),
     magicCircle2(magicCircle1),
+    magicCircle3(magicCircle1),
     magicTriangle("resources/attack/triangle.obj"),
     orb("resources/attack/orb.obj"),
     laser("resources/attack/laser.obj")
@@ -17,6 +18,8 @@ Attack::Attack(Player& player) :
                 .scale(glm::vec3(0.25f))
                 .rotate(glm::radians(90.0f), LocalBasis::z)
                 .rotate(glm::radians(90.0f), LocalBasis::x);
+    magicCircle3.translate(glm::vec3(0.0f, 5.0f, 0.0f))
+                .scale(glm::vec3(0.7f));
     orb.translate(magicCircle2.getPosition());
     laser.translate(magicCircle2.getPosition())
          .scale(glm::vec3(1.0f, 0.5f, 0.5f));
@@ -35,6 +38,12 @@ void Attack::update() {
         glm::vec3((float) exp(sin(glfwGetTime())))
     );
     magicCircle1.setTransformation(transformationCircle);
+    
+    transformationCircle = glm::mat4(1.0f);
+    transformationCircle = glm::rotate(
+        transformationCircle, (float) glfwGetTime(), LocalBasis::z
+    );
+    magicCircle3.setTransformation(transformationCircle);
     
     // transform magic triangle
     glm::mat4 transformationTriangle(1.0f);
@@ -62,6 +71,7 @@ glm::mat4 Attack::getModelMatrix(Model& model) {
 
 Model& Attack::getMagicCircle1() { return magicCircle1; }
 Model& Attack::getMagicCircle2() { return magicCircle2; }
+Model& Attack::getMagicCircle3() { return magicCircle3; }
 Model& Attack::getMagicTriangle() { return magicTriangle; }
 Model& Attack::getOrb() { return orb; }
 Model& Attack::getLaser() { return laser; }
