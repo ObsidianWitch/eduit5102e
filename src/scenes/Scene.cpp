@@ -26,6 +26,7 @@ Scene::Scene(GLuint width, GLuint height) :
     // key & mouse handlers
     Inputs::instance().addKeyHandler(player.getEventHandler());
     Inputs::instance().addMouseHandler(player.getEventHandler());
+    Inputs::instance().addKeyHandler(attack.getEventHandler());
     Inputs::instance().addMouseHandler(camera.getEventHandler());
     Inputs::instance().addWindowHandler(camera.getEventHandler());
     

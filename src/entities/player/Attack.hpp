@@ -5,6 +5,7 @@
 
 #include "entities/Entity.hpp"
 #include "entities/player/Player.hpp"
+#include "entities/player/AttackEventHandler.hpp"
 
 class Attack : public Entity {
 public:
@@ -18,6 +19,9 @@ public:
     Model& getMagicTriangle();
     Model& getOrb();
     
+    bool isAttacking();
+    AttackEventHandler& getEventHandler();
+    
 private:
     Player& player;
     Model magicCircle1;
@@ -25,8 +29,11 @@ private:
     Model magicTriangle;
     Model orb;
     // TODO Model laser;
+    
     glm::vec3 positionOffsetGround;
     glm::vec3 positionOffsetAir;
+    
+    AttackEventHandler eventHandler;
 };
 
 #endif // ATTACK_HPP

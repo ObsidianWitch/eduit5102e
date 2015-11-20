@@ -61,3 +61,6 @@ Model& Attack::getMagicCircle1() { return magicCircle1; }
 Model& Attack::getMagicCircle2() { return magicCircle2; }
 Model& Attack::getMagicTriangle() { return magicTriangle; }
 Model& Attack::getOrb() { return orb; }
+
+AttackEventHandler& Attack::getEventHandler() { return eventHandler; }
+bool Attack::isAttacking() { return eventHandler.isAttacking(); }

@@ -13,6 +13,8 @@ AttackRenderer::AttackRenderer(
 }
     
 void AttackRenderer::render() {
+    if (!attack.isAttacking()) { return; }
+    
     shader.use();
     for (auto l : lights) { l->update(shader); }
     
