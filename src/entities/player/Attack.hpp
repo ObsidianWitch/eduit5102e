@@ -18,7 +18,9 @@ public:
     Model& getMagicCircle2();
     Model& getMagicTriangle();
     Model& getOrb();
+    Model& getLaser();
     
+    bool isLoading();
     bool isAttacking();
     AttackEventHandler& getEventHandler();
     
@@ -28,7 +30,7 @@ private:
     Model magicCircle2;
     Model magicTriangle;
     Model orb;
-    // TODO Model laser;
+    Model laser;
     
     glm::vec3 positionOffsetGround;
     glm::vec3 positionOffsetAir;

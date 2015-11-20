@@ -7,7 +7,8 @@ Attack::Attack(Player& player) :
     magicCircle1("resources/attack/circle1.obj"),
     magicCircle2(magicCircle1),
     magicTriangle("resources/attack/triangle.obj"),
-    orb("resources/attack/orb.obj")
+    orb("resources/attack/orb.obj"),
+    laser("resources/attack/laser.obj")
 {
     magicCircle1.translate(glm::vec3(0.0f, 0.3f, 0.0f))
                 .scale(glm::vec3(0.5f));
@@ -16,7 +17,9 @@ Attack::Attack(Player& player) :
                 .scale(glm::vec3(0.25f))
                 .rotate(glm::radians(90.0f), LocalBasis::z)
                 .rotate(glm::radians(90.0f), LocalBasis::x);
-    orb.translate(glm::vec3(0.0f, 4.0f, 2.5f));
+    orb.translate(magicCircle2.getPosition());
+    laser.translate(magicCircle2.getPosition())
+         .scale(glm::vec3(1.0f, 0.5f, 0.5f));
 }
 
 void Attack::update() {
@@ -61,6 +64,8 @@ Model& Attack::getMagicCircle1() { return magicCircle1; }
 Model& Attack::getMagicCircle2() { return magicCircle2; }
 Model& Attack::getMagicTriangle() { return magicTriangle; }
 Model& Attack::getOrb() { return orb; }
+Model& Attack::getLaser() { return laser; }
 
 AttackEventHandler& Attack::getEventHandler() { return eventHandler; }
 bool Attack::isAttacking() { return eventHandler.isAttacking(); }
+bool Attack::isLoading() { return eventHandler.isLoading(); }

@@ -13,7 +13,7 @@ AttackRenderer::AttackRenderer(
 }
     
 void AttackRenderer::render() {
-    if (!attack.isAttacking()) { return; }
+    if (!attack.isLoading()) { return; }
     
     shader.use();
     for (auto l : lights) { l->update(shader); }
@@ -26,6 +26,10 @@ void AttackRenderer::render() {
     render(attack.getMagicCircle2());
     render(attack.getMagicTriangle());
     render(attack.getOrb());
+    
+    if (attack.isAttacking()) {
+        render(attack.getLaser());
+    }
 }
 
 void AttackRenderer::render(Model& model) {

@@ -13,9 +13,11 @@ public:
         GLFWwindow* window, int key, int scancode, int action, int mods
     ) override;
     
+    bool isLoading();
     bool isAttacking();
     
 private:
+    bool loading;
     bool attacking;
 };
 
