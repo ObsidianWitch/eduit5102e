@@ -113,7 +113,8 @@ void Forest::generateTrees(unsigned int nTrees) {
         dAngle(randomGen)            // phase shift
     );
     
-    for (unsigned int i = 0 ; i < nTrees ; i++) {
+    unsigned int generatedTrees = 0;
+    while (generatedTrees != nTrees) {
         float radius = dRadius(randomGen);
         float angle = dAngle(randomGen);
         glm::vec3 position(
@@ -124,16 +125,18 @@ void Forest::generateTrees(unsigned int nTrees) {
         
         // discard trees generated in the river's path
         if (position.x >= -50.0f && position.x <= 35.0f) {
-            i--; continue;
+            continue;
         }
         
-        trees.push_back(Tree(
-            tree, dAngle(randomGen)
-        ));
+        trees.push_back(
+            Tree(tree, dAngle(randomGen))
+        );
         trees.back().getModel()
             .setPosition(position)
             .scale(glm::vec3(1.0f, dScale(randomGen), 1.0f))
             .rotate(dAngle(randomGen));
+        
+        generatedTrees++;
     }
 }
 
