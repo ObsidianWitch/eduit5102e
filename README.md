@@ -1,5 +1,7 @@
 # IT5102E OpenGL project - Forest
 
+![Screenshot](https://i.imgur.com/bf14MUA.jpg)
+
 ## Dependencies
 
 * GLFW
