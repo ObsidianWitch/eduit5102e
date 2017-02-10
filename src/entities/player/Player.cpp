@@ -1,6 +1,7 @@
 #include <glm/gtc/constants.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "inputs/Inputs.hpp"
 #include "entities/player/Player.hpp"
 #include "behaviours/collisions/BoundingBox.hpp"
 
@@ -15,6 +16,9 @@ Player::Player(const glm::vec3& position, float speed) :
 {
     model.setPosition(position)
          .scale(glm::vec3(2.0f));
+
+    Inputs::instance().addKeyHandler(eventHandler);
+    Inputs::instance().addMouseHandler(eventHandler);
 }
 
 /**
@@ -35,22 +39,22 @@ void Player::update() {
  */
 void Player::move() {
     auto& states = eventHandler.getStates();
-    
+
     // translate
     movementVec = glm::vec3(0.0f);
     if (states[FORWARD]) { movementVec.z += speed; }
     else if (states[BACKWARD]) { movementVec.z -= speed; }
-    
+
     if (eventHandler.getStrafing()) {
         if (states[LEFT]) { movementVec.x += speed; }
         else if (states[RIGHT]) { movementVec.x -= speed; }
     }
-    
+
     /// clamp movementVec's magnitude
     float ratio = glm::length(movementVec) / speed;
     if (ratio != 0) { movementVec /= ratio; }
     model.translate(movementVec);
-    
+
     // rotate
     if (!eventHandler.getStrafing()) {
         if (states[LEFT]) {
@@ -69,6 +73,5 @@ void Player::cancelMove() {
     model.translate(-movementVec);
 }
 
-PlayerEventHandler& Player::getEventHandler() { return eventHandler; }
 glm::vec3 Player::getPosition() { return model.getPosition(); }
 Model& Player::getModel() { return model; }

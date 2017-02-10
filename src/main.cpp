@@ -65,14 +65,6 @@ void initLibraries() {
     //glEnable(GL_MULTISAMPLE);
 }
 
-/**
- * Deallocate resources and close the GLFW window.
- */
-void terminate() {
-    glfwDestroyWindow(window);
-    glfwTerminate();
-}
-
 int main() {
     initLibraries();
     
@@ -90,7 +82,7 @@ int main() {
         glfwSwapBuffers(window);
     }
     
-    terminate();
+    glfwTerminate();
     
     return EXIT_SUCCESS;
 }

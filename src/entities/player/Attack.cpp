@@ -1,3 +1,4 @@
+#include "inputs/Inputs.hpp"
 #include "entities/player/Attack.hpp"
 #include "tools/LocalBasis.hpp"
 
@@ -23,6 +24,8 @@ Attack::Attack(Player& player) :
     orb.translate(magicCircle2.getPosition());
     laser.translate(magicCircle2.getPosition())
          .scale(glm::vec3(1.0f, 0.5f, 0.5f));
+
+     Inputs::instance().addKeyHandler(eventHandler);
 }
 
 void Attack::update() {
@@ -32,26 +35,26 @@ void Attack::update() {
         transformationCircle, (float) glfwGetTime(), LocalBasis::y
     );
     magicCircle2.setTransformation(transformationCircle);
-    
+
     transformationCircle = glm::scale(
         transformationCircle,
         glm::vec3((float) exp(sin(glfwGetTime())))
     );
     magicCircle1.setTransformation(transformationCircle);
-    
+
     transformationCircle = glm::mat4(1.0f);
     transformationCircle = glm::rotate(
         transformationCircle, (float) glfwGetTime(), LocalBasis::z
     );
     magicCircle3.setTransformation(transformationCircle);
-    
+
     // transform magic triangle
     glm::mat4 transformationTriangle(1.0f);
     transformationTriangle = glm::rotate(
         transformationTriangle, -0.5f * (float) glfwGetTime(), LocalBasis::y
     );
     magicTriangle.setTransformation(transformationTriangle);
-    
+
     // transform orb
     glm::mat4 transformationOrb(1.0f);
     transformationOrb = glm::scale(
@@ -76,6 +79,5 @@ Model& Attack::getMagicTriangle() { return magicTriangle; }
 Model& Attack::getOrb() { return orb; }
 Model& Attack::getLaser() { return laser; }
 
-AttackEventHandler& Attack::getEventHandler() { return eventHandler; }
 bool Attack::isAttacking() { return eventHandler.isAttacking(); }
 bool Attack::isLoading() { return eventHandler.isLoading(); }

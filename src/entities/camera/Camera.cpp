@@ -2,6 +2,7 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <cmath>
 
+#include "inputs/Inputs.hpp"
 #include "tools/LocalBasis.hpp"
 #include "entities/camera/Camera.hpp"
 
@@ -28,16 +29,19 @@ Camera::Camera(
     float fov, float width, float height, float zNear, float zFar
 ) :
     Entity("camera"),
-    cameraEventHandler(this)
+    eventHandler(this)
 {
     this->position = position;
     this->target = target + targetOffset;
     this-> targetOffset = targetOffset;
-    
+
     this->fov = fov;
     this->zNear = zNear;
     this->zFar = zFar;
     setViewport(width, height);
+
+    Inputs::instance().addMouseHandler(eventHandler);
+    Inputs::instance().addWindowHandler(eventHandler);
 }
 
 void Camera::translate(const glm::vec3& vec) {
@@ -51,7 +55,7 @@ void Camera::rotate(float angle, const glm::vec3& axis) {
 
 void Camera::rotate(const glm::vec2& delta) {
     rotate(glm::radians(delta.x), getUp()); // yaw
-    
+
     float pitch = glm::degrees(std::asin(getDirection().y)) + delta.y;
     if (pitch > MIN_PITCH && pitch < MAX_PITCH) {
         rotate(glm::radians(delta.y), getRight());
@@ -61,7 +65,7 @@ void Camera::rotate(const glm::vec2& delta) {
 void Camera::zoom(float value) {
     glm::vec3 deltaZoom = getDirection() * value;
     float distanceToTarget = glm::distance(position + deltaZoom, target);
-    
+
     if (distanceToTarget > MIN_ZOOM && distanceToTarget < MAX_ZOOM) {
         position += deltaZoom;
     }
@@ -93,10 +97,6 @@ glm::vec3 Camera::getUp() {
 
 glm::vec3 Camera::getPosition() {
     return position;
-}
-
-CameraEventHandler& Camera::getEventHandler() {
-    return cameraEventHandler;
 }
 
 void Camera::setTarget(const glm::vec3& newTarget) {

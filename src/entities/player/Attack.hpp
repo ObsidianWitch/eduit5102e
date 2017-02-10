@@ -10,9 +10,9 @@
 class Attack : public Entity {
 public:
     Attack(Player& player);
-    
+
     void update() override;
-    
+
     glm::mat4 getModelMatrix(Model& model);
     Model& getMagicCircle1();
     Model& getMagicCircle2();
@@ -20,11 +20,10 @@ public:
     Model& getMagicTriangle();
     Model& getOrb();
     Model& getLaser();
-    
+
     bool isLoading();
     bool isAttacking();
-    AttackEventHandler& getEventHandler();
-    
+
 private:
     Player& player;
     Model magicCircle1;
@@ -33,10 +32,10 @@ private:
     Model magicTriangle;
     Model orb;
     Model laser;
-    
+
     glm::vec3 positionOffsetGround;
     glm::vec3 positionOffsetAir;
-    
+
     AttackEventHandler eventHandler;
 };
 

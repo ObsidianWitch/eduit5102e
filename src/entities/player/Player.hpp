@@ -12,16 +12,15 @@
 class Player : public Entity, public Movable, public Collidable {
 public:
     Player(const glm::vec3& position, float speed);
-    
+
     void update() override;
-    
+
     void move() override;
     void cancelMove() override;
-    
-    PlayerEventHandler& getEventHandler();
+
     glm::vec3 getPosition() override;
     Model& getModel();
-    
+
 private:
     Model model;
     PlayerEventHandler eventHandler;
