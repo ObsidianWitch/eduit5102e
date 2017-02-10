@@ -6,8 +6,8 @@
 #include "tools/LocalBasis.hpp"
 #include "entities/camera/Camera.hpp"
 
-const float Camera::MIN_PITCH = -80.0f;
-const float Camera::MAX_PITCH = 60.0f;
+const float Camera::MIN_PITCH = -30.0f;
+const float Camera::MAX_PITCH = 15.0f;
 const float Camera::MIN_ZOOM  = 5.0f;
 const float Camera::MAX_ZOOM  = 30.0f;
 
@@ -67,7 +67,7 @@ void Camera::zoom(float value) {
     float distanceToTarget = glm::distance(position + deltaZoom, target);
 
     if (distanceToTarget > MIN_ZOOM && distanceToTarget < MAX_ZOOM) {
-        position += deltaZoom;
+        translate(deltaZoom);
     }
 }
 

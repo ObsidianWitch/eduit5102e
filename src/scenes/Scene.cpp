@@ -15,7 +15,7 @@ Scene::Scene(GLuint width, GLuint height) :
         glm::vec3(0.0f, 10.0f, -10.0f), // position
         player.getPosition(),           // target
         glm::vec3(0.0f, 10.0f, 0.0f),   // target offset
-        glm::radians(90.0f),            // fov
+        glm::radians(45.0f),            // fov
         width, height,                  // width & height
         0.1f, 1000.0f                   // zNear & zFar
     ),

@@ -28,15 +28,15 @@ void CameraEventHandler::cursorPositionCallback(
     GLFWwindow*, double xpos, double ypos
 ) {
     if (!cameraIsMoving) { return; }
-    
+
     glm::dvec2 oldMousePosition = mousePosition;
     mousePosition = glm::dvec2(xpos, ypos);
-    
+
     glm::vec2 delta = (glm::vec2) glm::dvec2(
-        (mousePosition.x - oldMousePosition.x) * MOUSE_SENSITIVITY,
+        (oldMousePosition.x - mousePosition.x) * MOUSE_SENSITIVITY,
         (oldMousePosition.y - mousePosition.y) * MOUSE_SENSITIVITY
     );
-    
+
     camera->rotate(delta);
 }
 
