@@ -25,7 +25,7 @@ Player::Player(const glm::vec3& position, float speed) :
  * Updates the transformation matrix to simulate breathing.
  */
 void Player::update() {
-    glm::vec3 breathingScaleVector = glm::vec3(1.0f);
+    auto breathingScaleVector = glm::vec3(1.0f);
     breathingScaleVector.y += 0.005f * exp(sin(glfwGetTime()));
     model.setTransformation(glm::scale(
         glm::mat4(), breathingScaleVector
@@ -51,7 +51,7 @@ void Player::move() {
     }
 
     /// clamp movementVec's magnitude
-    float ratio = glm::length(movementVec) / speed;
+    auto ratio = glm::length(movementVec) / speed;
     if (ratio != 0) { movementVec /= ratio; }
     model.translate(movementVec);
 

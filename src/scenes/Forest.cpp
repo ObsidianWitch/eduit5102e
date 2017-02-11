@@ -46,7 +46,7 @@ Forest::Forest(float radius, unsigned int nTrees) :
 {
     createCliffs();
     generateTrees(nTrees);
-    
+
     bgObjects.reserve(2 + cliffs.size() + trees.size());
     bgObjects.push_back(&ground);
     bgObjects.push_back(&torch);
@@ -56,7 +56,7 @@ Forest::Forest(float radius, unsigned int nTrees) :
 
 void Forest::createCliffs() {
     cliffs.reserve(3);
-    
+
     // up
     BgObject cliffUp(
         "resources/cliff/cliff.obj",   // file path
@@ -68,7 +68,7 @@ void Forest::createCliffs() {
         )
     );
     cliffs.push_back(cliffUp);
-    
+
     // left
     BgObject cliffLeft(
         cliffUp,
@@ -81,7 +81,7 @@ void Forest::createCliffs() {
     cliffs.back().getModel()
         .setPosition(glm::vec3(radius, 0.0f, 0.0f))
         .rotate(glm::radians(90.0f));
-    
+
     // right
     BgObject cliffRight(
         cliffUp,
@@ -104,30 +104,30 @@ void Forest::generateTrees(unsigned int nTrees) {
     std::uniform_real_distribution<float> dScale(1.0f, 1.5f);
     std::uniform_real_distribution<float> dRadius(0.0f, this->radius);
     std::uniform_real_distribution<float> dAngle(0, glm::two_pi<float>());
-    
+
     trees.reserve(nTrees);
-    
+
     Tree tree(
         glm::vec3(0.0f, 0.0f, 0.0f), // position
         glm::vec3(10.0f),            // scaling vector
         dAngle(randomGen)            // phase shift
     );
-    
-    unsigned int generatedTrees = 0;
+
+    auto generatedTrees = 0u;
     while (generatedTrees != nTrees) {
-        float radius = dRadius(randomGen);
-        float angle = dAngle(randomGen);
+        auto radius = dRadius(randomGen);
+        auto angle = dAngle(randomGen);
         glm::vec3 position(
             radius * cos(angle),
             0.0f,
             radius * sin(angle)
         );
-        
+
         // discard trees generated in the river's path
         if (position.x >= -50.0f && position.x <= 35.0f) {
             continue;
         }
-        
+
         trees.push_back(
             Tree(tree, dAngle(randomGen))
         );
@@ -135,13 +135,12 @@ void Forest::generateTrees(unsigned int nTrees) {
             .setPosition(position)
             .scale(glm::vec3(1.0f, dScale(randomGen), 1.0f))
             .rotate(dAngle(randomGen));
-        
+
         generatedTrees++;
     }
 }
 
 void Forest::update() {
-    // update trees
     for (auto& t : trees) { t.update(); }
 }
 

@@ -10,7 +10,7 @@ Texture2D::Texture2D(std::string path, GLenum unit, bool alpha) {
     this->path = path;
     this->unit = unit;
     this->alpha = alpha;
-    
+
     // Only load the texture if it has not already been loaded.
     auto it = std::find(loadedTextures.begin(), loadedTextures.end(), path);
     if (it == loadedTextures.end()) {
@@ -27,7 +27,7 @@ Texture2D::Texture2D(std::string path, GLenum unit, bool alpha) {
  */
 void Texture2D::load(std::string path) {
     int width, height;
-    unsigned char* image = SOIL_load_image(
+    auto* image = SOIL_load_image(
         path.c_str(),                            // path
         &width, &height,                         // width & height
         nullptr,                                 // channels
@@ -38,7 +38,7 @@ void Texture2D::load(std::string path) {
                   << SOIL_last_result() << std::endl;
         exit(EXIT_FAILURE);
     }
-    
+
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_2D, id);
     glTexImage2D(
@@ -52,9 +52,9 @@ void Texture2D::load(std::string path) {
         image                     // image data
     );
     glGenerateMipmap(GL_TEXTURE_2D);
-    
+
     setParameters();
-    
+
     glBindTexture(GL_TEXTURE_2D, 0);
     SOIL_free_image_data(image);
 }
@@ -70,7 +70,7 @@ void Texture2D::load(std::string path) {
 void Texture2D::setParameters() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    
+
     glTexParameteri(
         GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR
     );

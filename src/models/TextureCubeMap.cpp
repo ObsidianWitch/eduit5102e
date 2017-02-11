@@ -9,20 +9,20 @@ TextureCubeMap::TextureCubeMap(
 ) {
     this->alpha = alpha;
     this->unit = unit;
-    
+
     glGenTextures(1, &id);
     glBindTexture(GL_TEXTURE_CUBE_MAP, id);
 
     load(texturesPaths);
     setParameters();
-    
+
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 }
 
 void TextureCubeMap::load(const std::vector<std::string>& texturesPaths) {
-    for (unsigned int i = 0 ; i < texturesPaths.size() ; i++) {
+    for (auto i = 0u ; i < texturesPaths.size() ; i++) {
         int width, height;
-        unsigned char* image = SOIL_load_image(
+        auto* image = SOIL_load_image(
             texturesPaths[i].c_str(),              //path
             &width, &height,                       // width & height
             nullptr,                               // channels

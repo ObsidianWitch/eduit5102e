@@ -56,7 +56,7 @@ void Camera::rotate(float angle, const glm::vec3& axis) {
 void Camera::rotate(const glm::vec2& delta) {
     rotate(glm::radians(delta.x), getUp()); // yaw
 
-    float pitch = glm::degrees(std::asin(getDirection().y)) + delta.y;
+    auto pitch = glm::degrees(std::asin(getDirection().y)) + delta.y;
     if (pitch > MIN_PITCH && pitch < MAX_PITCH) {
         rotate(glm::radians(delta.y), getRight());
     }

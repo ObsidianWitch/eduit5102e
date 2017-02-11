@@ -17,8 +17,8 @@ void Inputs::keyCallback(
     if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
-    
-    for (KeyHandler* kh : keyHandlers) {
+
+    for (auto* kh : keyHandlers) {
         kh->keyCallback(window, key, scancode, action, mods);
     }
 }
@@ -31,7 +31,7 @@ void Inputs::addKeyHandler(KeyHandler& kh) {
 void Inputs::mouseButtonCallback(
     GLFWwindow* window, int button, int action, int mods
 ) {
-    for (MouseHandler* mh : mouseHandlers) {
+    for (auto* mh : mouseHandlers) {
         mh->mouseButtonCallback(window, button, action, mods);
     }
 }
@@ -39,7 +39,7 @@ void Inputs::mouseButtonCallback(
 void Inputs::cursorPositionCallback(
     GLFWwindow* window, double xpos, double ypos
 ) {
-    for (MouseHandler* mh : mouseHandlers) {
+    for (auto* mh : mouseHandlers) {
         mh->cursorPositionCallback(window, xpos, ypos);
     }
 }
@@ -47,7 +47,7 @@ void Inputs::cursorPositionCallback(
 void Inputs::scrollCallback(
     GLFWwindow* window, double xoffset, double yoffset
 ) {
-    for (MouseHandler* mh : mouseHandlers) {
+    for (auto* mh : mouseHandlers) {
         mh->scrollCallback(window, xoffset, yoffset);
     }
 }
@@ -58,7 +58,7 @@ void Inputs::addMouseHandler(MouseHandler& mh) {
 
 
 void Inputs::windowSizeCallback(GLFWwindow* window, int width, int height) {
-    for (WindowHandler* wh : windowHandlers) {
+    for (auto* wh : windowHandlers) {
         wh->windowSizeCallback(window, width, height);
     }
 }

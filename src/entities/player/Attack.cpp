@@ -25,7 +25,7 @@ Attack::Attack(Player& player) :
     laser.translate(magicCircle2.getPosition())
          .scale(glm::vec3(1.0f, 0.5f, 0.5f));
 
-     Inputs::instance().addKeyHandler(eventHandler);
+    Inputs::instance().addKeyHandler(eventHandler);
 }
 
 void Attack::update() {

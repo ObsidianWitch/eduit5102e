@@ -29,10 +29,10 @@ void CameraEventHandler::cursorPositionCallback(
 ) {
     if (!cameraIsMoving) { return; }
 
-    glm::dvec2 oldMousePosition = mousePosition;
+    auto oldMousePosition = mousePosition;
     mousePosition = glm::dvec2(xpos, ypos);
 
-    glm::vec2 delta = (glm::vec2) glm::dvec2(
+    auto delta = (glm::vec2) glm::dvec2(
         (oldMousePosition.x - mousePosition.x) * MOUSE_SENSITIVITY,
         (oldMousePosition.y - mousePosition.y) * MOUSE_SENSITIVITY
     );

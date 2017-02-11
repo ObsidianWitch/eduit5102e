@@ -18,10 +18,10 @@ PointLight::PointLight(
 
 void PointLight::update(Shader& shader) {
     // quadOverTime in [1.0 ; 3.0]
-    float quadOverTime = (float) sin(
+    auto quadOverTime = (float) sin(
         quadFrequency * glfwGetTime()
     ) + 2.0f;
-    
+
     shader.setUniform(name + ".position", position);
     shader.setUniform(name + ".color", color);
     shader.setUniform(name + ".constant", constant);

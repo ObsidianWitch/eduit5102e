@@ -23,9 +23,9 @@ Scene::Scene(GLuint width, GLuint height) :
     forest(300.0f, 50) // radius, nTrees
 {
     // forest
-    const auto& forestBgObjs = forest.getBgObjects();
+    auto& forestBgObjs = forest.getBgObjects();
     bgObjects.reserve(forestBgObjs.size());
-    for (BgObject* o : forestBgObjs) { bgObjects.push_back(o); }
+    for (auto* o : forestBgObjs) { bgObjects.push_back(o); }
 
     // lights
     lights.push_back(std::make_shared<AmbientLight>(
@@ -50,7 +50,7 @@ Scene::Scene(GLuint width, GLuint height) :
 
     // Collidables
     collidables.reserve(bgObjects.size());
-    for (Collidable* c : bgObjects) { collidables.push_back(c); }
+    for (auto* c : bgObjects) { collidables.push_back(c); }
 
     // Renderers
     playerRenderer = std::make_unique<PlayerRenderer>(
@@ -76,7 +76,7 @@ Scene::Scene(GLuint width, GLuint height) :
 void Scene::update() {
     // logic
     player.move();
-    for (Collidable* c : collidables) {
+    for (auto* c : collidables) {
         if (player.collide(*c)) {
             player.cancelMove();
             break;

@@ -7,15 +7,15 @@ PlayerEventHandler::PlayerEventHandler() {
     for (int mvt = FORWARD ; mvt <= RIGHT ; mvt++) {
         states[mvt] = false;
     }
-    
+
     strafing = false;
 }
 
 void PlayerEventHandler::keyCallback(
     GLFWwindow*, int key, int, int action, int
 ) {
-    bool state = (action != GLFW_RELEASE);
-    
+    auto state = (action != GLFW_RELEASE);
+
     if (key == GLFW_KEY_W) {
         states[FORWARD] = state;
     }
