@@ -1,4 +1,4 @@
-# IT5102E OpenGL project - Forest
+# IT5102E OpenGL Sandbox
 
 ![Screenshot](https://i.imgur.com/bf14MUA.jpg)
 
@@ -16,7 +16,7 @@
 
 ```
 > premake4 gmake
-> make -j4  
+> make -j4
 > ./project.out
 ```
 
