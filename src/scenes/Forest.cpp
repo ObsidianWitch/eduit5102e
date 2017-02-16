@@ -6,10 +6,10 @@
 
 Forest::Forest(float radius, unsigned int nTrees) :
     ground(
-        "resources/ground/ground.obj",     // file path
-        glm::vec3(0.0f),                   // position
-        glm::vec3(1000.0f, 1.0f, 1000.0f), // scaling vector
-        BoundingBox(                       // bounding box
+        "resources/ground/ground.obj", // file path
+        glm::vec3(0.0f),               // position
+        glm::vec3(1.0f),               // scale
+        BoundingBox(
             glm::vec3(0.0f),
             glm::vec3(0.0f)
         )
