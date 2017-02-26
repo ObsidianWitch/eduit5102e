@@ -6,8 +6,8 @@
 #include "tools/LocalBasis.hpp"
 #include "entities/camera/Camera.hpp"
 
-const float Camera::MIN_PITCH = -30.0f;
-const float Camera::MAX_PITCH = 15.0f;
+const float Camera::MIN_PITCH = -15.0f;
+const float Camera::MAX_PITCH = 30.0f;
 const float Camera::MIN_ZOOM  = 5.0f;
 const float Camera::MAX_ZOOM  = 30.0f;
 
@@ -84,7 +84,7 @@ glm::mat4 Camera::getProjectionMatrix() {
 }
 
 glm::vec3 Camera::getDirection() {
-    return glm::normalize(target - position);
+    return glm::normalize(position - target);
 }
 
 glm::vec3 Camera::getRight() {

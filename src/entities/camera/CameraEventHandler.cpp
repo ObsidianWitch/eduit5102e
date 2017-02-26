@@ -34,7 +34,7 @@ void CameraEventHandler::cursorPositionCallback(
 
     auto delta = (glm::vec2) glm::dvec2(
         (oldMousePosition.x - mousePosition.x) * MOUSE_SENSITIVITY,
-        (oldMousePosition.y - mousePosition.y) * MOUSE_SENSITIVITY
+        (mousePosition.y - oldMousePosition.y) * MOUSE_SENSITIVITY
     );
 
     camera->rotate(delta);
