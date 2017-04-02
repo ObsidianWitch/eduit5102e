@@ -43,7 +43,7 @@ void CameraEventHandler::cursorPositionCallback(
 void CameraEventHandler::scrollCallback(
     GLFWwindow*, double, double yoffset
 ) {
-    camera->zoom(yoffset);
+    camera->zoom(-yoffset);
 }
 
 void CameraEventHandler::windowSizeCallback(
